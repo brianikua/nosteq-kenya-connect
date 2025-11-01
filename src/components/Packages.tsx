@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Sparkles, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-const packages = [
+const homePackages = [
   {
     name: "Starter",
     swahili: "Mwanzo",
@@ -67,6 +67,69 @@ const packages = [
   }
 ];
 
+const businessPackages = [
+  {
+    name: "SME Starter",
+    swahili: "Biashara Ndogo",
+    speed: "20 Mbps",
+    price: "5,000",
+    description: "Perfect for small businesses",
+    features: [
+      "Up to 10 devices",
+      "Business-grade router",
+      "99.5% uptime SLA",
+      "Email & web hosting",
+      "8am-8pm support"
+    ],
+    popular: false
+  },
+  {
+    name: "Corporate",
+    swahili: "Kampuni",
+    speed: "50 Mbps",
+    price: "8,500",
+    description: "Built for growing enterprises",
+    features: [
+      "Up to 25 devices",
+      "Static IP address",
+      "99.7% uptime SLA",
+      "VPN connectivity",
+      "Priority 24/7 support"
+    ],
+    popular: false
+  },
+  {
+    name: "Enterprise",
+    swahili: "Biashara Kubwa",
+    speed: "100 Mbps",
+    price: "15,000",
+    description: "Powering Kenya's business leaders",
+    features: [
+      "Unlimited devices",
+      "Dedicated bandwidth",
+      "99.9% uptime SLA",
+      "Free backup line",
+      "Dedicated account manager"
+    ],
+    popular: true
+  },
+  {
+    name: "Premium",
+    swahili: "Bora Zaidi",
+    speed: "200 Mbps+",
+    price: "25,000+",
+    description: "Maximum performance for large organizations",
+    features: [
+      "Scalable bandwidth",
+      "Multiple static IPs",
+      "99.95% uptime guarantee",
+      "On-site support",
+      "Custom SLA terms"
+    ],
+    popular: false
+  }
+];
+
 const Packages = () => {
   const [planType, setPlanType] = useState<"home" | "business">("home");
 
@@ -107,7 +170,7 @@ const Packages = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {packages.map((pkg, index) => (
+          {(planType === "home" ? homePackages : businessPackages).map((pkg, index) => (
             <Card
               key={index}
               className={`relative bg-card/80 backdrop-blur-sm transition-all duration-300 hover:scale-105 animate-fade-in ${
