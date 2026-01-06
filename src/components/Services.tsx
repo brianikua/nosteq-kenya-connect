@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Gauge, Shield, Network, Lightbulb, Phone, Server, ArrowRight } from "lucide-react";
+import { Gauge, Shield, Network, Lightbulb, Phone, Server, ArrowRight, Cable, Database, Code } from "lucide-react";
 
 const services = [
   {
@@ -18,11 +18,32 @@ const services = [
     badge: "4K Quality"
   },
   {
+    icon: Cable,
+    title: "Network Setup",
+    swahili: "Mtandao",
+    description: "Complete voice, data, and video network infrastructure. Structured cabling, LAN/WAN design, fiber optics installation, and unified communications for businesses of all sizes.",
+    badge: "Voice • Data • Video"
+  },
+  {
+    icon: Database,
+    title: "Data Center Setup",
+    swahili: "Kituo cha Data",
+    description: "End-to-end data center design and deployment. Server racks, cooling systems, power management, and network infrastructure built for maximum uptime and security.",
+    badge: "Enterprise Grade"
+  },
+  {
+    icon: Code,
+    title: "System Development & Apps",
+    swahili: "Programu",
+    description: "Custom software solutions, web applications, and mobile apps tailored to your business needs. From ERP systems to customer portals, we build digital excellence.",
+    badge: "Custom Solutions"
+  },
+  {
     icon: Network,
     title: "IT Systems & Solutions",
     swahili: "Teknolojia",
     description: "Custom network design, cloud integration, cybersecurity, and enterprise hardware setups, blending tech with Kenyan innovation.",
-    badge: "Enterprise Grade"
+    badge: "Full Integration"
   },
   {
     icon: Lightbulb,
