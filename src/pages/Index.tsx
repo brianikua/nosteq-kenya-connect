@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Packages from "@/components/Packages";
+import Portfolio from "@/components/Portfolio";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ const Index = () => {
       <Hero onQuoteClick={() => setIsQuoteModalOpen(true)} />
       <Services />
       <Packages />
+      <Portfolio />
       <About />
       <Contact />
       <Footer />
