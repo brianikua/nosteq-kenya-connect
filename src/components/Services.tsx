@@ -100,7 +100,7 @@ const Services = () => {
                   <CardDescription className="text-muted-foreground mb-4 leading-relaxed">
                     {service.description}
                   </CardDescription>
-                  <Button variant="ghost" size="sm" className="group/btn text-primary px-0">
+                  <Button variant="ghost" size="sm" className="group/btn text-primary px-0" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
                     Learn More
                     <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
