@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CheckCircle2, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Zap, Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { servicesData } from "@/data/services";
@@ -33,17 +33,24 @@ const ServiceDetail = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 relative">
-        <div className="absolute inset-0 subtle-pattern" />
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Hero with Image */}
+      <section className="pt-24 pb-0 relative">
+        <div className="w-full h-[340px] md:h-[420px] relative overflow-hidden">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10 -mt-32">
           <ScrollReveal>
             <Link to="/#services" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8 group">
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
               Back to Services
             </Link>
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center border border-border">
                 <Icon className="w-8 h-8 text-primary" />
               </div>
               <span className="px-4 py-1.5 bg-secondary/10 text-secondary text-sm rounded-full font-medium">
@@ -130,10 +137,47 @@ const ServiceDetail = () => {
         </div>
       </section>
 
+      {/* Client Testimonials */}
+      {service.testimonials.length > 0 && (
+        <section className="py-16 relative">
+          <div className="absolute inset-0 subtle-pattern" />
+          <div className="container mx-auto px-4 relative z-10">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Client Stories</p>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">What Our Clients Say</h2>
+              </div>
+            </ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {service.testimonials.map((testimonial, i) => (
+                <ScrollReveal key={i} delay={i * 0.1}>
+                  <Card className="bg-card border-border h-full relative overflow-hidden">
+                    <CardContent className="pt-8 pb-8">
+                      <Quote className="w-10 h-10 text-primary/20 mb-4" />
+                      <p className="text-muted-foreground leading-relaxed mb-6 italic">
+                        "{testimonial.quote}"
+                      </p>
+                      <div className="flex items-center gap-1 mb-4">
+                        {[...Array(5)].map((_, j) => (
+                          <Star key={j} className="w-4 h-4 fill-secondary text-secondary" />
+                        ))}
+                      </div>
+                      <div className="border-t border-border pt-4">
+                        <p className="font-heading font-semibold text-foreground">{testimonial.name}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}, {testimonial.company}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Technologies & Use Cases */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 subtle-pattern" />
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="py-16">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             <ScrollReveal>
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">Technologies We Use</h2>
