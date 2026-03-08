@@ -93,7 +93,7 @@ export const projects: Project[] = [
     client: "Insurance & Fintech Group",
     location: "Westlands, Nairobi",
     category: "Data Center",
-    description: "Purpose-built Tier 3+ data center for an insurance-fintech group hosting core insurance platforms, claims processing, and customer-facing APIs with N+1 redundancy.",
+    description: "An insurance-fintech group needed their own data center — not a rented rack in someone else's facility. We built a Tier 3+ facility from an empty floor: 60 racks, redundant everything, now hosting 12 fintech partners with zero data loss.",
     image: serverRoom,
     year: "2024",
     status: "completed",
