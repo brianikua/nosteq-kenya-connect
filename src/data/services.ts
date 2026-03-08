@@ -74,8 +74,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Shield,
     title: "CCTV & Security Systems",
     badge: "4K · AI Analytics",
-    tagline: "Intelligent surveillance that protects what matters most.",
-    description: "Our security solutions go beyond basic cameras. We design and deploy comprehensive surveillance ecosystems featuring 4K resolution cameras, AI-powered analytics for threat detection, biometric access control, and 24/7 remote monitoring — all managed from a unified platform.",
+    tagline: "Your eyes can't be everywhere. Our cameras can.",
+    description: "We go way beyond sticking cameras on walls. We design complete security ecosystems — 4K cameras with AI that actually knows the difference between a cat and an intruder, biometric access control, and remote monitoring you can check from your phone at 3am. Because peace of mind shouldn't require guesswork.",
     image: cctvImg,
     features: [
       "4K and 8MP IP cameras with night vision",
