@@ -1,13 +1,18 @@
 import { Network, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import ScrollReveal from "./ScrollReveal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -42,9 +47,9 @@ const Footer = () => {
                   { label: "Contact", id: "contact" },
                 ].map((link) => (
                   <li key={link.id}>
-                    <button onClick={() => scrollToSection(link.id)} className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href={`/#${link.id}`} onClick={(e) => handleNavClick(e, link.id)} className="text-muted-foreground hover:text-primary transition-colors">
                       {link.label}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
