@@ -15,6 +15,8 @@ const ServiceDetail = () => {
   const currentIndex = servicesData.findIndex((s) => s.slug === slug);
   const prevService = currentIndex > 0 ? servicesData[currentIndex - 1] : null;
   const nextService = currentIndex < servicesData.length - 1 ? servicesData[currentIndex + 1] : null;
+  const gallery = slug ? serviceGalleries[slug] || [] : [];
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!service) {
     return (
