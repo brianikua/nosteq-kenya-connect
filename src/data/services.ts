@@ -214,8 +214,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Network,
     title: "IT Consulting & Integration",
     badge: "Full Stack IT",
-    tagline: "Strategic technology guidance for confident digital transformation.",
-    description: "Our consulting services bridge the gap between business goals and technology execution. We provide IT strategy, architecture planning, cybersecurity assessments, and systems integration to help organizations modernize their infrastructure and operate more efficiently.",
+    tagline: "Not sure where to start with your IT? That's literally what we're here for.",
+    description: "Technology decisions are expensive to get wrong. We help you get them right the first time — whether that's planning a cloud migration, auditing your cybersecurity, integrating systems that don't talk to each other, or building an IT strategy that actually supports your business goals. No vendor bias, just honest advice.",
     image: consultingImg,
     features: [
       "IT infrastructure assessment and roadmapping",
