@@ -179,8 +179,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Code,
     title: "Software & App Development",
     badge: "Custom Solutions",
-    tagline: "Digital products engineered around your business processes.",
-    description: "We build custom software solutions that solve real business problems. From web applications and mobile apps to ERP systems and automation tools, our development team delivers scalable, maintainable software tailored to your workflows and growth objectives.",
+    tagline: "Software that fits how your business actually works — not the other way around.",
+    description: "Off-the-shelf software forces you to change your workflow. We build the opposite: custom web apps, mobile apps, ERPs, and automation tools designed around how your team actually operates. You own the code, you control the roadmap, and we stick around to make sure everything keeps running smoothly.",
     image: softwareImg,
     features: [
       "Custom web application development",
