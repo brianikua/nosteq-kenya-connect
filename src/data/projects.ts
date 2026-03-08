@@ -50,8 +50,8 @@ export const projects: Project[] = [
     technologies: ["MPLS", "SD-WAN", "Cisco Meraki", "Fortinet NGFW", "Grafana"],
     outcome: "Reduced transaction latency by 68% and achieved zero unplanned downtime in the first 12 months of operation.",
     duration: "8 months",
-    challenge: "The bank's legacy copper-based network suffered from frequent outages, high latency during peak hours, and lacked the segmentation required for PCI-DSS compliance. Branch-level connectivity was inconsistent, causing failed mobile banking transactions and customer dissatisfaction.",
-    approach: "We designed a phased migration strategy — rolling out fiber to high-traffic branches first while maintaining legacy connectivity as fallback. Each branch received dual-path fiber with SD-WAN overlay for intelligent traffic routing, and network segmentation was implemented using Fortinet NGFW with zero-trust policies.",
+    challenge: "The bank was running on copper cables from the early 2000s. Peak hours meant failed mobile banking transactions, angry customers, and an IT team constantly firefighting. PCI-DSS auditors were not happy either.",
+    approach: "We didn't rip everything out at once — that would've been reckless. Instead, we migrated branch by branch, starting with the busiest locations, keeping the old system as a safety net. Each branch got dual-path fiber with SD-WAN for smart traffic routing, and we locked down network segmentation with zero-trust policies.",
     beforeAfter: [
       { metric: "Transaction Latency", before: "45–120ms", after: "<5ms" },
       { metric: "Monthly Downtime", before: "12+ hours", after: "0 hours" },
