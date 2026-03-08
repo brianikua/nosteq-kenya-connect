@@ -144,8 +144,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Database,
     title: "Data Center Solutions",
     badge: "Enterprise Grade",
-    tagline: "Purpose-built environments for your most critical infrastructure.",
-    description: "We design, build, and manage data center environments that meet the highest standards of reliability and performance. From server rack deployment to precision cooling and redundant power systems, we create infrastructure that keeps your operations running around the clock.",
+    tagline: "Where your most critical systems live — built to never go down.",
+    description: "Your servers deserve better than a dusty closet with a desk fan. We design and build proper data center environments with precision cooling, redundant power, fire suppression, and monitoring that catches problems before they become outages. Whether you're building from scratch or upgrading what you have.",
     image: dataCenterImg,
     features: [
       "Server rack and cabinet installation",
