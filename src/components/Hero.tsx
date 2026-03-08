@@ -52,11 +52,11 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
                 <Button variant="hero" size="lg" onClick={scrollToPackages}>
-                  View Packages
+                  See What We Offer
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
                 <Button variant="cta" size="lg" onClick={onQuoteClick}>
-                  Get a Free Quote
+                  Talk to Our Team — Free
                 </Button>
               </div>
 
