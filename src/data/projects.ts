@@ -67,7 +67,7 @@ export const projects: Project[] = [
     client: "Leading Mobile Money Provider",
     location: "East Africa · Multi-Region",
     category: "Fintech & Banking",
-    description: "End-to-end security infrastructure for a mobile money platform processing 2M+ daily transactions — including AI-powered fraud detection, biometric access control, and SOC setup.",
+    description: "A mobile money platform processing 2M+ daily transactions was getting hit by sophisticated fraud. We built a multi-layered AI security system that catches 99.7% of attacks — and set up a full SOC to watch over everything around the clock.",
     image: cctvInstall,
     year: "2024",
     status: "live",
