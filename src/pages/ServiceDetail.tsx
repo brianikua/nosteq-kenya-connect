@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CheckCircle2, Zap, Quote, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Zap, Quote, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { servicesData } from "@/data/services";
+import { serviceGalleries } from "@/data/serviceGallery";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -13,6 +15,8 @@ const ServiceDetail = () => {
   const currentIndex = servicesData.findIndex((s) => s.slug === slug);
   const prevService = currentIndex > 0 ? servicesData[currentIndex - 1] : null;
   const nextService = currentIndex < servicesData.length - 1 ? servicesData[currentIndex + 1] : null;
+  const gallery = slug ? serviceGalleries[slug] || [] : [];
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!service) {
     return (
@@ -81,6 +85,76 @@ const ServiceDetail = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Project Gallery */}
+      {gallery.length > 0 && (
+        <section className="py-16 relative">
+          <div className="absolute inset-0 subtle-pattern" />
+          <div className="container mx-auto px-4 relative z-10">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Our Work</p>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">Project Gallery</h2>
+              </div>
+            </ScrollReveal>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {gallery.map((img, i) => (
+                <ScrollReveal key={i} delay={i * 0.08}>
+                  <div
+                    className="group relative overflow-hidden rounded-xl cursor-pointer aspect-square"
+                    onClick={() => setLightboxIndex(i)}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.caption}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <p className="text-sm text-foreground font-medium">{img.caption}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && gallery[lightboxIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4"
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setLightboxIndex(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(Math.max(0, lightboxIndex - 1)); }}
+          >
+            <ArrowLeft className="w-8 h-8" />
+          </button>
+          <div className="max-w-4xl max-h-[80vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={gallery[lightboxIndex].src}
+              alt={gallery[lightboxIndex].caption}
+              className="max-w-full max-h-[70vh] object-contain rounded-lg"
+            />
+            <p className="text-muted-foreground mt-4 text-center">{gallery[lightboxIndex].caption}</p>
+          </div>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(Math.min(gallery.length - 1, lightboxIndex + 1)); }}
+          >
+            <ArrowRight className="w-8 h-8" />
+          </button>
+        </div>
+      )}
 
       {/* Features & Benefits */}
       <section className="py-16 relative">
