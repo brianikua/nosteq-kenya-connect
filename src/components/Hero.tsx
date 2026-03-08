@@ -39,15 +39,15 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               </div>
               
               <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-primary-foreground">
-                Full-Stack IT
+                We Build the
                 <br />
-                <span className="gradient-text">Technology</span>
+                <span className="gradient-text">IT Backbone</span>
                 <br />
-                Solutions
+                Your Business Runs On
               </h1>
               
               <p className="text-lg md:text-xl text-primary-foreground/70 max-w-xl leading-relaxed">
-                Enterprise fiber networks · Intelligent CCTV security · Data center infrastructure · Custom software development — all under one roof.
+                From lightning-fast fiber to intelligent security, data centers to custom software — we handle it all so you can focus on what you do best.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
