@@ -145,7 +145,7 @@ export const projects: Project[] = [
     client: "Top-10 SACCO",
     location: "Kenya · Nationwide",
     category: "Software & Cloud",
-    description: "Custom digital banking platform for a SACCO with 500K+ members — mobile app, USSD channel, loan management, M-Pesa integration, and real-time financial reporting.",
+    description: "Half a million SACCO members had to visit a branch for every transaction. We built a complete digital banking platform — mobile app, USSD for basic phones, automated loan scoring, M-Pesa integration. Adoption hit 78% in three months.",
     image: heroBg,
     year: "2024",
     status: "live",
