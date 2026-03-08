@@ -25,9 +25,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const id = href.replace("/#", "");
-    // If already on homepage, smooth scroll instead of hard navigation
     if (location.pathname === "/") {
       e.preventDefault();
       const element = document.getElementById(id);
@@ -36,7 +40,6 @@ const Navbar = () => {
       }
       setIsMobileMenuOpen(false);
     } else {
-      // Let the native <a> handle cross-page navigation
       setIsMobileMenuOpen(false);
     }
   };
@@ -44,32 +47,34 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-card/95 backdrop-blur-lg shadow-md border-b border-border" : "bg-transparent"
+        isScrolled || isMobileMenuOpen
+          ? "bg-card/95 backdrop-blur-lg shadow-md border-b border-border"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/#hero" onClick={(e) => handleNavClick(e, "/#hero")} className="flex items-center gap-3 cursor-pointer">
-            <Network className={`w-8 h-8 ${isScrolled ? 'text-primary' : 'text-primary-foreground'}`} />
-            <div>
-              <h1 className={`font-heading font-bold text-xl ${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}>
+          <a href="/#hero" onClick={(e) => handleNavClick(e, "/#hero")} className="flex items-center gap-2 sm:gap-3 cursor-pointer min-w-0">
+            <Network className={`w-7 h-7 md:w-8 md:h-8 shrink-0 ${isScrolled || isMobileMenuOpen ? 'text-primary' : 'text-primary-foreground'}`} />
+            <div className="min-w-0">
+              <h1 className={`font-heading font-bold text-lg md:text-xl truncate ${isScrolled || isMobileMenuOpen ? 'text-foreground' : 'text-primary-foreground'}`}>
                 Nosteq Networks
               </h1>
-              <p className={`text-xs ${isScrolled ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>
+              <p className={`text-[10px] md:text-xs ${isScrolled || isMobileMenuOpen ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>
                 Full IT Technology
               </p>
             </div>
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-medium transition-colors whitespace-nowrap ${
                   isScrolled ? "text-foreground hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
                 }`}
               >
@@ -85,8 +90,9 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`md:hidden ${isScrolled ? 'text-foreground' : 'text-primary-foreground'}`}
+            className={`lg:hidden p-2 -mr-2 ${isScrolled || isMobileMenuOpen ? 'text-foreground' : 'text-primary-foreground'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -95,23 +101,25 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-card/98 backdrop-blur-lg border-t border-border animate-slide-in">
-          <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+        <div className="lg:hidden bg-card/98 backdrop-blur-lg border-t border-border animate-slide-in max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-left py-2 hover:text-primary transition-colors"
+                className="text-left py-3 px-3 hover:text-primary hover:bg-accent/50 rounded-lg transition-colors text-base font-medium"
               >
                 {link.label}
               </a>
             ))}
-            <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
-              <Button variant="hero" className="w-full">
-                Get Quote
-              </Button>
-            </a>
+            <div className="pt-2 pb-1">
+              <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
+                <Button variant="hero" className="w-full" size="lg">
+                  Get Quote
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       )}

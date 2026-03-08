@@ -22,27 +22,27 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-accent/30 relative">
+    <section id="contact" className="py-16 md:py-24 bg-accent/30 relative">
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
-          <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Contact</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-xs md:text-sm font-semibold text-primary uppercase tracking-widest mb-2 md:mb-3">Contact</p>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold mb-3 md:mb-4">
               Get in <span className="gradient-text">Touch</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Ready to transform your IT infrastructure? Let's discuss your requirements.
             </p>
-            <div className="brand-divider w-24 mx-auto mt-8" />
+            <div className="brand-divider w-24 mx-auto mt-6 md:mt-8" />
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
           <ScrollReveal direction="left">
             <Card className="bg-card border-border shadow-sm">
-              <CardHeader>
-                <CardTitle className="font-heading text-2xl">Send Us a Message</CardTitle>
-                <CardDescription>Fill out the form and we'll respond within 24 hours</CardDescription>
+              <CardHeader className="pb-4 md:pb-6">
+                <CardTitle className="font-heading text-xl md:text-2xl">Send Us a Message</CardTitle>
+                <CardDescription className="text-sm">Fill out the form and we'll respond within 24 hours</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -50,7 +50,7 @@ const Contact = () => {
                     <Label htmlFor="name">Full Name *</Label>
                     <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="John Doe" className="mt-1" />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="phone">Phone Number *</Label>
                       <Input id="phone" type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+254 7XX XXX XXX" className="mt-1" />
@@ -90,48 +90,48 @@ const Contact = () => {
           </ScrollReveal>
 
           <ScrollReveal direction="right" delay={0.1}>
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               <Card className="bg-card border-border shadow-sm">
-                <CardHeader>
-                  <CardTitle className="font-heading text-2xl">Contact Information</CardTitle>
-                  <CardDescription>Reach us through any of these channels</CardDescription>
+                <CardHeader className="pb-4 md:pb-6">
+                  <CardTitle className="font-heading text-xl md:text-2xl">Contact Information</CardTitle>
+                  <CardDescription className="text-sm">Reach us through any of these channels</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-5 md:space-y-6">
                   {[
                     { icon: Phone, label: "Phone", value: "+254 743 101 738", href: "tel:+254743101738" },
                     { icon: Mail, label: "Email", value: "info@nosteq.co.ke", href: "mailto:info@nosteq.co.ke" },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
-                        <item.icon className="w-6 h-6 text-primary" />
+                    <div key={i} className="flex items-start gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
+                        <item.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                       </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">{item.label}</h4>
-                        <a href={item.href} className="text-muted-foreground hover:text-primary transition-colors">{item.value}</a>
+                      <div className="min-w-0">
+                        <h4 className="font-semibold mb-0.5 md:mb-1 text-sm md:text-base">{item.label}</h4>
+                        <a href={item.href} className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors break-all">{item.value}</a>
                       </div>
                     </div>
                   ))}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
-                      <MapPin className="w-6 h-6 text-secondary" />
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
+                      <MapPin className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Office</h4>
-                      <p className="text-muted-foreground">Banana Hill, Kiambu<br />Kenya</p>
+                      <h4 className="font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Office</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Banana Hill, Kiambu<br />Kenya</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border shadow-sm">
-                <CardContent className="p-6 text-center">
-                  <h4 className="font-heading text-xl font-bold mb-3">Business Hours</h4>
-                  <div className="space-y-1 text-muted-foreground">
+                <CardContent className="p-5 md:p-6 text-center">
+                  <h4 className="font-heading text-lg md:text-xl font-bold mb-2 md:mb-3">Business Hours</h4>
+                  <div className="space-y-1 text-sm text-muted-foreground">
                     <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
                     <p>Saturday: 9:00 AM – 4:00 PM</p>
                     <p>Sunday: Closed</p>
                   </div>
-                  <p className="text-sm text-primary font-semibold mt-4">24/7 Emergency Support Available</p>
+                  <p className="text-xs md:text-sm text-primary font-semibold mt-3 md:mt-4">24/7 Emergency Support Available</p>
                 </CardContent>
               </Card>
             </div>
