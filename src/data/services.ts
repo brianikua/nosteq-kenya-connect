@@ -109,8 +109,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Cable,
     title: "Structured Cabling & Networks",
     badge: "Voice · Data · Video",
-    tagline: "The backbone of your digital infrastructure, built to last.",
-    description: "A well-designed cabling infrastructure is the foundation of every reliable network. We provide end-to-end structured cabling services — from Cat6A copper to single-mode fiber — ensuring your voice, data, and video systems operate flawlessly on a unified, standards-compliant platform.",
+    tagline: "Bad cabling is behind more network problems than people realize.",
+    description: "That random network drop? The laggy video call? Nine times out of ten, it's the cabling. We build structured cabling systems — from Cat6A copper to single-mode fiber — that give your voice, data, and video a solid foundation. Properly labeled, tested, certified, and built to last decades, not months.",
     image: cablingImg,
     features: [
       "Cat5e, Cat6, Cat6A, and fiber optic cabling",
