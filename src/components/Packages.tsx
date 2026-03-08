@@ -6,17 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import ScrollReveal from "./ScrollReveal";
 
 const homePackages = [
-  { name: "Starter", speed: "8 Mbps", price: "2,000", description: "Ideal for basic browsing and email", features: ["Basic browsing & email", "Social media access", "Light video calls", "Free installation", "24/7 support"], popular: false },
-  { name: "Pro", speed: "15 Mbps", price: "2,500", description: "Great for streaming and remote work", features: ["HD streaming (720p)", "Video calls & conferencing", "Multiple devices (5+)", "Free installation", "Priority support"], popular: false },
-  { name: "Turbo", speed: "50 Mbps", price: "3,000", description: "High performance for demanding users", features: ["4K streaming", "Online gaming", "Work from home ready", "Free router upgrade", "Dedicated support line"], popular: true },
-  { name: "Ultra", speed: "100 Mbps+", price: "4,000+", description: "Maximum speed, zero compromise", features: ["Unlimited everything", "Enterprise-ready", "Static IP available", "Premium equipment", "Account manager"], popular: false },
+  { name: "Starter", speed: "8 Mbps", price: "2,000", description: "Perfect for browsing, emails, and staying connected", features: ["Smooth browsing & email", "Social media & messaging", "Light video calls", "Free installation", "24/7 support"], popular: false },
+  { name: "Pro", speed: "15 Mbps", price: "2,500", description: "Stream, video-call, and work from home — comfortably", features: ["HD streaming (720p)", "Reliable video conferencing", "5+ devices at once", "Free installation", "Priority support"], popular: false },
+  { name: "Turbo", speed: "50 Mbps", price: "3,000", description: "The sweet spot — fast enough for almost anything", features: ["4K streaming, no buffering", "Lag-free gaming", "Work-from-home powerhouse", "Free router upgrade", "Dedicated support line"], popular: true },
+  { name: "Ultra", speed: "100 Mbps+", price: "4,000+", description: "For power users who refuse to compromise", features: ["Unlimited everything", "Enterprise-grade speed", "Static IP included", "Premium WiFi 6 router", "Personal account manager"], popular: false },
 ];
 
 const businessPackages = [
-  { name: "SME Starter", speed: "20 Mbps", price: "5,000", description: "Built for small businesses", features: ["Up to 10 devices", "Business-grade router", "99.5% uptime SLA", "Email & web hosting", "8am-8pm support"], popular: false },
-  { name: "Corporate", speed: "50 Mbps", price: "8,500", description: "Reliable connectivity for growing teams", features: ["Up to 25 devices", "Static IP address", "99.7% uptime SLA", "VPN connectivity", "Priority 24/7 support"], popular: false },
-  { name: "Enterprise", speed: "100 Mbps", price: "15,000", description: "Dedicated performance for large organizations", features: ["Unlimited devices", "Dedicated bandwidth", "99.9% uptime SLA", "Free backup line", "Dedicated account manager"], popular: true },
-  { name: "Premium", speed: "200 Mbps+", price: "25,000+", description: "Maximum performance, custom SLA", features: ["Scalable bandwidth", "Multiple static IPs", "99.95% uptime guarantee", "On-site support", "Custom SLA terms"], popular: false },
+  { name: "SME Starter", speed: "20 Mbps", price: "5,000", description: "Everything a small team needs to stay productive", features: ["Up to 10 devices", "Business-grade router", "99.5% uptime SLA", "Email & web hosting", "8am–8pm support"], popular: false },
+  { name: "Corporate", speed: "50 Mbps", price: "8,500", description: "For growing teams that can't afford downtime", features: ["Up to 25 devices", "Static IP address", "99.7% uptime SLA", "Secure VPN ready", "Priority 24/7 support"], popular: false },
+  { name: "Enterprise", speed: "100 Mbps", price: "15,000", description: "Dedicated bandwidth — your speed, nobody else's", features: ["Unlimited devices", "100% dedicated line", "99.9% uptime SLA", "Free backup connection", "Dedicated account manager"], popular: true },
+  { name: "Premium", speed: "200 Mbps+", price: "25,000+", description: "Custom-built for organizations that need it all", features: ["Scalable on demand", "Multiple static IPs", "99.95% uptime guarantee", "On-site support team", "Custom SLA terms"], popular: false },
 ];
 
 const Packages = () => {
@@ -29,10 +29,10 @@ const Packages = () => {
           <div className="text-center mb-12">
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="gradient-text">Internet Package</span>
+              Simple Plans, <span className="gradient-text">Honest Pricing</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Transparent pricing with no hidden fees. All packages include unlimited data and free installation.
+              No hidden fees. No data caps. No surprises on your bill. Just pick the speed that fits your life.
             </p>
             
             <div className="inline-flex items-center gap-1 p-1 bg-card rounded-lg border border-border shadow-sm">

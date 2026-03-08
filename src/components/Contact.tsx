@@ -26,12 +26,12 @@ const Contact = () => {
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-10 md:mb-16">
-            <p className="text-xs md:text-sm font-semibold text-primary uppercase tracking-widest mb-2 md:mb-3">Contact</p>
+            <p className="text-xs md:text-sm font-semibold text-primary uppercase tracking-widest mb-2 md:mb-3">Let's Talk</p>
             <h2 className="font-heading text-3xl md:text-5xl font-bold mb-3 md:mb-4">
-              Get in <span className="gradient-text">Touch</span>
+              Tell Us What <span className="gradient-text">You Need</span>
             </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ready to transform your IT infrastructure? Let's discuss your requirements.
+              No sales pitch — just a conversation about what's not working and how we can help fix it.
             </p>
             <div className="brand-divider w-24 mx-auto mt-6 md:mt-8" />
           </div>
@@ -41,8 +41,8 @@ const Contact = () => {
           <ScrollReveal direction="left">
             <Card className="bg-card border-border shadow-sm">
               <CardHeader className="pb-4 md:pb-6">
-                <CardTitle className="font-heading text-xl md:text-2xl">Send Us a Message</CardTitle>
-                <CardDescription className="text-sm">Fill out the form and we'll respond within 24 hours</CardDescription>
+                <CardTitle className="font-heading text-xl md:text-2xl">Drop Us a Line</CardTitle>
+                <CardDescription className="text-sm">We'll get back to you within 24 hours — usually much faster</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">

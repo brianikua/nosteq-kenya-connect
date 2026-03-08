@@ -19,12 +19,12 @@ const Portfolio = () => {
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-8 md:mb-12">
-            <p className="text-xs md:text-sm font-semibold text-primary uppercase tracking-widest mb-2 md:mb-3">Our Work</p>
+            <p className="text-xs md:text-sm font-semibold text-primary uppercase tracking-widest mb-2 md:mb-3">Real Projects, Real Results</p>
             <h2 className="font-heading text-3xl md:text-5xl font-bold mb-3 md:mb-4">
-              Project <span className="gradient-text">Portfolio</span>
+              See What We've <span className="gradient-text">Built</span>
             </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Delivering mission-critical IT infrastructure for fintech, banking, healthcare, and enterprise clients.
+              Every project tells a story — from the problem that kept someone up at night to the solution that fixed it. Dive into any case study to see the full picture.
             </p>
             <div className="brand-divider w-24 mx-auto mt-6 md:mt-8" />
           </div>
@@ -97,7 +97,7 @@ const Portfolio = () => {
               View All Case Studies <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2">
-              <p className="text-sm md:text-base text-muted-foreground text-center">Ready to build your next mission-critical project?</p>
+              <p className="text-sm md:text-base text-muted-foreground text-center">Have a project in mind? Let's figure it out together.</p>
               <Button variant="hero" className="group w-full sm:w-auto" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
                 Get in Touch <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
