@@ -76,8 +76,8 @@ export const projects: Project[] = [
     technologies: ["Splunk SIEM", "CrowdStrike", "Palo Alto", "HID Biometrics", "Custom ML Models"],
     outcome: "Fraud detection rate improved to 99.7% with false positives reduced by 82%. Platform passed all CBK compliance audits.",
     duration: "6 months",
-    challenge: "The platform was experiencing a surge in sophisticated fraud attempts — SIM swap attacks, API-level exploits, and social engineering. Existing rule-based detection was catching only 61% of fraudulent transactions, resulting in significant financial losses and regulatory pressure.",
-    approach: "We deployed a multi-layered security architecture: ML-based fraud scoring at the transaction level, behavioral analytics for anomaly detection, and a 24/7 SOC with Splunk SIEM for real-time monitoring. Physical security was hardened with biometric access for all critical infrastructure.",
+    challenge: "Fraudsters were getting creative — SIM swaps, API exploits, social engineering. The old rule-based system only caught 61% of fraud, and the losses were piling up fast. Regulators were asking hard questions.",
+    approach: "We built security in layers: ML models scoring every transaction in real-time, behavioral analytics flagging weird patterns, and a 24/7 SOC with Splunk SIEM watching the whole picture. We also locked down physical access to data centers with biometrics — no more shared passwords.",
     beforeAfter: [
       { metric: "Fraud Detection Rate", before: "61%", after: "99.7%" },
       { metric: "False Positive Rate", before: "18%", after: "3.2%" },
