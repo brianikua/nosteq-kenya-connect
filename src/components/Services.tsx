@@ -1,6 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Gauge, Shield, Network, Lightbulb, Phone, Server, ArrowRight, Cable, Database, Code } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { servicesData } from "@/data/services";
 import ScrollReveal from "./ScrollReveal";
 
 const services = [
