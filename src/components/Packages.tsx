@@ -29,10 +29,10 @@ const Packages = () => {
           <div className="text-center mb-12">
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="gradient-text">Internet Package</span>
+              Simple Plans, <span className="gradient-text">Honest Pricing</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Transparent pricing with no hidden fees. All packages include unlimited data and free installation.
+              No hidden fees. No data caps. No surprises on your bill. Just pick the speed that fits your life.
             </p>
             
             <div className="inline-flex items-center gap-1 p-1 bg-card rounded-lg border border-border shadow-sm">
