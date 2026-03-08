@@ -25,7 +25,7 @@ const Services = () => {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+          {servicesData.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.06}>
               <Card className="bg-card border-border hover:border-primary/30 transition-all duration-300 card-hover group h-full">
                 <CardHeader>
@@ -43,12 +43,14 @@ const Services = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground mb-4 leading-relaxed">
-                    {service.description}
+                    {service.tagline}
                   </CardDescription>
-                  <Button variant="ghost" size="sm" className="group/btn text-primary px-0" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to={`/services/${service.slug}`}>
+                    <Button variant="ghost" size="sm" className="group/btn text-primary px-0">
+                      Learn More
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </ScrollReveal>
