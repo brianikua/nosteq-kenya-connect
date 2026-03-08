@@ -223,7 +223,7 @@ export const projects: Project[] = [
     client: "Licensed Forex Bureau",
     location: "Nairobi · Mombasa",
     category: "Enterprise Network",
-    description: "Low-latency trading infrastructure with redundant connectivity, real-time rate feeds, secure client portals, and compliance-ready audit logging across 2 locations.",
+    description: "A forex bureau's trades were failing during peak hours because of a flaky DSL link between Nairobi and Mombasa. We built a dual-fiber, sub-3ms trading infrastructure with full audit compliance — failed trades dropped from 340/month to under 5.",
     image: heroTechnicians,
     year: "2024",
     status: "completed",
