@@ -1,13 +1,18 @@
 import { Network, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import ScrollReveal from "./ScrollReveal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
