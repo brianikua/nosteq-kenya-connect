@@ -41,7 +41,7 @@ export const projects: Project[] = [
     client: "Tier-1 Commercial Bank",
     location: "Nairobi · 42 Branches",
     category: "Fintech & Banking",
-    description: "Redundant fiber backbone connecting 42 branches with sub-5ms latency for real-time transaction processing, mobile banking APIs, and PCI-DSS compliant network segmentation.",
+    description: "A major bank needed their 42 branches talking to each other in under 5ms — fast enough for real-time transactions. We built a redundant fiber backbone with PCI-DSS compliant segmentation that hasn't gone down once.",
     image: heroBg,
     year: "2024",
     status: "live",
