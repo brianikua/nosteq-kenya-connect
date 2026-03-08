@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CheckCircle2, Zap, Quote, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Zap, Quote, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { servicesData } from "@/data/services";
+import { serviceGalleries } from "@/data/serviceGallery";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
