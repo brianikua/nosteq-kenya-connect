@@ -2,87 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Kenyan Flag Colors - HSL Values */
-    --kenya-black: 0 0% 0%;
-    --kenya-red: 0 100% 45%;
-    --kenya-green: 120 100% 25%;
-    --kenya-white: 0 0% 100%;
-    --tech-cyan: 180 100% 50%;
+    /* Nosteq Brand Colors - Blue, White, Maroon */
+    --nosteq-blue: 215 90% 52%;
+    --nosteq-navy: 215 60% 18%;
+    --nosteq-maroon: 345 65% 35%;
+    --nosteq-white: 0 0% 100%;
+    --nosteq-light: 215 30% 96%;
     
-    /* Base Theme Colors */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    /* Base Theme - Light professional */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
 
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
 
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 180 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 215 90% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 120 100% 25%;
+    --secondary: 345 65% 35%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 215 15% 92%;
+    --muted-foreground: 215 10% 45%;
 
-    --accent: 0 100% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 215 90% 95%;
+    --accent-foreground: 215 90% 40%;
 
-    --destructive: 0 100% 45%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 180 100% 50%;
+    --border: 215 15% 88%;
+    --input: 215 15% 90%;
+    --ring: 215 90% 52%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Kenyan Cultural Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--kenya-black)), hsl(0 0% 10%));
-    --gradient-kenya: linear-gradient(135deg, hsl(var(--kenya-red)), hsl(var(--kenya-green)));
-    --gradient-tech: linear-gradient(135deg, hsl(var(--tech-cyan)), hsl(200 100% 40%));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 0% 8%));
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 60% 18%), hsl(215 50% 28%));
+    --gradient-brand: linear-gradient(135deg, hsl(215 90% 52%), hsl(215 90% 42%));
+    --gradient-accent: linear-gradient(135deg, hsl(345 65% 35%), hsl(345 65% 45%));
     
-    /* Shadows & Glows */
-    --shadow-cyan: 0 0 30px hsl(var(--tech-cyan) / 0.3);
-    --shadow-red: 0 0 20px hsl(var(--kenya-red) / 0.4);
-    --shadow-green: 0 0 20px hsl(var(--kenya-green) / 0.4);
-    --glow-cyber: 0 0 40px hsl(var(--tech-cyan) / 0.5);
+    /* Shadows */
+    --shadow-brand: 0 4px 20px hsl(215 90% 52% / 0.15);
+    --shadow-elevated: 0 8px 30px hsl(215 25% 15% / 0.08);
+    --shadow-card: 0 1px 3px hsl(215 25% 15% / 0.06), 0 1px 2px hsl(215 25% 15% / 0.04);
     
-    /* Animations */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 180 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 120 100% 25%;
+    --background: 215 25% 8%;
+    --foreground: 210 20% 95%;
+    --card: 215 25% 11%;
+    --card-foreground: 210 20% 95%;
+    --popover: 215 25% 11%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 215 90% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 345 65% 45%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 100% 45%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 100% 45%;
+    --muted: 215 20% 18%;
+    --muted-foreground: 215 10% 55%;
+    --accent: 215 30% 16%;
+    --accent-foreground: 215 90% 65%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 180 100% 50%;
+    --border: 215 20% 20%;
+    --input: 215 20% 18%;
+    --ring: 215 90% 58%;
   }
 }
 
@@ -102,93 +95,48 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Maasai Bead Pattern Border */
-  .maasai-border {
-    position: relative;
-  }
-  
-  .maasai-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(135deg, 
-      hsl(var(--kenya-red)) 0%, 
-      hsl(var(--tech-cyan)) 25%, 
-      hsl(var(--kenya-green)) 50%, 
-      hsl(var(--tech-cyan)) 75%, 
-      hsl(var(--kenya-red)) 100%
+  /* Brand accent line */
+  .brand-divider {
+    height: 3px;
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--secondary)) 50%,
+      hsl(var(--primary)) 100%
     );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    border-radius: 2px;
   }
 
-  /* Kitenge Pattern Background */
-  .kitenge-pattern {
+  /* Subtle pattern background */
+  .subtle-pattern {
     background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 10px, hsl(var(--kenya-red) / 0.05) 10px, hsl(var(--kenya-red) / 0.05) 20px),
-      repeating-linear-gradient(-45deg, transparent, transparent 10px, hsl(var(--kenya-green) / 0.05) 10px, hsl(var(--kenya-green) / 0.05) 20px);
+      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, hsl(var(--secondary) / 0.03) 0%, transparent 50%);
   }
 
-  /* Cyber Glow Effect */
-  .cyber-glow {
-    box-shadow: var(--shadow-cyan);
+  /* Card hover effect */
+  .card-hover {
+    box-shadow: var(--shadow-card);
     transition: var(--transition-smooth);
   }
 
-  .cyber-glow:hover {
-    box-shadow: var(--glow-cyber);
-    transform: translateY(-4px);
+  .card-hover:hover {
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-2px);
   }
 
-  /* Kenya Flag Accent Line */
-  .flag-divider {
-    height: 4px;
-    background: linear-gradient(90deg, 
-      hsl(var(--kenya-black)) 0%, 
-      hsl(var(--kenya-red)) 33%, 
-      hsl(var(--kenya-green)) 66%, 
-      hsl(var(--kenya-black)) 100%
-    );
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Particle Animation */
-  @keyframes float-particle {
-    0%, 100% {
-      transform: translateY(0) translateX(0);
-      opacity: 0.3;
-    }
-    50% {
-      transform: translateY(-20px) translateX(10px);
-      opacity: 0.6;
-    }
-  }
-
-  .particle {
-    animation: float-particle 6s ease-in-out infinite;
-  }
-
-  /* Network Pulse */
-  @keyframes pulse-network {
-    0%, 100% {
-      box-shadow: 0 0 0 0 hsl(var(--tech-cyan) / 0.7);
-    }
-    50% {
-      box-shadow: 0 0 0 20px hsl(var(--tech-cyan) / 0);
-    }
-  }
-
-  .network-pulse {
-    animation: pulse-network 2s infinite;
-  }
-
-  /* Scroll Reveal */
+  /* Scroll reveal */
   @keyframes reveal-up {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -197,14 +145,6 @@ All colors MUST be HSL.
   }
 
   .reveal-up {
-    animation: reveal-up 0.8s ease-out forwards;
-  }
-
-  /* Gradient Text */
-  .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--tech-cyan)), hsl(var(--kenya-green)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    animation: reveal-up 0.6s ease-out forwards;
   }
 }

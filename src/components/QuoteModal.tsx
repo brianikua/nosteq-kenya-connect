@@ -25,13 +25,12 @@ const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // WhatsApp integration
     const whatsappMessage = `New Quote Request%0A%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email}%0ALocation: ${formData.location}%0AService: ${formData.service}`;
     window.open(`https://wa.me/254743101738?text=${whatsappMessage}`, "_blank");
     
     toast({
       title: "Quote Request Sent!",
-      description: "Our team will contact you shortly via WhatsApp.",
+      description: "Our team will contact you shortly.",
     });
     
     onClose();
@@ -40,11 +39,11 @@ const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md bg-card/95 backdrop-blur-lg border-border">
+      <DialogContent className="sm:max-w-md bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl gradient-text">Get Instant Quote</DialogTitle>
+          <DialogTitle className="font-heading text-2xl">Get a Free Quote</DialogTitle>
           <DialogDescription>
-            Fill in your details and we'll send you a customized quote immediately
+            Fill in your details and we'll send you a customized quote within 24 hours.
           </DialogDescription>
         </DialogHeader>
         
@@ -94,7 +93,7 @@ const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
               required
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              placeholder="e.g., Kiambu, Nairobi"
+              placeholder="e.g., Nairobi, Kiambu"
               className="mt-1"
             />
           </div>
@@ -112,10 +111,13 @@ const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
               <SelectContent>
                 <SelectItem value="internet">Fiber Internet</SelectItem>
                 <SelectItem value="cctv">CCTV & Security</SelectItem>
-                <SelectItem value="it">IT Solutions</SelectItem>
-                <SelectItem value="smart">Smart Home</SelectItem>
-                <SelectItem value="voip">VoIP & Telephony</SelectItem>
-                <SelectItem value="hosting">Data Center Hosting</SelectItem>
+                <SelectItem value="datacenter">Data Center Solutions</SelectItem>
+                <SelectItem value="networking">Structured Cabling</SelectItem>
+                <SelectItem value="software">Software Development</SelectItem>
+                <SelectItem value="consulting">IT Consulting</SelectItem>
+                <SelectItem value="smart">Smart Building</SelectItem>
+                <SelectItem value="voip">VoIP & Communications</SelectItem>
+                <SelectItem value="hosting">Cloud & Hosting</SelectItem>
               </SelectContent>
             </Select>
           </div>

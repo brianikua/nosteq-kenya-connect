@@ -6,64 +6,55 @@ const services = [
   {
     icon: Gauge,
     title: "Fiber Internet Provision",
-    swahili: "Haraka",
-    description: "Unlimited high-speed fiber up to 1Gbps for seamless streaming, gaming, and remote work. 99.9% uptime, empowering Kenyan homes like the resilient Maasai warriors.",
+    description: "High-speed fiber connectivity up to 1Gbps with 99.9% uptime SLA. Dedicated and shared bandwidth options for residential and commercial clients.",
     badge: "Up to 1Gbps"
   },
   {
     icon: Shield,
-    title: "CCTV & Security Installation",
-    swahili: "Usalama",
-    description: "State-of-the-art 4K surveillance systems with AI motion detection, remote access, and 24/7 monitoring, safeguarding like traditional Kenyan village watchtowers.",
-    badge: "4K Quality"
+    title: "CCTV & Security Systems",
+    description: "Enterprise-grade 4K surveillance with AI-powered analytics, remote monitoring, access control, and 24/7 incident response.",
+    badge: "4K · AI Analytics"
   },
   {
     icon: Cable,
-    title: "Network Setup",
-    swahili: "Mtandao",
-    description: "Complete voice, data, and video network infrastructure. Structured cabling, LAN/WAN design, fiber optics installation, and unified communications for businesses of all sizes.",
-    badge: "Voice • Data • Video"
+    title: "Structured Cabling & Networks",
+    description: "End-to-end structured cabling for voice, data, and video. LAN/WAN design, fiber optics, and unified communications infrastructure.",
+    badge: "Voice · Data · Video"
   },
   {
     icon: Database,
-    title: "Data Center Setup",
-    swahili: "Kituo cha Data",
-    description: "End-to-end data center design and deployment. Server racks, cooling systems, power management, and network infrastructure built for maximum uptime and security.",
+    title: "Data Center Solutions",
+    description: "Complete data center design and deployment — server racks, cooling, power management, and redundant infrastructure built for maximum uptime.",
     badge: "Enterprise Grade"
   },
   {
     icon: Code,
-    title: "System Development & Apps",
-    swahili: "Programu",
-    description: "Custom software solutions, web applications, and mobile apps tailored to your business needs. From ERP systems to customer portals, we build digital excellence.",
+    title: "Software & App Development",
+    description: "Custom web applications, mobile apps, ERP systems, and digital platforms tailored to your business processes and growth goals.",
     badge: "Custom Solutions"
   },
   {
     icon: Network,
-    title: "IT Systems & Solutions",
-    swahili: "Teknolojia",
-    description: "Custom network design, cloud integration, cybersecurity, and enterprise hardware setups, blending tech with Kenyan innovation.",
-    badge: "Full Integration"
+    title: "IT Consulting & Integration",
+    description: "Strategic IT planning, cloud migration, cybersecurity audits, and enterprise systems integration for seamless digital transformation.",
+    badge: "Full Stack IT"
   },
   {
     icon: Lightbulb,
-    title: "Smart Home Automation",
-    swahili: "Nyumba Smart",
-    description: "IoT devices, voice control, energy-efficient smart systems for homes and offices, inspired by harmonious Kenyan communal living.",
+    title: "Smart Building Automation",
+    description: "IoT-enabled building management, energy optimization, access control, and intelligent environmental monitoring systems.",
     badge: "IoT Enabled"
   },
   {
     icon: Phone,
-    title: "VoIP & Business Telephony",
-    swahili: "Mawasiliano",
-    description: "Crystal-clear cloud PBX, video conferencing, and unified communications, connecting like ancient Kenyan drum signals.",
+    title: "VoIP & Unified Communications",
+    description: "Cloud PBX, HD video conferencing, and unified communications platforms that scale with your organization.",
     badge: "HD Quality"
   },
   {
     icon: Server,
-    title: "Data Center Hosting",
-    swahili: "Hifadhi Data",
-    description: "Secure colocation, VPS, dedicated servers with redundant power and cooling, as reliable as Kenya's enduring landscapes.",
+    title: "Cloud & Hosting Services",
+    description: "Secure colocation, VPS, dedicated servers, and managed cloud infrastructure with redundant power and cooling.",
     badge: "99.9% Uptime"
   }
 ];
@@ -71,45 +62,45 @@ const services = [
 const Services = () => {
   return (
     <section id="services" className="py-24 relative">
-      <div className="absolute inset-0 kitenge-pattern opacity-50" />
+      <div className="absolute inset-0 subtle-pattern" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
+          <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Do</p>
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="gradient-text">Services</span>
+            Comprehensive <span className="gradient-text">Technology Services</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive tech solutions for every Kenyan need
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            From fiber installation to enterprise software — we deliver full-spectrum IT solutions built for reliability and scale.
           </p>
-          <div className="flag-divider w-32 mx-auto mt-6" />
+          <div className="brand-divider w-24 mx-auto mt-8" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
               key={index}
-              className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 cyber-glow maasai-border animate-fade-in group"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="bg-card border-border hover:border-primary/30 transition-all duration-300 card-hover animate-fade-in group"
+              style={{ animationDelay: `${index * 0.08}s` }}
             >
               <CardHeader>
-                <div className="relative inline-block mb-4">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <service.icon className="w-8 h-8 text-primary" />
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-14 h-14 bg-accent rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                    <service.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <span className="absolute -top-2 -right-2 px-2 py-1 bg-accent text-accent-foreground text-xs rounded-full font-semibold">
+                  <span className="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">
                     {service.badge}
                   </span>
                 </div>
-                <CardTitle className="font-heading text-xl mb-2">
+                <CardTitle className="font-heading text-lg">
                   {service.title}
-                  <span className="block text-sm text-primary font-normal italic">"{service.swahili}"</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-muted-foreground mb-4">
+                <CardDescription className="text-muted-foreground mb-4 leading-relaxed">
                   {service.description}
                 </CardDescription>
-                <Button variant="ghost" size="sm" className="group/btn">
+                <Button variant="ghost" size="sm" className="group/btn text-primary px-0">
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
@@ -117,10 +108,6 @@ const Services = () => {
             </Card>
           ))}
         </div>
-
-        {/* Background Decorative Elements */}
-        <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-20 left-10 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -z-10" />
       </div>
     </section>
   );
