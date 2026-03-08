@@ -39,8 +39,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Gauge,
     title: "Fiber Internet Provision",
     badge: "Up to 1Gbps",
-    tagline: "Blazing-fast, reliable connectivity that powers your business forward.",
-    description: "We deliver enterprise-grade fiber optic internet solutions designed for maximum speed and reliability. Whether you need dedicated lines for mission-critical operations or shared bandwidth for everyday use, our fiber infrastructure ensures your business stays connected with minimal latency and maximum uptime.",
+    tagline: "Slow internet costs you more than you think. We fix that.",
+    description: "We install and manage fiber optic internet that actually delivers what it promises. Whether your team needs dedicated lines for banking systems or shared bandwidth for daily work, we design connectivity that won't let you down — with real speeds, real uptime, and real people you can call when you need help.",
     image: fiberImg,
     features: [
       "Dedicated & shared bandwidth options (10Mbps – 1Gbps)",
