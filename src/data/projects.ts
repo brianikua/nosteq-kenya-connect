@@ -197,7 +197,7 @@ export const projects: Project[] = [
     client: "General Insurance Provider",
     location: "Nairobi",
     category: "Software & Cloud",
-    description: "AI-powered claims processing platform with document OCR, fraud scoring, automated adjudication, and integration with reinsurance partners via secure APIs.",
+    description: "Insurance claims used to take 21 days of paper shuffling. We built an AI pipeline that reads documents, scores for fraud, and auto-approves standard claims — cutting processing time by 65% while actually improving accuracy.",
     image: serverRoom,
     year: "2025",
     status: "ongoing",
