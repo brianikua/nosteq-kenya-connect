@@ -284,8 +284,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Phone,
     title: "VoIP & Unified Communications",
     badge: "HD Quality",
-    tagline: "Crystal-clear communications that keep your team connected anywhere.",
-    description: "We deploy cloud and on-premise VoIP solutions that unify voice, video, messaging, and collaboration into a single platform. Our systems scale from small offices to enterprise call centers, delivering HD call quality and seamless integration with your existing tools.",
+    tagline: "Ditch the old phone system. Talk to anyone, anywhere, crystal clear.",
+    description: "Traditional phone systems are expensive and inflexible. We replace them with modern VoIP that unifies calls, video, messaging, and collaboration in one platform. Your team can take calls from a desk phone, laptop, or mobile app — same number, same quality. And you'll save a fortune on phone bills.",
     image: voipImg,
     features: [
       "Cloud PBX and on-premise IP PBX",
