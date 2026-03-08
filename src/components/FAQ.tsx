@@ -9,30 +9,30 @@ import ScrollReveal from "./ScrollReveal";
 
 const faqs = [
   {
-    category: "Installation",
+    category: "Getting Started",
     questions: [
-      { question: "How long does fiber installation take?", answer: "Standard residential installation takes 2–4 hours once fiber reaches your building. For areas requiring new fiber laying, this may take 5–7 business days. Our team will survey your location and provide an accurate timeline." },
-      { question: "Is there an installation fee?", answer: "We offer free standard installation for all new customers on 6-month contracts or longer. For month-to-month plans, a one-time installation fee of KES 3,000 applies. Business installations are quoted based on scope and complexity." },
-      { question: "What equipment is included?", answer: "All packages include a high-performance WiFi router (dual-band AC or WiFi 6 for premium plans), fiber ONT device, and all necessary cabling. Equipment remains Nosteq property during your subscription." },
-      { question: "Do you provide service in my area?", answer: "We currently cover Nairobi, Kiambu, Thika, and surrounding areas with rapid expansion underway. Contact us with your location for the latest coverage information." },
+      { question: "How quickly can you set up my fiber connection?", answer: "If fiber already reaches your building, we'll have you online in 2–4 hours. If we need to lay new fiber to your location, expect 5–7 business days. Either way, we'll survey your site first and give you an honest timeline — no surprises." },
+      { question: "Will I need to pay for installation?", answer: "Nope — installation is completely free when you sign up for 6 months or longer. For month-to-month flexibility, there's a one-time KES 3,000 setup fee. Business installations depend on complexity, so we'll quote you upfront." },
+      { question: "What equipment do I get?", answer: "Every package comes with a high-performance WiFi router (dual-band AC or WiFi 6 on premium plans), a fiber ONT device, and all the cabling needed. The equipment stays in great shape because we maintain it as part of your subscription." },
+      { question: "Are you available in my area?", answer: "We currently cover Nairobi, Kiambu, Thika, and surrounding areas — and we're expanding fast. Drop us your location and we'll check coverage instantly. If we're not there yet, we'll let you know when we will be." },
     ]
   },
   {
-    category: "Pricing & Billing",
+    category: "Money Matters",
     questions: [
-      { question: "Can I upgrade or downgrade my package?", answer: "Absolutely. You can change your package at any time. Upgrades take effect immediately, while downgrades apply at your next billing cycle. No penalties for switching." },
-      { question: "What payment methods do you accept?", answer: "We accept M-Pesa, bank transfers, card payments, and Airtel Money. Business accounts can arrange invoiced billing with net-30 terms." },
-      { question: "Is there a contract or commitment period?", answer: "We offer flexible month-to-month plans. However, 6-month and 12-month contracts include free installation and up to 15% discount on monthly rates." },
-      { question: "What happens if I miss a payment?", answer: "We provide a 7-day grace period. After that, service is temporarily suspended but can be restored immediately upon payment. No reconnection fees for first-time late payments." },
+      { question: "Can I switch my plan anytime?", answer: "Absolutely. Upgrading takes effect immediately. If you're downgrading, it kicks in at your next billing cycle. No penalties, no awkward phone calls — just flexibility." },
+      { question: "How can I pay?", answer: "However works best for you: M-Pesa, bank transfer, card, or Airtel Money. Businesses can set up invoiced billing with net-30 terms. We try to make the boring stuff easy." },
+      { question: "Am I locked into a contract?", answer: "You can go month-to-month if you like. But if you commit to 6 or 12 months, you get free installation and up to 15% off your monthly rate. Your call — no pressure either way." },
+      { question: "What if I forget to pay?", answer: "Life happens. We give you a 7-day grace period. If service gets paused, one payment restores it instantly. First-time late? No reconnection fee. We're not here to penalize you." },
     ]
   },
   {
-    category: "Support & Service",
+    category: "Support & Reliability",
     questions: [
-      { question: "What is your uptime guarantee?", answer: "We guarantee 99.9% uptime for all packages. If uptime falls below this in any month, you receive pro-rated credit. Business plans include SLA-backed guarantees." },
-      { question: "How do I report a service issue?", answer: "Call our 24/7 hotline at +254 743 101 738, WhatsApp us, or email support@nosteq.co.ke. Most issues are resolved remotely within 2 hours. On-site visits are scheduled within 24 hours if needed." },
-      { question: "Do you offer static IP addresses?", answer: "Yes. Static IPs are included free with Turbo, Ultra, and all Business packages. For Starter and Pro plans, add a static IP for KES 500/month." },
-      { question: "Can I use my own router?", answer: "Absolutely. While we provide quality routers, you're welcome to use your own. Our technicians can help configure it during installation at no extra charge." },
+      { question: "What's your uptime guarantee?", answer: "99.9% across all packages — and we put our money where our mouth is. If we fall short in any month, you get pro-rated credit automatically. Business plans come with even stricter SLA-backed guarantees." },
+      { question: "Something's wrong with my connection — who do I call?", answer: "Our 24/7 team at +254 743 101 738 — call or WhatsApp. You can also email support@nosteq.co.ke. Most issues get resolved remotely within 2 hours. If it needs a site visit, we'll be there within 24 hours." },
+      { question: "Can I get a static IP?", answer: "It's included free with Turbo, Ultra, and all Business packages. On Starter or Pro plans, add one for just KES 500/month. Perfect for hosting, VPNs, or remote access." },
+      { question: "Can I use my own router instead?", answer: "Of course. Use whatever hardware you prefer — our technicians will configure it during installation at no extra charge. We want you comfortable with your setup." },
     ]
   }
 ];
@@ -47,10 +47,10 @@ const FAQ = () => {
           <div className="text-center mb-12">
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">FAQ</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-              Frequently Asked <span className="gradient-text">Questions</span>
+              Got Questions? <span className="gradient-text">We've Got Answers</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to know about our services, pricing, and support.
+              The stuff people ask us most — straight answers, no jargon.
             </p>
             <div className="brand-divider w-24 mx-auto mt-8" />
           </div>
@@ -80,8 +80,8 @@ const FAQ = () => {
 
         <ScrollReveal delay={0.3}>
           <div className="text-center mt-12 p-8 bg-card rounded-2xl border border-border max-w-2xl mx-auto shadow-sm">
-            <h4 className="font-heading text-xl font-semibold mb-2">Still have questions?</h4>
-            <p className="text-muted-foreground mb-6">Our team is ready to help you find the right solution.</p>
+            <h4 className="font-heading text-xl font-semibold mb-2">Still curious about something?</h4>
+            <p className="text-muted-foreground mb-6">We love questions — it means you're serious about getting the right solution.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://wa.me/254743101738" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-lg font-medium transition-colors">WhatsApp Us</a>
               <a href="tel:+254743101738" className="inline-flex items-center justify-center px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-medium transition-colors">Call +254 743 101 738</a>

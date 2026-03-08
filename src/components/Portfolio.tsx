@@ -97,7 +97,7 @@ const Portfolio = () => {
               View All Case Studies <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2">
-              <p className="text-sm md:text-base text-muted-foreground text-center">Ready to build your next mission-critical project?</p>
+              <p className="text-sm md:text-base text-muted-foreground text-center">Have a project in mind? Let's figure it out together.</p>
               <Button variant="hero" className="group w-full sm:w-auto" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
                 Get in Touch <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>

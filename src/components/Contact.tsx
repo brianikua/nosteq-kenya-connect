@@ -41,8 +41,8 @@ const Contact = () => {
           <ScrollReveal direction="left">
             <Card className="bg-card border-border shadow-sm">
               <CardHeader className="pb-4 md:pb-6">
-                <CardTitle className="font-heading text-xl md:text-2xl">Send Us a Message</CardTitle>
-                <CardDescription className="text-sm">Fill out the form and we'll respond within 24 hours</CardDescription>
+                <CardTitle className="font-heading text-xl md:text-2xl">Drop Us a Line</CardTitle>
+                <CardDescription className="text-sm">We'll get back to you within 24 hours — usually much faster</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
