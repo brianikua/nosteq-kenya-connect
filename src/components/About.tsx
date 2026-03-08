@@ -7,31 +7,31 @@ import serverImage from "@/assets/server-room.jpg";
 
 const testimonials = [
   {
-    text: "Switched to Nosteq – zero downtime, blazing speeds! Best decision for my shamba. My business runs smoothly now, even during peak hours.",
-    author: "Jane Wanjiku",
-    role: "Business Owner",
-    location: "Kiambu",
+    text: "Nosteq completely transformed our office connectivity. Zero downtime since installation, and the support team responds within minutes. A true enterprise-grade partner.",
+    author: "Jane W.",
+    role: "Operations Director",
+    location: "Financial Services",
     rating: 5
   },
   {
-    text: "CCTV install was flawless. Crystal-clear feeds 24/7, like watching over my herd. The team was professional and finished ahead of schedule.",
-    author: "John Kimani",
-    role: "Homeowner",
-    location: "Nairobi",
+    text: "The CCTV installation was completed ahead of schedule with crystal-clear feeds across all 8 floors. Their attention to detail and professionalism is unmatched.",
+    author: "John K.",
+    role: "Facilities Manager",
+    location: "Commercial Real Estate",
     rating: 5
   },
   {
-    text: "Their IT solutions saved our office thousands. Highly recommend – truly Kenyan ingenuity! The support team is always responsive.",
-    author: "Sarah Muthoni",
-    role: "CEO, Corp Ltd",
-    location: "Westlands",
+    text: "Their IT consulting saved us significant costs by consolidating our infrastructure. The team understood our needs perfectly and delivered beyond expectations.",
+    author: "Sarah M.",
+    role: "CEO",
+    location: "Tech Startup",
     rating: 5
   },
   {
-    text: "Affordable, reliable fiber. 5 stars – Hakuna Matata connectivity! Gaming has never been this smooth. Upload speeds are incredible too.",
-    author: "Mike Otieno",
-    role: "Gamer & Streamer",
-    location: "Banana Hill",
+    text: "Reliable fiber with consistent speeds at all hours. The dedicated account manager makes everything seamless — from billing to technical support.",
+    author: "Michael O.",
+    role: "IT Manager",
+    location: "Media Company",
     rating: 5
   }
 ];
@@ -49,80 +49,81 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 kitenge-pattern opacity-30" />
+      <div className="absolute inset-0 subtle-pattern" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
+          <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">About Us</p>
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Kwa Nini Nosteq?</span>
+            Why Choose <span className="gradient-text">Nosteq?</span>
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Kenya's Premier Tech Innovator
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A trusted technology partner delivering international-grade IT solutions.
           </p>
-          <div className="flag-divider w-32 mx-auto mt-6" />
+          <div className="brand-divider w-24 mx-auto mt-8" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           {/* Company Story */}
           <div className="space-y-6 animate-fade-in">
-            <Card className="bg-card/50 backdrop-blur-sm border-border">
+            <Card className="bg-card border-border shadow-sm">
               <CardContent className="p-8">
                 <h3 className="font-heading text-2xl font-bold mb-4">Our Story</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Nosteq Networks Limited, headquartered in <span className="text-foreground font-semibold">Kiambu</span>, delivers cutting-edge connectivity and security solutions across Nairobi and beyond.
+                  Nosteq Networks Limited is a full-service IT technology company delivering enterprise-grade connectivity, security, and infrastructure solutions.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  <span className="text-secondary font-semibold">Licensed by CA Kenya</span>, we empower homes, businesses, and enterprises with reliable tech that honors Kenyan heritage – from savannah speeds to urban security.
+                  <span className="text-primary font-semibold">Fully licensed and certified</span>, we serve residential, commercial, and enterprise clients with solutions that meet international standards for reliability, performance, and security.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our mission is to bridge the digital divide, bringing <span className="text-primary font-semibold">world-class internet infrastructure</span> to every corner of Kenya, powered by local expertise and global standards.
+                  Our mission is to bridge the digital divide by bringing <span className="text-primary font-semibold">world-class IT infrastructure</span> to every client, powered by deep technical expertise and a commitment to excellence.
                 </p>
               </CardContent>
             </Card>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4">
-              <Card className="bg-primary/10 border-primary/30 text-center p-4">
+              <Card className="bg-accent text-center p-5 border-border shadow-sm">
                 <div className="font-heading text-3xl font-bold text-primary">5000+</div>
-                <div className="text-xs text-muted-foreground mt-1">Happy Customers</div>
+                <div className="text-xs text-muted-foreground mt-1">Active Clients</div>
               </Card>
-              <Card className="bg-secondary/10 border-secondary/30 text-center p-4">
-                <div className="font-heading text-3xl font-bold text-secondary">10+</div>
+              <Card className="bg-accent text-center p-5 border-border shadow-sm">
+                <div className="font-heading text-3xl font-bold text-primary">10+</div>
                 <div className="text-xs text-muted-foreground mt-1">Years Experience</div>
               </Card>
-              <Card className="bg-accent/10 border-accent/30 text-center p-4">
-                <div className="font-heading text-3xl font-bold text-accent">24/7</div>
-                <div className="text-xs text-muted-foreground mt-1">Support Available</div>
+              <Card className="bg-accent text-center p-5 border-border shadow-sm">
+                <div className="font-heading text-3xl font-bold text-secondary">24/7</div>
+                <div className="text-xs text-muted-foreground mt-1">Support</div>
               </Card>
             </div>
           </div>
 
           {/* Images Grid */}
           <div className="grid grid-cols-2 gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="rounded-xl overflow-hidden maasai-border cyber-glow">
-              <img src={cctvImage} alt="CCTV installation in Kenyan building" className="w-full h-64 object-cover" />
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img src={cctvImage} alt="Enterprise CCTV installation" className="w-full h-64 object-cover" />
             </div>
-            <div className="rounded-xl overflow-hidden maasai-border cyber-glow mt-8">
-              <img src={serverImage} alt="Nosteq data center with Kenyan cultural elements" className="w-full h-64 object-cover" />
+            <div className="rounded-xl overflow-hidden shadow-lg mt-8">
+              <img src={serverImage} alt="Nosteq data center infrastructure" className="w-full h-64 object-cover" />
             </div>
           </div>
         </div>
 
-        {/* Testimonials Carousel */}
+        {/* Testimonials */}
         <div className="max-w-4xl mx-auto">
           <h3 className="font-heading text-3xl font-bold text-center mb-8">
-            What Our <span className="gradient-text">Customers Say</span>
+            What Our <span className="gradient-text">Clients Say</span>
           </h3>
           
-          <Card className="bg-card/80 backdrop-blur-sm border-border relative overflow-hidden">
-            <div className="absolute top-6 left-6 text-primary/20">
+          <Card className="bg-card border-border shadow-sm relative overflow-hidden">
+            <div className="absolute top-6 left-6 text-primary/10">
               <Quote className="w-16 h-16" />
             </div>
             
             <CardContent className="p-8 md:p-12 relative">
               <div className="mb-6 flex gap-1">
                 {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                  <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
                 ))}
               </div>
               
@@ -134,7 +135,7 @@ const About = () => {
                 <div>
                   <div className="font-heading font-bold text-lg">{testimonials[currentTestimonial].author}</div>
                   <div className="text-sm text-muted-foreground">
-                    {testimonials[currentTestimonial].role} • {testimonials[currentTestimonial].location}
+                    {testimonials[currentTestimonial].role} · {testimonials[currentTestimonial].location}
                   </div>
                 </div>
                 
@@ -148,14 +149,14 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Dots Indicator */}
+              {/* Dots */}
               <div className="flex justify-center gap-2 mt-6">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentTestimonial ? "bg-primary w-8" : "bg-muted"
+                      index === currentTestimonial ? "bg-primary w-8" : "bg-border"
                     }`}
                   />
                 ))}
