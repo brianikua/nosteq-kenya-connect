@@ -171,7 +171,7 @@ export const projects: Project[] = [
     client: "Pan-African MFI",
     location: "Kenya · Uganda · Tanzania",
     category: "CCTV & Security",
-    description: "Unified security deployment across 85 microfinance branches in 3 countries — 4K cameras, vault monitoring, access control, and centralized cloud-based surveillance.",
+    description: "85 microfinance branches across Kenya, Uganda, and Tanzania — each running its own security independently. We unified everything: 600+ 4K cameras, biometric vault access, and a single dashboard at HQ showing every branch in real-time.",
     image: cctvInstall,
     year: "2024",
     status: "ongoing",
