@@ -62,7 +62,7 @@ const Navbar = () => {
                 Nosteq Networks
               </h1>
               <p className={`text-[10px] md:text-xs ${isScrolled || isMobileMenuOpen ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>
-                Full IT Technology
+                Get Connected
               </p>
             </div>
           </a>
