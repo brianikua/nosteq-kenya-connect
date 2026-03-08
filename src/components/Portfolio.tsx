@@ -92,8 +92,11 @@ const Portfolio = () => {
         </div>
 
         <ScrollReveal delay={0.2}>
-          <div className="text-center mt-16">
-            <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
+          <div className="text-center mt-16 space-y-4">
+            <Button variant="outline" size="lg" className="group" onClick={() => navigate("/portfolio")}>
+              View All Case Studies <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-2">
               <p className="text-muted-foreground">Ready to build your next mission-critical project?</p>
               <Button variant="hero" className="group" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
                 Get in Touch <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
