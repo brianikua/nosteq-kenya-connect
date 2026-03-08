@@ -319,8 +319,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Server,
     title: "Cloud & Hosting Services",
     badge: "99.9% Uptime",
-    tagline: "Secure, scalable infrastructure you can count on.",
-    description: "From colocation and VPS to fully managed cloud environments, we provide hosting solutions built on redundant infrastructure with enterprise-grade security. Our data centers feature N+1 power, precision cooling, and 24/7 monitoring to ensure your applications are always available.",
+    tagline: "Your apps and data, hosted on infrastructure that doesn't sleep.",
+    description: "Stop worrying about server crashes at 2am. We provide colocation, VPS, dedicated servers, and fully managed cloud hosting — all running on redundant infrastructure with enterprise security, automated backups, and a team watching over everything 24/7. You focus on your business; we'll keep the lights on.",
     image: cloudImg,
     features: [
       "Colocation with redundant power and cooling",
