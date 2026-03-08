@@ -249,8 +249,8 @@ export const servicesData: ServiceDetail[] = [
     icon: Lightbulb,
     title: "Smart Building Automation",
     badge: "IoT Enabled",
-    tagline: "Intelligent buildings that optimize comfort, security, and efficiency.",
-    description: "We integrate IoT sensors, automation controllers, and management platforms to create buildings that think for themselves. From lighting and HVAC control to occupancy analytics and energy optimization, our smart building solutions reduce costs while enhancing occupant experience.",
+    tagline: "Buildings that adjust lighting, temperature, and access without anyone lifting a finger.",
+    description: "Imagine walking into a building where the lights dim when no one's around, the AC adjusts based on occupancy, and the front door knows who you are. That's what we build. Our smart building systems use IoT sensors and automation to cut energy costs, boost comfort, and give you real-time control over every floor.",
     image: smartBuildingImg,
     features: [
       "Automated lighting and HVAC control",
