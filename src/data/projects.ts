@@ -119,7 +119,7 @@ export const projects: Project[] = [
     client: "Regional Healthcare Network",
     location: "Nairobi · 3 Campuses",
     category: "Enterprise Network",
-    description: "HIPAA-aligned network infrastructure across 3 hospital campuses supporting EHR systems, telemedicine, IoT medical devices, and integrated billing with insurance APIs.",
+    description: "Three hospital campuses with patient records stuck in silos, no telemedicine capability, and insurance claims done by hand. We connected everything — now doctors access any patient record instantly from any campus, and telemedicine visits jumped 340%.",
     image: heroTechnicians,
     year: "2024",
     status: "live",
