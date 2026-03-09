@@ -42,10 +42,18 @@
 
     --radius: 0.5rem;
 
+    /* Dark section colors */
+    --section-dark-bg: 215 55% 12%;
+    --section-dark-fg: 210 20% 92%;
+    --section-dark-muted: 215 20% 35%;
+    --section-dark-card: 215 40% 16%;
+    --section-dark-border: 215 30% 22%;
+
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(215 60% 18%), hsl(215 50% 28%));
     --gradient-brand: linear-gradient(135deg, hsl(215 90% 52%), hsl(215 90% 42%));
     --gradient-accent: linear-gradient(135deg, hsl(345 65% 35%), hsl(345 65% 45%));
+    --gradient-section: linear-gradient(180deg, hsl(215 55% 12%) 0%, hsl(215 45% 15%) 100%);
     
     /* Shadows */
     --shadow-brand: 0 4px 20px hsl(215 90% 52% / 0.15);
