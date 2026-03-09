@@ -11,31 +11,47 @@ interface HeroProps {
 
 const PARTICLE_COUNT = 40;
 
+// Brand colors: Blue (215, 90%, 52%) & Maroon (345, 65%, 35%)
+const BRAND_BLUE = { r: 26, g: 115, b: 232 };
+const BRAND_MAROON = { r: 147, g: 31, b: 63 };
+
 function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2.5 + 0.8,
-    dx: (Math.random() - 0.5) * 0.4,
-    dy: (Math.random() - 0.5) * 0.4,
-    opacity: Math.random() * 0.5 + 0.15,
-  }));
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => {
+    const isBlue = Math.random() > 0.4; // 60% blue, 40% maroon
+    const color = isBlue ? BRAND_BLUE : BRAND_MAROON;
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2.5 + 1,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      opacity: Math.random() * 0.6 + 0.2,
+      color,
+    };
+  });
 
   let animId: number;
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw connections
+    // Draw connections with gradient-like colors
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 150) {
+          const alpha = 0.12 * (1 - dist / 150);
+          // Blend the two particle colors for the line
+          const c1 = particles[i].color;
+          const c2 = particles[j].color;
+          const avgR = Math.round((c1.r + c2.r) / 2);
+          const avgG = Math.round((c1.g + c2.g) / 2);
+          const avgB = Math.round((c1.b + c2.b) / 2);
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(99, 165, 255, ${0.08 * (1 - dist / 150)})`;
-          ctx.lineWidth = 0.5;
+          ctx.strokeStyle = `rgba(${avgR}, ${avgG}, ${avgB}, ${alpha})`;
+          ctx.lineWidth = 0.6;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
@@ -47,7 +63,7 @@ function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
     for (const p of particles) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(99, 165, 255, ${p.opacity})`;
+      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity})`;
       ctx.fill();
 
       p.x += p.dx;
