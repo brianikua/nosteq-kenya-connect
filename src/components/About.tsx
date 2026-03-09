@@ -19,7 +19,7 @@ const About = () => {
   const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-24 section-dark relative overflow-hidden">
       <div className="absolute inset-0 subtle-pattern" />
       
       <div className="container mx-auto px-4 relative z-10">

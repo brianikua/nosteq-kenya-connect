@@ -23,7 +23,7 @@ const Packages = () => {
   const [planType, setPlanType] = useState<"home" | "business">("home");
 
   return (
-    <section id="packages" className="py-24 bg-accent/30">
+    <section id="packages" className="py-24 section-dark">
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-12">

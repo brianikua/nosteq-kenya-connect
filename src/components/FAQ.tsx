@@ -39,7 +39,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section id="faq" className="py-24 relative">
+    <section id="faq" className="py-24 section-dark relative">
       <div className="absolute inset-0 subtle-pattern" />
       
       <div className="container mx-auto px-4 relative z-10">
