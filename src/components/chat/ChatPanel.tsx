@@ -120,7 +120,7 @@ const ChatPanel = () => {
           Powered by Nosteq Networks
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
