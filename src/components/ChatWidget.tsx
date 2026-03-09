@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import ChatLauncher from "./chat/ChatLauncher";
 import ChatPanel from "./chat/ChatPanel";
 
@@ -8,7 +9,9 @@ const ChatWidget = () => {
   return (
     <>
       <ChatLauncher isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} />
-      {isOpen && <ChatPanel />}
+      <AnimatePresence>
+        {isOpen && <ChatPanel />}
+      </AnimatePresence>
     </>
   );
 };
