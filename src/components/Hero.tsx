@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap } from "lucide-react";
 import heroTechnicians from "@/assets/hero-technicians.jpg";
@@ -8,7 +9,84 @@ interface HeroProps {
   onQuoteClick: () => void;
 }
 
+const PARTICLE_COUNT = 40;
+
+function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2.5 + 0.8,
+    dx: (Math.random() - 0.5) * 0.4,
+    dy: (Math.random() - 0.5) * 0.4,
+    opacity: Math.random() * 0.5 + 0.15,
+  }));
+
+  let animId: number;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(99, 165, 255, ${0.08 * (1 - dist / 150)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw dots
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(99, 165, 255, ${p.opacity})`;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    }
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  draw();
+  return () => cancelAnimationFrame(animId);
+}
+
 const Hero = ({ onQuoteClick }: HeroProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const cleanup = createParticles(canvas, ctx);
+    return () => {
+      cleanup();
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
   const scrollToPackages = () => {
     const element = document.getElementById("packages");
     if (element) {
@@ -26,6 +104,12 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
       </div>
+
+      {/* Particle canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full z-[1] pointer-events-none"
+      />
 
       <div className="container mx-auto px-4 py-32 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
