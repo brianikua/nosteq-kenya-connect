@@ -19,10 +19,13 @@ const ChatWidget = () => {
   };
 
   const quickReplies = [
-    "Fiber internet inquiry",
-    "CCTV installation",
-    "Request a quote",
-    "Technical support"
+    "Show fintech & banking case studies",
+    "I need Fiber Internet for my business",
+    "I need CCTV & branch security setup",
+    "I need a Data Center / server room upgrade",
+    "I need custom Software & App Development",
+    "Request a quote for my project",
+    "I need technical support",
   ];
 
   return (
