@@ -72,12 +72,19 @@ const ChatPanel = () => {
             <QuickReplies onSelect={setMessage} />
 
             <div className="space-y-3 pt-2">
-              <Input
-                placeholder="Your name (optional)"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="bg-accent/50"
-              />
+              <div>
+                <Input
+                  placeholder="Your name (optional)"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-accent/50"
+                />
+                {!name.trim() && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Adding your name helps us personalize the conversation
+                  </p>
+                )}
+              </div>
               <Textarea
                 placeholder="Type your message..."
                 value={message}
@@ -87,7 +94,8 @@ const ChatPanel = () => {
               />
               <Button
                 onClick={handleWhatsAppChat}
-                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white"
+                disabled={!message.trim()}
+                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <FaWhatsapp className="w-5 h-5 mr-2" />
                 Continue on WhatsApp
