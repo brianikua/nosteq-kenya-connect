@@ -19,10 +19,13 @@ const ChatWidget = () => {
   };
 
   const quickReplies = [
-    "Fiber internet inquiry",
-    "CCTV installation",
-    "Request a quote",
-    "Technical support"
+    "Show fintech & banking case studies",
+    "I need Fiber Internet for my business",
+    "I need CCTV & branch security setup",
+    "I need a Data Center / server room upgrade",
+    "I need custom Software & App Development",
+    "Request a quote for my project",
+    "I need technical support",
   ];
 
   return (
@@ -97,7 +100,7 @@ const ChatWidget = () => {
                   </div>
                   <div className="bg-accent rounded-2xl rounded-tl-none p-3 max-w-[80%]">
                     <p className="text-sm">
-                      Hello! 👋 How can we help you today? Choose an option below or type your message.
+                      Hello! 👋 I'm your Nosteq assistant. We've helped 5,000+ businesses with fiber internet, CCTV security, data centers, and custom software. How can we help you today?
                     </p>
                   </div>
                 </div>
