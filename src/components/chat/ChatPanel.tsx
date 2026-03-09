@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,13 @@ const ChatPanel = () => {
   };
 
   return (
-    <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] bg-card border border-border rounded-2xl shadow-xl overflow-hidden animate-fade-in">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] bg-card border border-border rounded-2xl shadow-xl overflow-hidden origin-bottom-right"
+    >
       {/* Header */}
       <div className="p-4" style={{ background: "var(--gradient-brand)" }}>
         <div className="flex items-center gap-3">
