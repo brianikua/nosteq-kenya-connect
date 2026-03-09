@@ -121,6 +121,40 @@
       radial-gradient(circle at 80% 50%, hsl(var(--secondary) / 0.03) 0%, transparent 50%);
   }
 
+  /* Dark section styling */
+  .section-dark {
+    background: var(--gradient-section);
+    color: hsl(var(--section-dark-fg));
+  }
+
+  .section-dark .text-foreground,
+  .section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 {
+    color: hsl(var(--section-dark-fg));
+  }
+
+  .section-dark .text-muted-foreground {
+    color: hsl(var(--section-dark-muted));
+  }
+
+  .section-dark .bg-card {
+    background-color: hsl(var(--section-dark-card));
+  }
+
+  .section-dark .border-border {
+    border-color: hsl(var(--section-dark-border));
+  }
+
+  .section-dark .bg-accent {
+    background-color: hsl(215 40% 20%);
+  }
+
+  .section-dark .brand-divider {
+    opacity: 0.8;
+  }
+      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, hsl(var(--secondary) / 0.03) 0%, transparent 50%);
+  }
+
   /* Card hover effect */
   .card-hover {
     box-shadow: var(--shadow-card);
