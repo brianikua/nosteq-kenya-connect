@@ -149,7 +149,7 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               </h1>
               
               <p className="text-lg md:text-xl text-primary-foreground/70 max-w-xl leading-relaxed">
-                From lightning-fast fiber to intelligent security, data centers to custom software — we handle it all so you can focus on what you do best.
+                {content.hero.subheading}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
