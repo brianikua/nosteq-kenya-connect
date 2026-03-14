@@ -8,6 +8,7 @@ import CaseStudy from "./pages/CaseStudy";
 import PortfolioPage from "./pages/PortfolioPage";
 import ServiceDetail from "./pages/ServiceDetail";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
