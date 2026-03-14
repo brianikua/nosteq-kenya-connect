@@ -29,11 +29,9 @@ import {
   saveContent,
   resetContent,
   type SiteContent,
-  type FAQItem,
   type PackageItem,
-  type TestimonialItem,
-  type MediaItem,
 } from "@/lib/contentStore";
+import type { MediaItem } from "@/data/media";
 
 const Admin = () => {
   const { toast } = useToast();
