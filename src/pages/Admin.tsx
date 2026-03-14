@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -23,6 +24,21 @@ import {
   Plus,
   Trash2,
   GripVertical,
+  Gauge,
+  Shield,
+  Cable,
+  Database,
+  Code,
+  Network,
+  Lightbulb,
+  Server,
+  Wifi,
+  Monitor,
+  Cloud,
+  Lock,
+  Cpu,
+  Radio,
+  type LucideIcon,
 } from "lucide-react";
 import {
   getContent,
@@ -32,6 +48,24 @@ import {
   type PackageItem,
 } from "@/lib/contentStore";
 import type { MediaItem } from "@/data/media";
+
+const availableIcons: { name: string; icon: LucideIcon }[] = [
+  { name: "Gauge", icon: Gauge },
+  { name: "Shield", icon: Shield },
+  { name: "Cable", icon: Cable },
+  { name: "Database", icon: Database },
+  { name: "Code", icon: Code },
+  { name: "Network", icon: Network },
+  { name: "Lightbulb", icon: Lightbulb },
+  { name: "Phone", icon: Phone },
+  { name: "Server", icon: Server },
+  { name: "Wifi", icon: Wifi },
+  { name: "Monitor", icon: Monitor },
+  { name: "Cloud", icon: Cloud },
+  { name: "Lock", icon: Lock },
+  { name: "Cpu", icon: Cpu },
+  { name: "Radio", icon: Radio },
+];
 
 const Admin = () => {
   const { toast } = useToast();
@@ -189,12 +223,29 @@ const Admin = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <Label>Icon Name (Lucide)</Label>
-                        <Input value={service.iconName} onChange={(e) => {
-                          const s = [...content.services];
-                          s[i] = { ...s[i], iconName: e.target.value };
-                          updateContent("services", s);
-                        }} className="mt-1" placeholder="e.g. Gauge, Shield, Cable" />
+                        <Label>Icon</Label>
+                        <Select
+                          value={service.iconName}
+                          onValueChange={(v) => {
+                            const s = [...content.services];
+                            s[i] = { ...s[i], iconName: v };
+                            updateContent("services", s);
+                          }}
+                        >
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select icon" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {availableIcons.map(({ name, icon: IconComp }) => (
+                              <SelectItem key={name} value={name}>
+                                <span className="flex items-center gap-2">
+                                  <IconComp className="w-4 h-4" />
+                                  {name}
+                                </span>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <Label>Slug</Label>
