@@ -42,23 +42,23 @@
 
     --radius: 0.5rem;
 
-    /* Dark section colors */
-    --section-dark-bg: 215 55% 12%;
-    --section-dark-fg: 210 20% 92%;
-    --section-dark-muted: 215 20% 35%;
-    --section-dark-card: 215 40% 16%;
-    --section-dark-border: 215 30% 22%;
+    /* Dark section colors — reduced blue, more neutral */
+    --section-dark-bg: 220 20% 14%;
+    --section-dark-fg: 210 15% 94%;
+    --section-dark-muted: 215 12% 50%;
+    --section-dark-card: 220 18% 18%;
+    --section-dark-border: 220 15% 25%;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(215 40% 12%), hsl(215 30% 20%));
+    /* Gradients — toned down blue */
+    --gradient-hero: linear-gradient(135deg, hsl(220 25% 13%), hsl(220 20% 22%));
     --gradient-brand: linear-gradient(135deg, hsl(215 90% 52%), hsl(215 90% 42%));
     --gradient-accent: linear-gradient(135deg, hsl(345 65% 35%), hsl(345 65% 45%));
-    --gradient-section: linear-gradient(180deg, hsl(215 55% 12%) 0%, hsl(215 45% 15%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(220 20% 14%) 0%, hsl(220 18% 17%) 100%);
     
     /* Shadows */
     --shadow-brand: 0 4px 20px hsl(215 90% 52% / 0.15);
-    --shadow-elevated: 0 8px 30px hsl(215 25% 15% / 0.08);
-    --shadow-card: 0 1px 3px hsl(215 25% 15% / 0.06), 0 1px 2px hsl(215 25% 15% / 0.04);
+    --shadow-elevated: 0 8px 30px hsl(220 15% 10% / 0.12);
+    --shadow-card: 0 1px 3px hsl(220 15% 10% / 0.06), 0 1px 2px hsl(220 15% 10% / 0.04);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -134,9 +134,9 @@
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(ellipse 600px 400px at 10% 15%, hsl(var(--primary) / 0.15) 0%, transparent 70%),
-      radial-gradient(ellipse 500px 500px at 90% 85%, hsl(var(--secondary) / 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 400px 300px at 50% 40%, hsl(var(--primary) / 0.06) 0%, transparent 60%);
+      radial-gradient(ellipse 600px 400px at 10% 15%, hsl(var(--primary) / 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 90% 85%, hsl(var(--secondary) / 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at 50% 40%, hsl(var(--primary) / 0.03) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -146,8 +146,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(135deg, transparent 23%, hsl(var(--primary) / 0.08) 25%, hsl(var(--primary) / 0.08) 27%, transparent 28%),
-      linear-gradient(225deg, transparent 23%, hsl(var(--primary) / 0.06) 25%, hsl(var(--primary) / 0.06) 27%, transparent 28%);
+      linear-gradient(135deg, transparent 23%, hsl(var(--primary) / 0.04) 25%, hsl(var(--primary) / 0.04) 27%, transparent 28%),
+      linear-gradient(225deg, transparent 23%, hsl(var(--primary) / 0.03) 25%, hsl(var(--primary) / 0.03) 27%, transparent 28%);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
@@ -176,7 +176,7 @@
   }
 
   .section-dark .bg-accent {
-    background-color: hsl(215 40% 20%);
+    background-color: hsl(220 18% 22%);
   }
 
   .section-dark .brand-divider {
