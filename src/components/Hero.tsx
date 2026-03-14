@@ -136,7 +136,7 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               <div className="inline-block">
                 <span className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary-foreground backdrop-blur-sm">
                   <Zap className="inline w-4 h-4 mr-2" />
-                  Trusted by 5,000+ Businesses Across East Africa
+                  {content.hero.badge}
                 </span>
               </div>
               
