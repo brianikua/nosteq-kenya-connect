@@ -129,9 +129,9 @@ const Contact = () => {
                 <CardContent className="p-5 md:p-6 text-center">
                   <h4 className="font-heading text-lg md:text-xl font-bold mb-2 md:mb-3">Business Hours</h4>
                   <div className="space-y-1 text-sm text-muted-foreground">
-                    <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
-                    <p>Saturday: 9:00 AM – 4:00 PM</p>
-                    <p>Sunday: Closed</p>
+                    {content.contact.hours.map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
                   </div>
                   <p className="text-xs md:text-sm text-primary font-semibold mt-3 md:mt-4">24/7 Emergency Support Available</p>
                 </CardContent>
