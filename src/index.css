@@ -42,18 +42,18 @@
 
     --radius: 0.5rem;
 
-    /* Dark section colors — neutral charcoal */
-    --section-dark-bg: 0 0% 15%;
-    --section-dark-fg: 0 0% 95%;
-    --section-dark-muted: 0 0% 55%;
-    --section-dark-card: 0 0% 19%;
-    --section-dark-border: 0 0% 26%;
+    /* Dark section colors — light blue tint */
+    --section-dark-bg: 215 30% 94%;
+    --section-dark-fg: 215 25% 15%;
+    --section-dark-muted: 215 10% 45%;
+    --section-dark-card: 0 0% 100%;
+    --section-dark-border: 215 15% 88%;
 
     /* Gradients — neutral dark */
     --gradient-hero: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 20%));
     --gradient-brand: linear-gradient(135deg, hsl(215 90% 52%), hsl(215 90% 42%));
     --gradient-accent: linear-gradient(135deg, hsl(345 65% 35%), hsl(345 65% 45%));
-    --gradient-section: linear-gradient(180deg, hsl(0 0% 15%) 0%, hsl(0 0% 18%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(215 30% 94%) 0%, hsl(215 25% 92%) 100%);
     
     /* Shadows */
     --shadow-brand: 0 4px 20px hsl(215 90% 52% / 0.15);
@@ -176,7 +176,7 @@
   }
 
   .section-dark .bg-accent {
-    background-color: hsl(0 0% 23%);
+    background-color: hsl(215 30% 90%);
   }
 
   .section-dark .brand-divider {
