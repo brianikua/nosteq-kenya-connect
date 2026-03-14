@@ -134,9 +134,9 @@
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(ellipse 600px 400px at 10% 15%, hsl(var(--primary) / 0.15) 0%, transparent 70%),
-      radial-gradient(ellipse 500px 500px at 90% 85%, hsl(var(--secondary) / 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 400px 300px at 50% 40%, hsl(var(--primary) / 0.06) 0%, transparent 60%);
+      radial-gradient(ellipse 600px 400px at 10% 15%, hsl(var(--primary) / 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 90% 85%, hsl(var(--secondary) / 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at 50% 40%, hsl(var(--primary) / 0.03) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -146,8 +146,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(135deg, transparent 23%, hsl(var(--primary) / 0.08) 25%, hsl(var(--primary) / 0.08) 27%, transparent 28%),
-      linear-gradient(225deg, transparent 23%, hsl(var(--primary) / 0.06) 25%, hsl(var(--primary) / 0.06) 27%, transparent 28%);
+      linear-gradient(135deg, transparent 23%, hsl(var(--primary) / 0.04) 25%, hsl(var(--primary) / 0.04) 27%, transparent 28%),
+      linear-gradient(225deg, transparent 23%, hsl(var(--primary) / 0.03) 25%, hsl(var(--primary) / 0.03) 27%, transparent 28%);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
