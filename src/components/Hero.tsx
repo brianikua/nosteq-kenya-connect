@@ -4,6 +4,7 @@ import { ArrowRight, Zap } from "lucide-react";
 import heroTechnicians from "@/assets/hero-technicians.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 import ScrollReveal from "./ScrollReveal";
+import { getContent } from "@/lib/contentStore";
 
 interface HeroProps {
   onQuoteClick: () => void;
