@@ -5,15 +5,11 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import cctvImage from "@/assets/cctv-install.jpg";
 import serverImage from "@/assets/server-room.jpg";
 import ScrollReveal from "./ScrollReveal";
-
-const testimonials = [
-  { text: "We used to lose hours every week to network issues. Since Nosteq came in, we haven't thought about connectivity once — it just works. That's exactly what we needed.", author: "Jane W.", role: "Operations Director", location: "Financial Services", rating: 5 },
-  { text: "What impressed us most wasn't just the CCTV quality — it was how they took time to understand our security concerns before recommending anything. The 8-floor install was seamless.", author: "John K.", role: "Facilities Manager", location: "Commercial Real Estate", rating: 5 },
-  { text: "We were spending a fortune on disconnected IT systems. Nosteq helped us consolidate everything and the savings were immediate. They genuinely care about your bottom line.", author: "Sarah M.", role: "CEO", location: "Tech Startup", rating: 5 },
-  { text: "Most ISPs give you a number to call when things break. Nosteq gave us a dedicated account manager who knows our setup inside out. That personal touch makes all the difference.", author: "Michael O.", role: "IT Manager", location: "Media Company", rating: 5 },
-];
+import { getContent } from "@/lib/contentStore";
 
 const About = () => {
+  const content = getContent();
+  const testimonials = content.about.testimonials;
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
   const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -55,13 +51,9 @@ const About = () => {
               </Card>
 
               <div className="grid grid-cols-3 gap-4">
-                {[
-                  { value: "5,000+", label: "Happy Clients", color: "text-primary" },
-                  { value: "10+", label: "Years in the Field", color: "text-primary" },
-                  { value: "24/7", label: "Real Human Support", color: "text-secondary" },
-                ].map((stat, i) => (
+                {content.about.stats.map((stat, i) => (
                   <Card key={i} className="bg-accent text-center p-5 border-border shadow-sm">
-                    <div className={`font-heading text-3xl font-bold ${stat.color}`}>{stat.value}</div>
+                    <div className={`font-heading text-3xl font-bold ${i < 2 ? 'text-primary' : 'text-secondary'}`}>{stat.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                   </Card>
                 ))}

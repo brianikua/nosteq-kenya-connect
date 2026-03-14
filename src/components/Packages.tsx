@@ -4,23 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Check, Sparkles, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ScrollReveal from "./ScrollReveal";
-
-const homePackages = [
-  { name: "Starter", speed: "8 Mbps", price: "2,000", description: "Perfect for browsing, emails, and staying connected", features: ["Smooth browsing & email", "Social media & messaging", "Light video calls", "Free installation", "24/7 support"], popular: false },
-  { name: "Pro", speed: "15 Mbps", price: "2,500", description: "Stream, video-call, and work from home — comfortably", features: ["HD streaming (720p)", "Reliable video conferencing", "5+ devices at once", "Free installation", "Priority support"], popular: false },
-  { name: "Turbo", speed: "50 Mbps", price: "3,000", description: "The sweet spot — fast enough for almost anything", features: ["4K streaming, no buffering", "Lag-free gaming", "Work-from-home powerhouse", "Free router upgrade", "Dedicated support line"], popular: true },
-  { name: "Ultra", speed: "100 Mbps+", price: "4,000+", description: "For power users who refuse to compromise", features: ["Unlimited everything", "Enterprise-grade speed", "Static IP included", "Premium WiFi 6 router", "Personal account manager"], popular: false },
-];
-
-const businessPackages = [
-  { name: "SME Starter", speed: "20 Mbps", price: "5,000", description: "Everything a small team needs to stay productive", features: ["Up to 10 devices", "Business-grade router", "99.5% uptime SLA", "Email & web hosting", "8am–8pm support"], popular: false },
-  { name: "Corporate", speed: "50 Mbps", price: "8,500", description: "For growing teams that can't afford downtime", features: ["Up to 25 devices", "Static IP address", "99.7% uptime SLA", "Secure VPN ready", "Priority 24/7 support"], popular: false },
-  { name: "Enterprise", speed: "100 Mbps", price: "15,000", description: "Dedicated bandwidth — your speed, nobody else's", features: ["Unlimited devices", "100% dedicated line", "99.9% uptime SLA", "Free backup connection", "Dedicated account manager"], popular: true },
-  { name: "Premium", speed: "200 Mbps+", price: "25,000+", description: "Custom-built for organizations that need it all", features: ["Scalable on demand", "Multiple static IPs", "99.95% uptime guarantee", "On-site support team", "Custom SLA terms"], popular: false },
-];
+import { getContent } from "@/lib/contentStore";
 
 const Packages = () => {
   const [planType, setPlanType] = useState<"home" | "business">("home");
+  const content = getContent();
+  const homePackages = content.homePackages;
+  const businessPackages = content.businessPackages;
 
   return (
     <section id="packages" className="py-24 section-dark">

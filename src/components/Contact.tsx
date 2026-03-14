@@ -8,9 +8,11 @@ import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ScrollReveal from "./ScrollReveal";
+import { getContent } from "@/lib/contentStore";
 
 const Contact = () => {
   const { toast } = useToast();
+  const content = getContent();
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", service: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -98,8 +100,8 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent className="space-y-5 md:space-y-6">
                   {[
-                    { icon: Phone, label: "Phone", value: "+254 743 101 738", href: "tel:+254743101738" },
-                    { icon: Mail, label: "Email", value: "info@nosteq.co.ke", href: "mailto:info@nosteq.co.ke" },
+                    { icon: Phone, label: "Phone", value: content.contact.phone, href: `tel:${content.contact.phone.replace(/\s/g, '')}` },
+                    { icon: Mail, label: "Email", value: content.contact.email, href: `mailto:${content.contact.email}` },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 md:gap-4">
                       <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
@@ -117,7 +119,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Office</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">Banana Hill, Kiambu<br />Kenya</p>
+                      <p className="text-sm md:text-base text-muted-foreground whitespace-pre-line">{content.contact.address}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -127,9 +129,9 @@ const Contact = () => {
                 <CardContent className="p-5 md:p-6 text-center">
                   <h4 className="font-heading text-lg md:text-xl font-bold mb-2 md:mb-3">Business Hours</h4>
                   <div className="space-y-1 text-sm text-muted-foreground">
-                    <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
-                    <p>Saturday: 9:00 AM – 4:00 PM</p>
-                    <p>Sunday: Closed</p>
+                    {content.contact.hours.map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
                   </div>
                   <p className="text-xs md:text-sm text-primary font-semibold mt-3 md:mt-4">24/7 Emergency Support Available</p>
                 </CardContent>

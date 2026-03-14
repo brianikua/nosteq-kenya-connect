@@ -4,6 +4,7 @@ import { ArrowRight, Zap } from "lucide-react";
 import heroTechnicians from "@/assets/hero-technicians.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 import ScrollReveal from "./ScrollReveal";
+import { getContent } from "@/lib/contentStore";
 
 interface HeroProps {
   onQuoteClick: () => void;
@@ -82,6 +83,7 @@ function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
 
 const Hero = ({ onQuoteClick }: HeroProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const content = getContent();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -134,20 +136,20 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               <div className="inline-block">
                 <span className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary-foreground backdrop-blur-sm">
                   <Zap className="inline w-4 h-4 mr-2" />
-                  Trusted by 5,000+ Businesses Across East Africa
+                  {content.hero.badge}
                 </span>
               </div>
               
               <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-primary-foreground">
-                We Build the
+                {content.hero.heading[0]}
                 <br />
-                <span className="gradient-text">IT Backbone</span>
+                <span className="gradient-text">{content.hero.heading[1]}</span>
                 <br />
-                Your Business Runs On
+                {content.hero.heading[2]}
               </h1>
               
               <p className="text-lg md:text-xl text-primary-foreground/70 max-w-xl leading-relaxed">
-                From lightning-fast fiber to intelligent security, data centers to custom software — we handle it all so you can focus on what you do best.
+                {content.hero.subheading}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
@@ -161,12 +163,7 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               </div>
 
               <div className="flex flex-wrap gap-8 justify-center md:justify-start pt-6">
-                {[
-                  { value: "99.9%", label: "Uptime SLA" },
-                  { value: "1Gbps", label: "Max Speed" },
-                  { value: "24/7", label: "Support" },
-                  { value: "5000+", label: "Clients Served" },
-                ].map((stat, i) => (
+                {content.hero.stats.map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="font-heading text-3xl font-bold text-primary-foreground">{stat.value}</div>
                     <div className="text-sm text-primary-foreground/50">{stat.label}</div>
