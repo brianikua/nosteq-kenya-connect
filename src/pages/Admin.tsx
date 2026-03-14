@@ -129,6 +129,10 @@ const Admin = () => {
             )}
           </div>
           <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground hidden md:inline">{user.email}</span>
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              Sign Out
+            </Button>
             <Button variant="outline" size="sm" onClick={handleReset}>
               <RotateCcw className="w-4 h-4 mr-2" />
               Reset All
