@@ -109,4 +109,10 @@ export const serviceGalleries: Record<string, GalleryImage[]> = {
     { src: cloud3, caption: "Enterprise backup and storage arrays" },
     { src: cloud4, caption: "Technician installing server hardware" },
   ],
+  "server-room-masters": [
+    { src: serverroom1, caption: "Enterprise server rack installation with structured cabling" },
+    { src: serverroom2, caption: "UPS and power distribution unit deployment" },
+    { src: serverroom3, caption: "Precision cooling and aisle containment system" },
+    { src: serverroom4, caption: "Fiber backbone and patch panel organization" },
+  ],
 };

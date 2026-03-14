@@ -15,7 +15,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Do</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-              9 Ways We Keep Your <span className="gradient-text">Business Running</span>
+              10 Ways We Keep Your <span className="gradient-text">Business Running</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Whether you need faster internet, smarter security, or custom software — we've got a team for that. Explore any service to see how we can help.

@@ -347,7 +347,42 @@ export const servicesData: ServiceDetail[] = [
     useCases: ["Web application hosting", "Email servers", "Database hosting", "Development environments", "Disaster recovery sites"],
     testimonials: [
       { quote: "We migrated 15 production servers to their managed cloud. Uptime has been 99.99% for 18 months straight, and the automated backups saved us during a ransomware attempt.", name: "Martin Njoroge", role: "Head of Technology", company: "M-KOPA Solar" },
-      { quote: "Their colocation facility is world-class. Redundant power, 24/7 security, and the support team responds within minutes. It's like having our own enterprise data center without the overhead.", name: "Elizabeth Chebet", role: "Systems Administrator", company: "Kenya Power & Lighting" }
+     { quote: "Their colocation facility is world-class. Redundant power, 24/7 security, and the support team responds within minutes. It's like having our own enterprise data center without the overhead.", name: "Elizabeth Chebet", role: "Systems Administrator", company: "Kenya Power & Lighting" }
+    ]
+  },
+  {
+    slug: "server-room-masters",
+    icon: Server,
+    title: "ServerRoomMasters",
+    badge: "99.9% Uptime",
+    tagline: "Elite server room engineering for modern business infrastructure.",
+    description: "We design, deploy, optimize, and maintain professional server rooms, data halls, and network environments for enterprises, ISPs, and mission-critical facilities. From initial design and rack planning to fiber patching, power readiness, and long-term maintenance, we help businesses build dependable infrastructure with a premium finish.",
+    image: serverRoomImg,
+    features: [
+      "Professional server room design with rack elevation plans",
+      "Complete rack, UPS, and PDU installation",
+      "Structured cabling and fiber backbone termination",
+      "Precision cooling and hot/cold aisle containment",
+      "Carrier-grade switching, routing, and patch management",
+      "Preventive maintenance, audits, and emergency response"
+    ],
+    benefits: [
+      "Achieve 99.9% infrastructure uptime with redundant design",
+      "Scalable layouts built for growth without full rebuilds",
+      "Enterprise-grade presentation quality and cable discipline",
+      "Reduce operational risk with proactive maintenance"
+    ],
+    process: [
+      { step: "Assess", description: "We review your current room, power, cooling, racks, patching, and business requirements." },
+      { step: "Design", description: "We create a practical technical plan for layout, redundancy, structured cabling, and growth." },
+      { step: "Build", description: "We install and organize racks, PDUs, UPS systems, fiber, switching, and labeling standards." },
+      { step: "Maintain", description: "We keep your environment tidy, efficient, monitored, and ready for the next stage of expansion." }
+    ],
+    technologies: ["APC", "Schneider Electric", "Vertiv", "Commscope", "Panduit", "Cisco"],
+    useCases: ["Corporate offices", "ISPs & Telecoms", "Hospitals", "Banks & Financial Institutions", "Universities", "Government Facilities", "Warehouses", "Multi-site Enterprises"],
+    testimonials: [
+      { quote: "They transformed our outdated server closet into a professional, scalable server room in under 3 weeks. The cable management alone was worth the investment — our team can now troubleshoot in minutes instead of hours.", name: "Anthony Maina", role: "IT Infrastructure Lead", company: "Equity Bank Kenya" },
+      { quote: "The server room they built for our ISP POP is immaculate. Structured patching, proper labeling, redundant power — everything an operator needs. Their maintenance contracts keep it running flawlessly.", name: "Janet Otieno", role: "Network Operations Manager", company: "Liquid Intelligent Technologies" }
     ]
   }
 ];
