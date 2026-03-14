@@ -9,6 +9,7 @@ import consultingImg from "@/assets/services/it-consulting.jpg";
 import smartBuildingImg from "@/assets/services/smart-building.jpg";
 import voipImg from "@/assets/services/voip-communications.jpg";
 import cloudImg from "@/assets/services/cloud-hosting.jpg";
+import serverRoomImg from "@/assets/services/server-room-masters.jpg";
 
 export interface Testimonial {
   quote: string;
