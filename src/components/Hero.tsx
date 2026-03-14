@@ -83,6 +83,7 @@ function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
 
 const Hero = ({ onQuoteClick }: HeroProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const content = getContent();
 
   useEffect(() => {
     const canvas = canvasRef.current;
