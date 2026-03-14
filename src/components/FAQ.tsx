@@ -6,38 +6,11 @@ import {
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
-
-const faqs = [
-  {
-    category: "Getting Started",
-    questions: [
-      { question: "How quickly can you set up my fiber connection?", answer: "If fiber already reaches your building, we'll have you online in 2–4 hours. If we need to lay new fiber to your location, expect 5–7 business days. Either way, we'll survey your site first and give you an honest timeline — no surprises." },
-      { question: "Will I need to pay for installation?", answer: "Nope — installation is completely free when you sign up for 6 months or longer. For month-to-month flexibility, there's a one-time KES 3,000 setup fee. Business installations depend on complexity, so we'll quote you upfront." },
-      { question: "What equipment do I get?", answer: "Every package comes with a high-performance WiFi router (dual-band AC or WiFi 6 on premium plans), a fiber ONT device, and all the cabling needed. The equipment stays in great shape because we maintain it as part of your subscription." },
-      { question: "Are you available in my area?", answer: "We currently cover Nairobi, Kiambu, Thika, and surrounding areas — and we're expanding fast. Drop us your location and we'll check coverage instantly. If we're not there yet, we'll let you know when we will be." },
-    ]
-  },
-  {
-    category: "Money Matters",
-    questions: [
-      { question: "Can I switch my plan anytime?", answer: "Absolutely. Upgrading takes effect immediately. If you're downgrading, it kicks in at your next billing cycle. No penalties, no awkward phone calls — just flexibility." },
-      { question: "How can I pay?", answer: "However works best for you: M-Pesa, bank transfer, card, or Airtel Money. Businesses can set up invoiced billing with net-30 terms. We try to make the boring stuff easy." },
-      { question: "Am I locked into a contract?", answer: "You can go month-to-month if you like. But if you commit to 6 or 12 months, you get free installation and up to 15% off your monthly rate. Your call — no pressure either way." },
-      { question: "What if I forget to pay?", answer: "Life happens. We give you a 7-day grace period. If service gets paused, one payment restores it instantly. First-time late? No reconnection fee. We're not here to penalize you." },
-    ]
-  },
-  {
-    category: "Support & Reliability",
-    questions: [
-      { question: "What's your uptime guarantee?", answer: "99.9% across all packages — and we put our money where our mouth is. If we fall short in any month, you get pro-rated credit automatically. Business plans come with even stricter SLA-backed guarantees." },
-      { question: "Something's wrong with my connection — who do I call?", answer: "Our 24/7 team at +254 743 101 738 — call or WhatsApp. You can also email support@nosteq.co.ke. Most issues get resolved remotely within 2 hours. If it needs a site visit, we'll be there within 24 hours." },
-      { question: "Can I get a static IP?", answer: "It's included free with Turbo, Ultra, and all Business packages. On Starter or Pro plans, add one for just KES 500/month. Perfect for hosting, VPNs, or remote access." },
-      { question: "Can I use my own router instead?", answer: "Of course. Use whatever hardware you prefer — our technicians will configure it during installation at no extra charge. We want you comfortable with your setup." },
-    ]
-  }
-];
+import { getContent } from "@/lib/contentStore";
 
 const FAQ = () => {
+  const content = getContent();
+  const faqs = content.faqs;
   return (
     <section id="faq" className="py-24 section-dark relative">
       <div className="absolute inset-0 subtle-pattern" />

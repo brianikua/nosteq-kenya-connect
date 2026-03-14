@@ -51,13 +51,9 @@ const About = () => {
               </Card>
 
               <div className="grid grid-cols-3 gap-4">
-                {[
-                  { value: "5,000+", label: "Happy Clients", color: "text-primary" },
-                  { value: "10+", label: "Years in the Field", color: "text-primary" },
-                  { value: "24/7", label: "Real Human Support", color: "text-secondary" },
-                ].map((stat, i) => (
+                {content.about.stats.map((stat, i) => (
                   <Card key={i} className="bg-accent text-center p-5 border-border shadow-sm">
-                    <div className={`font-heading text-3xl font-bold ${stat.color}`}>{stat.value}</div>
+                    <div className={`font-heading text-3xl font-bold ${i < 2 ? 'text-primary' : 'text-secondary'}`}>{stat.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                   </Card>
                 ))}
