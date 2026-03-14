@@ -100,8 +100,8 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent className="space-y-5 md:space-y-6">
                   {[
-                    { icon: Phone, label: "Phone", value: "+254 743 101 738", href: "tel:+254743101738" },
-                    { icon: Mail, label: "Email", value: "info@nosteq.co.ke", href: "mailto:info@nosteq.co.ke" },
+                    { icon: Phone, label: "Phone", value: content.contact.phone, href: `tel:${content.contact.phone.replace(/\s/g, '')}` },
+                    { icon: Mail, label: "Email", value: content.contact.email, href: `mailto:${content.contact.email}` },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 md:gap-4">
                       <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-lg flex items-center justify-center shrink-0">
