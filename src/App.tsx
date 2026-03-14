@@ -9,6 +9,7 @@ import PortfolioPage from "./pages/PortfolioPage";
 import ServiceDetail from "./pages/ServiceDetail";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
+import AdminLogin from "./pages/AdminLogin";
 
 const queryClient = new QueryClient();
 
