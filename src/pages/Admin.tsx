@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -69,6 +70,7 @@ const availableIcons: { name: string; icon: LucideIcon }[] = [
 
 const Admin = () => {
   const { toast } = useToast();
+  const { user, isAdmin, loading, signOut } = useAdminAuth();
   const [content, setContent] = useState<SiteContent>(getContent());
   const [activeTab, setActiveTab] = useState("hero");
   const [hasChanges, setHasChanges] = useState(false);
@@ -76,6 +78,18 @@ const Admin = () => {
   useEffect(() => {
     setContent(getContent());
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Checking access...</p>
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) {
+    return <Navigate to="/admin/login" replace />;
+  }
 
   const updateContent = (section: keyof SiteContent, value: any) => {
     setContent((prev) => ({ ...prev, [section]: value }));
@@ -115,6 +129,10 @@ const Admin = () => {
             )}
           </div>
           <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground hidden md:inline">{user.email}</span>
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              Sign Out
+            </Button>
             <Button variant="outline" size="sm" onClick={handleReset}>
               <RotateCcw className="w-4 h-4 mr-2" />
               Reset All
