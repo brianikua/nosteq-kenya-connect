@@ -119,7 +119,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Office</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">Banana Hill, Kiambu<br />Kenya</p>
+                      <p className="text-sm md:text-base text-muted-foreground whitespace-pre-line">{content.contact.address}</p>
                     </div>
                   </div>
                 </CardContent>
