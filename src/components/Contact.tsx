@@ -8,9 +8,11 @@ import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ScrollReveal from "./ScrollReveal";
+import { getContent } from "@/lib/contentStore";
 
 const Contact = () => {
   const { toast } = useToast();
+  const content = getContent();
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", service: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
