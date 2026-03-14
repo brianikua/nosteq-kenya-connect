@@ -42,18 +42,18 @@
 
     --radius: 0.5rem;
 
-    /* Dark section colors — reduced blue, more neutral */
-    --section-dark-bg: 220 20% 14%;
-    --section-dark-fg: 210 15% 94%;
-    --section-dark-muted: 215 12% 50%;
-    --section-dark-card: 220 18% 18%;
-    --section-dark-border: 220 15% 25%;
+    /* Dark section colors — neutral charcoal */
+    --section-dark-bg: 0 0% 15%;
+    --section-dark-fg: 0 0% 95%;
+    --section-dark-muted: 0 0% 55%;
+    --section-dark-card: 0 0% 19%;
+    --section-dark-border: 0 0% 26%;
 
-    /* Gradients — toned down blue */
-    --gradient-hero: linear-gradient(135deg, hsl(220 25% 13%), hsl(220 20% 22%));
+    /* Gradients — neutral dark */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 20%));
     --gradient-brand: linear-gradient(135deg, hsl(215 90% 52%), hsl(215 90% 42%));
     --gradient-accent: linear-gradient(135deg, hsl(345 65% 35%), hsl(345 65% 45%));
-    --gradient-section: linear-gradient(180deg, hsl(220 20% 14%) 0%, hsl(220 18% 17%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(0 0% 15%) 0%, hsl(0 0% 18%) 100%);
     
     /* Shadows */
     --shadow-brand: 0 4px 20px hsl(215 90% 52% / 0.15);
