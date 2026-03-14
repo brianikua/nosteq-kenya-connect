@@ -44,6 +44,11 @@ import cloud2 from "@/assets/services/gallery/cloud-2.jpg";
 import cloud3 from "@/assets/services/gallery/cloud-3.jpg";
 import cloud4 from "@/assets/services/gallery/cloud-4.jpg";
 
+import serverroom1 from "@/assets/services/gallery/serverroom-1.jpg";
+import serverroom2 from "@/assets/services/gallery/serverroom-2.jpg";
+import serverroom3 from "@/assets/services/gallery/serverroom-3.jpg";
+import serverroom4 from "@/assets/services/gallery/serverroom-4.jpg";
+
 export interface GalleryImage {
   src: string;
   caption: string;
