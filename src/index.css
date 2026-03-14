@@ -42,12 +42,12 @@
 
     --radius: 0.5rem;
 
-    /* Dark section colors — neutral charcoal */
-    --section-dark-bg: 0 0% 15%;
-    --section-dark-fg: 0 0% 95%;
-    --section-dark-muted: 0 0% 55%;
-    --section-dark-card: 0 0% 19%;
-    --section-dark-border: 0 0% 26%;
+    /* Dark section colors — light blue tint */
+    --section-dark-bg: 215 30% 94%;
+    --section-dark-fg: 215 25% 15%;
+    --section-dark-muted: 215 10% 45%;
+    --section-dark-card: 0 0% 100%;
+    --section-dark-border: 215 15% 88%;
 
     /* Gradients — neutral dark */
     --gradient-hero: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 20%));
