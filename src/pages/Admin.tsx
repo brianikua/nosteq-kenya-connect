@@ -49,6 +49,24 @@ import {
 } from "@/lib/contentStore";
 import type { MediaItem } from "@/data/media";
 
+const availableIcons: { name: string; icon: LucideIcon }[] = [
+  { name: "Gauge", icon: Gauge },
+  { name: "Shield", icon: Shield },
+  { name: "Cable", icon: Cable },
+  { name: "Database", icon: Database },
+  { name: "Code", icon: Code },
+  { name: "Network", icon: Network },
+  { name: "Lightbulb", icon: Lightbulb },
+  { name: "Phone", icon: Phone },
+  { name: "Server", icon: Server },
+  { name: "Wifi", icon: Wifi },
+  { name: "Monitor", icon: Monitor },
+  { name: "Cloud", icon: Cloud },
+  { name: "Lock", icon: Lock },
+  { name: "Cpu", icon: Cpu },
+  { name: "Radio", icon: Radio },
+];
+
 const Admin = () => {
   const { toast } = useToast();
   const [content, setContent] = useState<SiteContent>(getContent());
