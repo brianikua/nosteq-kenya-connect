@@ -163,12 +163,7 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
               </div>
 
               <div className="flex flex-wrap gap-8 justify-center md:justify-start pt-6">
-                {[
-                  { value: "99.9%", label: "Uptime SLA" },
-                  { value: "1Gbps", label: "Max Speed" },
-                  { value: "24/7", label: "Support" },
-                  { value: "5000+", label: "Clients Served" },
-                ].map((stat, i) => (
+                {content.hero.stats.map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="font-heading text-3xl font-bold text-primary-foreground">{stat.value}</div>
                     <div className="text-sm text-primary-foreground/50">{stat.label}</div>
