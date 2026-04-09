@@ -71,7 +71,7 @@ const availableIcons: { name: string; icon: LucideIcon }[] = [
 
 const Admin = () => {
   const { toast } = useToast();
-  const { user, isAdmin, loading, signOut } = useAdminAuth();
+  const { user, isAdmin, isSuperadmin, loading, signOut } = useAdminAuth();
   const [content, setContent] = useState<SiteContent>(getContent());
   const [activeTab, setActiveTab] = useState("hero");
   const [hasChanges, setHasChanges] = useState(false);
@@ -148,7 +148,7 @@ const Admin = () => {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-4 md:grid-cols-7 w-full mb-8">
+          <TabsList className={`grid ${isSuperadmin ? 'grid-cols-4 md:grid-cols-8' : 'grid-cols-4 md:grid-cols-7'} w-full mb-8`}>
             <TabsTrigger value="hero" className="gap-1.5"><Home className="w-4 h-4" /><span className="hidden md:inline">Hero</span></TabsTrigger>
             <TabsTrigger value="services" className="gap-1.5"><Layers className="w-4 h-4" /><span className="hidden md:inline">Services</span></TabsTrigger>
             <TabsTrigger value="packages" className="gap-1.5"><Package className="w-4 h-4" /><span className="hidden md:inline">Packages</span></TabsTrigger>
@@ -156,6 +156,9 @@ const Admin = () => {
             <TabsTrigger value="about" className="gap-1.5"><Users className="w-4 h-4" /><span className="hidden md:inline">About</span></TabsTrigger>
             <TabsTrigger value="contact" className="gap-1.5"><Phone className="w-4 h-4" /><span className="hidden md:inline">Contact</span></TabsTrigger>
             <TabsTrigger value="media" className="gap-1.5"><Image className="w-4 h-4" /><span className="hidden md:inline">Media</span></TabsTrigger>
+            {isSuperadmin && (
+              <TabsTrigger value="users" className="gap-1.5"><Shield className="w-4 h-4" /><span className="hidden md:inline">Users</span></TabsTrigger>
+            )}
           </TabsList>
 
           {/* HERO TAB */}
