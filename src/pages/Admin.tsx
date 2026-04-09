@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+const WebUsers = lazy(() => import("@/components/admin/WebUsers"));
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
