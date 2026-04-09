@@ -683,6 +683,14 @@ const Admin = () => {
               </div>
             </div>
           </TabsContent>
+          {/* USERS TAB - Superadmin only */}
+          {isSuperadmin && (
+            <TabsContent value="users">
+              <Suspense fallback={<p className="text-muted-foreground">Loading...</p>}>
+                <WebUsers />
+              </Suspense>
+            </TabsContent>
+          )}
         </Tabs>
       </div>
     </div>
