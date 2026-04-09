@@ -30,17 +30,30 @@ const AdminLogin = () => {
       return;
     }
 
-    // Check admin role
+    // Check for any admin-level role
     const { data: roleData } = await supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", data.user.id)
-      .eq("role", "admin")
       .maybeSingle();
 
-    if (!roleData) {
+    if (!roleData || roleData.role === "user") {
       await supabase.auth.signOut();
       toast({ title: "Access denied", description: "You do not have admin privileges.", variant: "destructive" });
+      setLoading(false);
+      return;
+    }
+
+    // Check if suspended
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("status")
+      .eq("user_id", data.user.id)
+      .maybeSingle();
+
+    if (profile?.status === "suspended") {
+      await supabase.auth.signOut();
+      toast({ title: "Account suspended", description: "Contact your administrator.", variant: "destructive" });
       setLoading(false);
       return;
     }
