@@ -656,18 +656,11 @@ const ContentCMS = () => {
               </div>
             </div>
           </TabsContent>
-          {/* USERS TAB - Superadmin only */}
-          {isSuperadmin && (
-            <TabsContent value="users">
-              <Suspense fallback={<p className="text-muted-foreground">Loading...</p>}>
-                <WebUsers />
-              </Suspense>
-            </TabsContent>
-          )}
         </Tabs>
       </div>
     </div>
   );
 };
 
-export default Admin;
+export default ContentCMS;
+
