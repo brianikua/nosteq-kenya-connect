@@ -100,55 +100,39 @@ const ContentCMS = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Top bar */}
-      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Site
-              </Button>
-            </Link>
-            <h1 className="font-heading text-xl font-bold">Admin Panel</h1>
-            {hasChanges && (
-              <Badge variant="destructive" className="animate-pulse">
-                Unsaved changes
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground hidden md:inline">{user.email}</span>
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              Sign Out
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleReset}>
-              <RotateCcw className="w-4 h-4 mr-2" />
-              Reset All
-            </Button>
-            <Button size="sm" onClick={handleSave} disabled={!hasChanges}>
-              <Save className="w-4 h-4 mr-2" />
-              Save Changes
-            </Button>
-          </div>
+    <div>
+      {/* Local action bar for content editor */}
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+        <div className="flex items-center gap-3">
+          <h2 className="font-heading text-2xl font-bold">Website Content</h2>
+          {hasChanges && (
+            <Badge variant="destructive" className="animate-pulse">Unsaved changes</Badge>
+          )}
         </div>
-      </header>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={handleReset}>
+            <RotateCcw className="w-4 h-4 mr-2" />
+            Reset All
+          </Button>
+          <Button size="sm" onClick={handleSave} disabled={!hasChanges}>
+            <Save className="w-4 h-4 mr-2" />
+            Save Changes
+          </Button>
+        </div>
+      </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className={`grid ${isSuperadmin ? 'grid-cols-4 md:grid-cols-8' : 'grid-cols-4 md:grid-cols-7'} w-full mb-8`}>
+          <TabsList className="grid grid-cols-4 md:grid-cols-7 w-full mb-8">
             <TabsTrigger value="hero" className="gap-1.5"><Home className="w-4 h-4" /><span className="hidden md:inline">Hero</span></TabsTrigger>
             <TabsTrigger value="services" className="gap-1.5"><Layers className="w-4 h-4" /><span className="hidden md:inline">Services</span></TabsTrigger>
-            <TabsTrigger value="packages" className="gap-1.5"><Package className="w-4 h-4" /><span className="hidden md:inline">Packages</span></TabsTrigger>
+            <TabsTrigger value="packages" className="gap-1.5"><Package className="w-4 h-4" /><span className="hidden md:inline">Plans</span></TabsTrigger>
             <TabsTrigger value="faq" className="gap-1.5"><HelpCircle className="w-4 h-4" /><span className="hidden md:inline">FAQ</span></TabsTrigger>
             <TabsTrigger value="about" className="gap-1.5"><Users className="w-4 h-4" /><span className="hidden md:inline">About</span></TabsTrigger>
             <TabsTrigger value="contact" className="gap-1.5"><Phone className="w-4 h-4" /><span className="hidden md:inline">Contact</span></TabsTrigger>
             <TabsTrigger value="media" className="gap-1.5"><Image className="w-4 h-4" /><span className="hidden md:inline">Media</span></TabsTrigger>
-            {isSuperadmin && (
-              <TabsTrigger value="users" className="gap-1.5"><Shield className="w-4 h-4" /><span className="hidden md:inline">Users</span></TabsTrigger>
-            )}
           </TabsList>
+
 
           {/* HERO TAB */}
           <TabsContent value="hero">
