@@ -14,6 +14,148 @@ export type Database = {
   }
   public: {
     Tables: {
+      customers: {
+        Row: {
+          business_name: string
+          contact_name: string
+          created_at: string
+          email: string
+          id: string
+          kyc_status: string
+          notes: string
+          phone: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          business_name: string
+          contact_name?: string
+          created_at?: string
+          email: string
+          id?: string
+          kyc_status?: string
+          notes?: string
+          phone?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          business_name?: string
+          contact_name?: string
+          created_at?: string
+          email?: string
+          id?: string
+          kyc_status?: string
+          notes?: string
+          phone?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          amount_kes: number
+          created_at: string
+          id: string
+          invoice_number: string
+          issued_at: string
+          paid_at: string | null
+          period_end: string
+          period_start: string
+          status: string
+          subscription_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount_kes?: number
+          created_at?: string
+          id?: string
+          invoice_number: string
+          issued_at?: string
+          paid_at?: string | null
+          period_end: string
+          period_start: string
+          status?: string
+          subscription_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount_kes?: number
+          created_at?: string
+          id?: string
+          invoice_number?: string
+          issued_at?: string
+          paid_at?: string | null
+          period_end?: string
+          period_start?: string
+          status?: string
+          subscription_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kyc_applications: {
+        Row: {
+          address_url: string
+          cert_url: string
+          created_at: string
+          customer_id: string
+          id: string
+          id_doc_url: string
+          kra_pin_url: string
+          review_notes: string
+          reviewed_at: string | null
+          reviewer_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address_url?: string
+          cert_url?: string
+          created_at?: string
+          customer_id: string
+          id?: string
+          id_doc_url?: string
+          kra_pin_url?: string
+          review_notes?: string
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address_url?: string
+          cert_url?: string
+          created_at?: string
+          customer_id?: string
+          id?: string
+          id_doc_url?: string
+          kra_pin_url?: string
+          review_notes?: string
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kyc_applications_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -40,6 +182,147 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      sla_incidents: {
+        Row: {
+          created_at: string
+          credit_kes: number
+          duration_minutes: number
+          ended_at: string | null
+          id: string
+          impact: string
+          notes: string
+          started_at: string
+          subscription_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          credit_kes?: number
+          duration_minutes?: number
+          ended_at?: string | null
+          id?: string
+          impact?: string
+          notes?: string
+          started_at: string
+          subscription_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          credit_kes?: number
+          duration_minutes?: number
+          ended_at?: string | null
+          id?: string
+          impact?: string
+          notes?: string
+          started_at?: string
+          subscription_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sla_incidents_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          activated_at: string | null
+          bandwidth_mbps: number
+          billing_cycle: string
+          created_at: string
+          customer_id: string
+          id: string
+          monthly_price_kes: number
+          next_billing_at: string | null
+          plan_tier: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          activated_at?: string | null
+          bandwidth_mbps?: number
+          billing_cycle?: string
+          created_at?: string
+          customer_id: string
+          id?: string
+          monthly_price_kes?: number
+          next_billing_at?: string | null
+          plan_tier: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          activated_at?: string | null
+          bandwidth_mbps?: number
+          billing_cycle?: string
+          created_at?: string
+          customer_id?: string
+          id?: string
+          monthly_price_kes?: number
+          next_billing_at?: string | null
+          plan_tier?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      usage_records: {
+        Row: {
+          cap_percent: number
+          created_at: string
+          gb_used: number
+          id: string
+          peak_mbps: number
+          period_end: string
+          period_start: string
+          subscription_id: string
+          updated_at: string
+        }
+        Insert: {
+          cap_percent?: number
+          created_at?: string
+          gb_used?: number
+          id?: string
+          peak_mbps?: number
+          period_end: string
+          period_start: string
+          subscription_id: string
+          updated_at?: string
+        }
+        Update: {
+          cap_percent?: number
+          created_at?: string
+          gb_used?: number
+          id?: string
+          peak_mbps?: number
+          period_end?: string
+          period_start?: string
+          subscription_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usage_records_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -71,6 +354,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_admin_or_superadmin: { Args: { _user_id: string }; Returns: boolean }
       is_superadmin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
