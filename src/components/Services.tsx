@@ -13,12 +13,12 @@ const Services = () => {
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Do</p>
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Infrastructure Powering Our IaaS</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-              10 Ways We Keep Your <span className="gradient-text">Business Running</span>
+              Every Layer of Your <span className="gradient-text">Connectivity Stack</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Whether you need faster internet, smarter security, or custom software — we've got a team for that. Explore any service to see how we can help.
+              Our Internet-as-a-Service platform sits on top of ten dedicated engineering practices — from fiber and data centers to CCTV and structured cabling. One provider, one SLA, one invoice.
             </p>
             <div className="brand-divider w-24 mx-auto mt-8" />
           </div>
