@@ -83,14 +83,14 @@ export interface SiteContent {
 // Default content extracted from components
 const defaultContent: SiteContent = {
   hero: {
-    badge: "Trusted by 5,000+ Businesses Across East Africa",
-    heading: ["We Build the", "IT Backbone", "Your Business Runs On"],
-    subheading: "From lightning-fast fiber to intelligent security, data centers to custom software — we handle it all so you can focus on what you do best.",
+    badge: "Fintech-grade Internet-as-a-Service · SLA-backed",
+    heading: ["Internet-as-a-Service", "Engineered Like", "A Fintech Platform"],
+    subheading: "Bank-grade connectivity for banks, fintechs, ISPs and modern businesses — subscribe to bandwidth like you subscribe to any SaaS. SLA credits, transparent billing, KYC-first onboarding.",
     stats: [
-      { value: "99.9%", label: "Uptime SLA" },
-      { value: "1Gbps", label: "Max Speed" },
-      { value: "24/7", label: "Support" },
-      { value: "5000+", label: "Clients Served" },
+      { value: "99.99%", label: "SLA Uptime" },
+      { value: "<15m", label: "Incident Response" },
+      { value: "24/7", label: "NOC Support" },
+      { value: "T+1", label: "SLA Credit Cycle" },
     ],
   },
   services: [

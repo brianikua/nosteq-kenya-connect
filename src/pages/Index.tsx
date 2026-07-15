@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Packages from "@/components/Packages";
+import UptimePromise from "@/components/UptimePromise";
 import Portfolio from "@/components/Portfolio";
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
@@ -33,6 +34,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero onQuoteClick={() => setIsQuoteModalOpen(true)} />
+      <UptimePromise />
       <Services />
       <Packages />
       <Portfolio />
