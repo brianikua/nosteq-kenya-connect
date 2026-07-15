@@ -69,9 +69,9 @@ const availableIcons: { name: string; icon: LucideIcon }[] = [
   { name: "Radio", icon: Radio },
 ];
 
-const Admin = () => {
+const ContentCMS = () => {
   const { toast } = useToast();
-  const { user, isAdmin, isSuperadmin, loading, signOut } = useAdminAuth();
+  const { isSuperadmin } = useAdminAuth();
   const [content, setContent] = useState<SiteContent>(getContent());
   const [activeTab, setActiveTab] = useState("hero");
   const [hasChanges, setHasChanges] = useState(false);
@@ -80,17 +80,6 @@ const Admin = () => {
     setContent(getContent());
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground">Checking access...</p>
-      </div>
-    );
-  }
-
-  if (!user || !isAdmin) {
-    return <Navigate to="/admin/login" replace />;
-  }
 
   const updateContent = (section: keyof SiteContent, value: any) => {
     setContent((prev) => ({ ...prev, [section]: value }));
