@@ -12,6 +12,7 @@ import {
   FileCheck2,
   FileText,
   Shield,
+  ScrollText,
   ArrowLeft,
   LogOut,
 } from "lucide-react";
