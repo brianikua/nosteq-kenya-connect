@@ -23,6 +23,7 @@ type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
   superadminOnly?: boolean;
   editorOnly?: boolean;
+  adminAndUp?: boolean;
 };
 
 const navItems: NavItem[] = [
