@@ -18,6 +18,7 @@ import Admin, {
   AdminKYC,
   AdminContent,
   AdminUsersPage,
+  AdminAuditLogs,
 } from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="kyc" element={<AdminKYC />} />
             <Route path="content" element={<AdminContent />} />
             <Route path="users" element={<AdminUsersPage />} />
+            <Route path="audit-logs" element={<AdminAuditLogs />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

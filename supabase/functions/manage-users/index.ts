@@ -54,6 +54,26 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const { action } = body;
 
+    const logAudit = async (
+      auditAction: string,
+      targetUserId: string | null,
+      targetEmail: string | null,
+      details: Record<string, unknown>,
+    ) => {
+      try {
+        await adminClient.from("admin_audit_logs").insert({
+          actor_id: caller.id,
+          actor_email: caller.email,
+          action: auditAction,
+          target_user_id: targetUserId,
+          target_email: targetEmail,
+          details,
+        });
+      } catch (e) {
+        console.error("audit log failed", e);
+      }
+    };
+
     if (action === "list") {
       // List all users with their roles and profiles
       const { data: { users }, error } = await adminClient.auth.admin.listUsers();
@@ -106,6 +126,8 @@ Deno.serve(async (req) => {
       await adminClient.from("user_roles").insert({ user_id: newUser.user.id, role });
       await adminClient.from("profiles").insert({ user_id: newUser.user.id, full_name, status: "active" });
 
+      await logAudit("user.create", newUser.user.id, email, { full_name, role });
+
       return new Response(JSON.stringify({ success: true, user_id: newUser.user.id }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -127,6 +149,14 @@ Deno.serve(async (req) => {
         });
       }
 
+      // Load "before" snapshot for audit
+      const { data: beforeProfile } = await adminClient
+        .from("profiles").select("full_name,status").eq("user_id", user_id).maybeSingle();
+      const { data: beforeRole } = await adminClient
+        .from("user_roles").select("role").eq("user_id", user_id).maybeSingle();
+      const { data: targetUser } = await adminClient.auth.admin.getUserById(user_id);
+      const targetEmail = targetUser?.user?.email ?? null;
+
       if (full_name !== undefined || status !== undefined) {
         const updates: Record<string, string> = {};
         if (full_name !== undefined) updates.full_name = full_name;
@@ -136,6 +166,10 @@ Deno.serve(async (req) => {
 
       if (role && ["admin", "editor"].includes(role)) {
         await adminClient.from("user_roles").update({ role }).eq("user_id", user_id);
+        await logAudit("user.role_change", user_id, targetEmail, {
+          from: beforeRole?.role ?? null,
+          to: role,
+        });
       }
 
       // Ban/unban for suspend
@@ -143,9 +177,19 @@ Deno.serve(async (req) => {
         await adminClient.auth.admin.updateUserById(user_id, {
           ban_duration: "876000h", // ~100 years
         });
-      } else if (status === "active") {
+        await logAudit("user.suspend", user_id, targetEmail, { previous_status: beforeProfile?.status ?? null });
+      } else if (status === "active" && beforeProfile?.status === "suspended") {
         await adminClient.auth.admin.updateUserById(user_id, {
           ban_duration: "none",
+        });
+        await logAudit("user.activate", user_id, targetEmail, { previous_status: beforeProfile?.status ?? null });
+      }
+
+      if (full_name !== undefined && full_name !== beforeProfile?.full_name) {
+        await logAudit("user.profile_update", user_id, targetEmail, {
+          field: "full_name",
+          from: beforeProfile?.full_name ?? null,
+          to: full_name,
         });
       }
 
@@ -169,9 +213,22 @@ Deno.serve(async (req) => {
         });
       }
 
+      const { data: targetUser } = await adminClient.auth.admin.getUserById(user_id);
+      const targetEmail = targetUser?.user?.email ?? null;
+      const { data: beforeProfile } = await adminClient
+        .from("profiles").select("full_name,status").eq("user_id", user_id).maybeSingle();
+      const { data: beforeRole } = await adminClient
+        .from("user_roles").select("role").eq("user_id", user_id).maybeSingle();
+
       await adminClient.from("profiles").delete().eq("user_id", user_id);
       await adminClient.from("user_roles").delete().eq("user_id", user_id);
       await adminClient.auth.admin.deleteUser(user_id);
+
+      await logAudit("user.delete", user_id, targetEmail, {
+        full_name: beforeProfile?.full_name ?? null,
+        role: beforeRole?.role ?? null,
+        status: beforeProfile?.status ?? null,
+      });
 
       return new Response(JSON.stringify({ success: true }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

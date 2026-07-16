@@ -12,6 +12,7 @@ import {
   FileCheck2,
   FileText,
   Shield,
+  ScrollText,
   ArrowLeft,
   LogOut,
 } from "lucide-react";
@@ -22,6 +23,7 @@ type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
   superadminOnly?: boolean;
   editorOnly?: boolean;
+  adminAndUp?: boolean;
 };
 
 const navItems: NavItem[] = [
@@ -34,6 +36,7 @@ const navItems: NavItem[] = [
   { to: "/admin/kyc", label: "KYC Queue", icon: FileCheck2 },
   { to: "/admin/content", label: "Content CMS", icon: FileText },
   { to: "/admin/users", label: "Web Users", icon: Shield, superadminOnly: true },
+  { to: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText, adminAndUp: true },
 ];
 
 const Admin = () => {
@@ -54,6 +57,7 @@ const Admin = () => {
 
   const visibleNav = navItems.filter((item) => {
     if (item.superadminOnly && !isSuperadmin) return false;
+    if (item.adminAndUp && !(role === "admin" || role === "superadmin")) return false;
     // editors: only Content CMS
     if (role === "editor" && item.to !== "/admin/content") return false;
     return true;
@@ -142,5 +146,6 @@ export const AdminSLA = lazy(() => import("./admin/SLA"));
 export const AdminKYC = lazy(() => import("./admin/KYC"));
 export const AdminContent = lazy(() => import("./admin/ContentCMS"));
 export const AdminUsersPage = lazy(() => import("./admin/UsersPage"));
+export const AdminAuditLogs = lazy(() => import("./admin/AuditLogs"));
 
 export default Admin;
