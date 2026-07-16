@@ -38,6 +38,8 @@ const AuditLogs = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [actionFilter, setActionFilter] = useState<string>("all");
+  const [actorFilter, setActorFilter] = useState<string>("all");
+  const [targetFilter, setTargetFilter] = useState<string>("all");
 
   const fetchLogs = useCallback(async () => {
     setLoading(true);
@@ -56,8 +58,13 @@ const AuditLogs = () => {
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
+  const actorOptions = Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort();
+  const targetOptions = Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort();
+
   const filtered = logs.filter((l) => {
     if (actionFilter !== "all" && l.action !== actionFilter) return false;
+    if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
+    if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
     if (search) {
       const q = search.toLowerCase();
       return (
