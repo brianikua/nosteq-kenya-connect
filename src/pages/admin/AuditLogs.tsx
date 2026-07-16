@@ -88,7 +88,7 @@ const AuditLogs = () => {
         <CardHeader>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <CardTitle>Recent activity</CardTitle>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-wrap gap-2 items-center">
               <Input
                 placeholder="Search actor, target, action..."
                 value={search}
@@ -96,7 +96,7 @@ const AuditLogs = () => {
                 className="w-64"
               />
               <Select value={actionFilter} onValueChange={setActionFilter}>
-                <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-44"><SelectValue placeholder="All actions" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All actions</SelectItem>
                   <SelectItem value="user.create">User created</SelectItem>
@@ -105,6 +105,24 @@ const AuditLogs = () => {
                   <SelectItem value="user.activate">User activated</SelectItem>
                   <SelectItem value="user.role_change">Role changed</SelectItem>
                   <SelectItem value="user.profile_update">Profile updated</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={actorFilter} onValueChange={setActorFilter}>
+                <SelectTrigger className="w-52"><SelectValue placeholder="All actors" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All actors</SelectItem>
+                  {actorOptions.map((email) => (
+                    <SelectItem key={email} value={email}>{email}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={targetFilter} onValueChange={setTargetFilter}>
+                <SelectTrigger className="w-52"><SelectValue placeholder="All affected users" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All affected users</SelectItem>
+                  {targetOptions.map((email) => (
+                    <SelectItem key={email} value={email}>{email}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <Button variant="outline" size="sm" onClick={fetchLogs} disabled={loading}>
