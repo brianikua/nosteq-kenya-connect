@@ -38,6 +38,8 @@ const AuditLogs = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [actionFilter, setActionFilter] = useState<string>("all");
+  const [actorFilter, setActorFilter] = useState<string>("all");
+  const [targetFilter, setTargetFilter] = useState<string>("all");
 
   const fetchLogs = useCallback(async () => {
     setLoading(true);
@@ -56,8 +58,13 @@ const AuditLogs = () => {
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
+  const actorOptions = Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort();
+  const targetOptions = Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort();
+
   const filtered = logs.filter((l) => {
     if (actionFilter !== "all" && l.action !== actionFilter) return false;
+    if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
+    if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
     if (search) {
       const q = search.toLowerCase();
       return (
@@ -81,7 +88,7 @@ const AuditLogs = () => {
         <CardHeader>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <CardTitle>Recent activity</CardTitle>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-wrap gap-2 items-center">
               <Input
                 placeholder="Search actor, target, action..."
                 value={search}
@@ -89,7 +96,7 @@ const AuditLogs = () => {
                 className="w-64"
               />
               <Select value={actionFilter} onValueChange={setActionFilter}>
-                <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-44"><SelectValue placeholder="All actions" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All actions</SelectItem>
                   <SelectItem value="user.create">User created</SelectItem>
@@ -98,6 +105,24 @@ const AuditLogs = () => {
                   <SelectItem value="user.activate">User activated</SelectItem>
                   <SelectItem value="user.role_change">Role changed</SelectItem>
                   <SelectItem value="user.profile_update">Profile updated</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={actorFilter} onValueChange={setActorFilter}>
+                <SelectTrigger className="w-52"><SelectValue placeholder="All actors" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All actors</SelectItem>
+                  {actorOptions.map((email) => (
+                    <SelectItem key={email} value={email}>{email}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={targetFilter} onValueChange={setTargetFilter}>
+                <SelectTrigger className="w-52"><SelectValue placeholder="All affected users" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All affected users</SelectItem>
+                  {targetOptions.map((email) => (
+                    <SelectItem key={email} value={email}>{email}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <Button variant="outline" size="sm" onClick={fetchLogs} disabled={loading}>
