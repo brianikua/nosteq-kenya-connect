@@ -35,6 +35,7 @@ const navItems: NavItem[] = [
   { to: "/admin/kyc", label: "KYC Queue", icon: FileCheck2 },
   { to: "/admin/content", label: "Content CMS", icon: FileText },
   { to: "/admin/users", label: "Web Users", icon: Shield, superadminOnly: true },
+  { to: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText, adminAndUp: true },
 ];
 
 const Admin = () => {
