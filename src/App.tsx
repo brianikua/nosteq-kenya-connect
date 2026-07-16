@@ -18,6 +18,7 @@ import Admin, {
   AdminKYC,
   AdminContent,
   AdminUsersPage,
+  AdminAuditLogs,
 } from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
