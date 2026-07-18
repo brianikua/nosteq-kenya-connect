@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,27 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RefreshCw } from "lucide-react";
+import { ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const PAGE_SIZE = 25;
+
+const extractDetailStrings = (details: Record<string, unknown> | null | undefined): string => {
+  if (!details) return "";
+  const parts: string[] = [];
+  const walk = (v: unknown) => {
+    if (v == null) return;
+    if (typeof v === "string" || typeof v === "number" || typeof v === "boolean") {
+      parts.push(String(v));
+    } else if (Array.isArray(v)) {
+      v.forEach(walk);
+    } else if (typeof v === "object") {
+      Object.values(v as Record<string, unknown>).forEach(walk);
+    }
+  };
+  walk(details);
+  return parts.join(" ").toLowerCase();
+};
 
 interface AuditLog {
   id: string;
