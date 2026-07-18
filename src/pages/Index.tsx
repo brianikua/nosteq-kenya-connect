@@ -13,6 +13,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ChatWidget from "@/components/ChatWidget";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
