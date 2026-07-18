@@ -182,17 +182,79 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
 
           <ScrollReveal direction="right" delay={0.15}>
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={heroTechnicians}
-                  alt="Nosteq engineering team deploying enterprise infrastructure"
-                  className="w-full h-auto rounded-2xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+              {/* Collage grid */}
+              <div className="grid grid-cols-6 grid-rows-6 gap-3 h-[520px] md:h-[560px]">
+                <div className="col-span-4 row-span-4 relative rounded-2xl overflow-hidden shadow-2xl group">
+                  <img
+                    src={heroTechnicians}
+                    alt="Nosteq engineering team deploying enterprise infrastructure"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+                  <div className="absolute bottom-3 left-3 text-xs font-medium text-primary-foreground/90 backdrop-blur-sm bg-background/30 px-2 py-1 rounded">
+                    Field engineering
+                  </div>
+                </div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group animate-float-slow">
+                  <img src={fiberImg} alt="Fiber internet backbone" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-70" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Fiber</div>
+                </div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
+                  <img src={serverImg} alt="Server room infrastructure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-accent/60 to-transparent opacity-70" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Data halls</div>
+                </div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
+                  <img src={cctvImg} alt="CCTV security systems" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Security</div>
+                </div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
+                  <img src={smartBuildingImg} alt="Smart building automation" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-70" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Smart building</div>
+                </div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
+                  <img src={voipImg} alt="VoIP communications" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-accent/50 to-transparent opacity-70" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">VoIP</div>
+                </div>
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -top-4 -right-4 bg-background/80 backdrop-blur-md border border-primary/20 rounded-xl px-3 py-2 shadow-xl hidden md:block">
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Live NOC</div>
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary-foreground">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> 99.99% uptime
+                </div>
               </div>
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Scrolling marquee strip - teases more visual content below */}
+        <div className="mt-16 relative overflow-hidden rounded-xl border border-primary/10 bg-background/20 backdrop-blur-sm">
+          <div className="flex gap-4 py-3 animate-marquee whitespace-nowrap">
+            {[fiberImg, cctvImg, serverImg, dataCenterImg, cablingImg, smartBuildingImg, voipImg, heroTechnicians, fiberImg, cctvImg, serverImg, dataCenterImg].map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt=""
+                className="h-16 w-28 object-cover rounded-lg flex-shrink-0 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2" />
+        </div>
+      </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
