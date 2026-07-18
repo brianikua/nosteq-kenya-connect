@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,27 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RefreshCw } from "lucide-react";
+import { ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const PAGE_SIZE = 25;
+
+const extractDetailStrings = (details: Record<string, unknown> | null | undefined): string => {
+  if (!details) return "";
+  const parts: string[] = [];
+  const walk = (v: unknown) => {
+    if (v == null) return;
+    if (typeof v === "string" || typeof v === "number" || typeof v === "boolean") {
+      parts.push(String(v));
+    } else if (Array.isArray(v)) {
+      v.forEach(walk);
+    } else if (typeof v === "object") {
+      Object.values(v as Record<string, unknown>).forEach(walk);
+    }
+  };
+  walk(details);
+  return parts.join(" ").toLowerCase();
+};
 
 interface AuditLog {
   id: string;
@@ -58,23 +77,46 @@ const AuditLogs = () => {
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
-  const actorOptions = Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort();
-  const targetOptions = Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort();
+  const [page, setPage] = useState(1);
 
-  const filtered = logs.filter((l) => {
-    if (actionFilter !== "all" && l.action !== actionFilter) return false;
-    if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
-    if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
-    if (search) {
-      const q = search.toLowerCase();
-      return (
-        (l.actor_email ?? "").toLowerCase().includes(q) ||
-        (l.target_email ?? "").toLowerCase().includes(q) ||
-        l.action.toLowerCase().includes(q)
-      );
-    }
-    return true;
-  });
+  const actorOptions = useMemo(
+    () => Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort(),
+    [logs],
+  );
+  const targetOptions = useMemo(
+    () => Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort(),
+    [logs],
+  );
+
+  const indexed = useMemo(
+    () => logs.map((l) => ({ log: l, haystack: extractDetailStrings(l.details) })),
+    [logs],
+  );
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return indexed
+      .filter(({ log: l, haystack }) => {
+        if (actionFilter !== "all" && l.action !== actionFilter) return false;
+        if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
+        if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
+        if (!q) return true;
+        return (
+          (l.actor_email ?? "").toLowerCase().includes(q) ||
+          (l.target_email ?? "").toLowerCase().includes(q) ||
+          l.action.toLowerCase().includes(q) ||
+          haystack.includes(q)
+        );
+      })
+      .map((x) => x.log);
+  }, [indexed, search, actionFilter, actorFilter, targetFilter]);
+
+  useEffect(() => { setPage(1); }, [search, actionFilter, actorFilter, targetFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pageRows = filtered.slice(pageStart, pageStart + PAGE_SIZE);
 
   return (
     <div>
@@ -90,10 +132,10 @@ const AuditLogs = () => {
             <CardTitle>Recent activity</CardTitle>
             <div className="flex flex-wrap gap-2 items-center">
               <Input
-                placeholder="Search actor, target, action..."
+                placeholder="Search actor, target, action, table, record id, notes..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-64"
+                className="w-72"
               />
               <Select value={actionFilter} onValueChange={setActionFilter}>
                 <SelectTrigger className="w-44"><SelectValue placeholder="All actions" /></SelectTrigger>
@@ -137,32 +179,48 @@ const AuditLogs = () => {
           ) : filtered.length === 0 ? (
             <p className="text-muted-foreground text-center py-8">No audit entries found</p>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>When</TableHead>
-                  <TableHead>Actor</TableHead>
-                  <TableHead>Action</TableHead>
-                  <TableHead>Target</TableHead>
-                  <TableHead>Details</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((l) => (
-                  <TableRow key={l.id}>
-                    <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
-                      {new Date(l.created_at).toLocaleString()}
-                    </TableCell>
-                    <TableCell className="text-sm">{l.actor_email || "—"}</TableCell>
-                    <TableCell>{actionBadge(l.action)}</TableCell>
-                    <TableCell className="text-sm">{l.target_email || "—"}</TableCell>
-                    <TableCell className="text-xs font-mono text-muted-foreground max-w-md truncate" title={JSON.stringify(l.details)}>
-                      {Object.keys(l.details || {}).length ? JSON.stringify(l.details) : "—"}
-                    </TableCell>
+            <>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>When</TableHead>
+                    <TableHead>Actor</TableHead>
+                    <TableHead>Action</TableHead>
+                    <TableHead>Target</TableHead>
+                    <TableHead>Details</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {pageRows.map((l) => (
+                    <TableRow key={l.id}>
+                      <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
+                        {new Date(l.created_at).toLocaleString()}
+                      </TableCell>
+                      <TableCell className="text-sm">{l.actor_email || "—"}</TableCell>
+                      <TableCell>{actionBadge(l.action)}</TableCell>
+                      <TableCell className="text-sm">{l.target_email || "—"}</TableCell>
+                      <TableCell className="text-xs font-mono text-muted-foreground max-w-md truncate" title={JSON.stringify(l.details)}>
+                        {Object.keys(l.details || {}).length ? JSON.stringify(l.details) : "—"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <div className="flex items-center justify-between mt-4 text-sm">
+                <div className="text-muted-foreground">
+                  Showing {pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, filtered.length)} of {filtered.length}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>
+                    <ChevronLeft className="w-4 h-4" /> Prev
+                  </Button>
+                  <span className="text-muted-foreground">Page {currentPage} / {totalPages}</span>
+                  <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>
+                    Next <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </>
           )}
         </CardContent>
       </Card>
