@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap } from "lucide-react";
 import heroTechnicians from "@/assets/hero-technicians.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
+import fiberImg from "@/assets/services/fiber-internet.jpg";
+import cctvImg from "@/assets/services/cctv-security.jpg";
+import serverImg from "@/assets/server-room.jpg";
+import dataCenterImg from "@/assets/services/data-center.jpg";
+import cablingImg from "@/assets/services/structured-cabling.jpg";
+import smartBuildingImg from "@/assets/services/smart-building.jpg";
+import voipImg from "@/assets/services/voip-communications.jpg";
 import ScrollReveal from "./ScrollReveal";
 import { getContent } from "@/lib/contentStore";
 
