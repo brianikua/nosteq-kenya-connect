@@ -179,32 +179,48 @@ const AuditLogs = () => {
           ) : filtered.length === 0 ? (
             <p className="text-muted-foreground text-center py-8">No audit entries found</p>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>When</TableHead>
-                  <TableHead>Actor</TableHead>
-                  <TableHead>Action</TableHead>
-                  <TableHead>Target</TableHead>
-                  <TableHead>Details</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((l) => (
-                  <TableRow key={l.id}>
-                    <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
-                      {new Date(l.created_at).toLocaleString()}
-                    </TableCell>
-                    <TableCell className="text-sm">{l.actor_email || "—"}</TableCell>
-                    <TableCell>{actionBadge(l.action)}</TableCell>
-                    <TableCell className="text-sm">{l.target_email || "—"}</TableCell>
-                    <TableCell className="text-xs font-mono text-muted-foreground max-w-md truncate" title={JSON.stringify(l.details)}>
-                      {Object.keys(l.details || {}).length ? JSON.stringify(l.details) : "—"}
-                    </TableCell>
+            <>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>When</TableHead>
+                    <TableHead>Actor</TableHead>
+                    <TableHead>Action</TableHead>
+                    <TableHead>Target</TableHead>
+                    <TableHead>Details</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {pageRows.map((l) => (
+                    <TableRow key={l.id}>
+                      <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
+                        {new Date(l.created_at).toLocaleString()}
+                      </TableCell>
+                      <TableCell className="text-sm">{l.actor_email || "—"}</TableCell>
+                      <TableCell>{actionBadge(l.action)}</TableCell>
+                      <TableCell className="text-sm">{l.target_email || "—"}</TableCell>
+                      <TableCell className="text-xs font-mono text-muted-foreground max-w-md truncate" title={JSON.stringify(l.details)}>
+                        {Object.keys(l.details || {}).length ? JSON.stringify(l.details) : "—"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <div className="flex items-center justify-between mt-4 text-sm">
+                <div className="text-muted-foreground">
+                  Showing {pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, filtered.length)} of {filtered.length}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>
+                    <ChevronLeft className="w-4 h-4" /> Prev
+                  </Button>
+                  <span className="text-muted-foreground">Page {currentPage} / {totalPages}</span>
+                  <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>
+                    Next <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </>
           )}
         </CardContent>
       </Card>
