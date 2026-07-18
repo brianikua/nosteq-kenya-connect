@@ -255,13 +255,6 @@ const Hero = ({ onQuoteClick }: HeroProps) => {
           <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2" />
         </div>
       </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2" />
-        </div>
-      </div>
     </section>
   );
 };
