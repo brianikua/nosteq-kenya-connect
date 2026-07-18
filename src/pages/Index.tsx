@@ -33,6 +33,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <Navbar />
       <Hero onQuoteClick={() => setIsQuoteModalOpen(true)} />
       <UptimePromise />
