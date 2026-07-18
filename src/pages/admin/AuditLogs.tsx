@@ -132,10 +132,10 @@ const AuditLogs = () => {
             <CardTitle>Recent activity</CardTitle>
             <div className="flex flex-wrap gap-2 items-center">
               <Input
-                placeholder="Search actor, target, action..."
+                placeholder="Search actor, target, action, table, record id, notes..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-64"
+                className="w-72"
               />
               <Select value={actionFilter} onValueChange={setActionFilter}>
                 <SelectTrigger className="w-44"><SelectValue placeholder="All actions" /></SelectTrigger>
