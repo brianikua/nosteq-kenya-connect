@@ -77,23 +77,46 @@ const AuditLogs = () => {
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
-  const actorOptions = Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort();
-  const targetOptions = Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort();
+  const [page, setPage] = useState(1);
 
-  const filtered = logs.filter((l) => {
-    if (actionFilter !== "all" && l.action !== actionFilter) return false;
-    if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
-    if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
-    if (search) {
-      const q = search.toLowerCase();
-      return (
-        (l.actor_email ?? "").toLowerCase().includes(q) ||
-        (l.target_email ?? "").toLowerCase().includes(q) ||
-        l.action.toLowerCase().includes(q)
-      );
-    }
-    return true;
-  });
+  const actorOptions = useMemo(
+    () => Array.from(new Set(logs.map((l) => l.actor_email).filter(Boolean))).sort(),
+    [logs],
+  );
+  const targetOptions = useMemo(
+    () => Array.from(new Set(logs.map((l) => l.target_email).filter(Boolean))).sort(),
+    [logs],
+  );
+
+  const indexed = useMemo(
+    () => logs.map((l) => ({ log: l, haystack: extractDetailStrings(l.details) })),
+    [logs],
+  );
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return indexed
+      .filter(({ log: l, haystack }) => {
+        if (actionFilter !== "all" && l.action !== actionFilter) return false;
+        if (actorFilter !== "all" && l.actor_email !== actorFilter) return false;
+        if (targetFilter !== "all" && l.target_email !== targetFilter) return false;
+        if (!q) return true;
+        return (
+          (l.actor_email ?? "").toLowerCase().includes(q) ||
+          (l.target_email ?? "").toLowerCase().includes(q) ||
+          l.action.toLowerCase().includes(q) ||
+          haystack.includes(q)
+        );
+      })
+      .map((x) => x.log);
+  }, [indexed, search, actionFilter, actorFilter, targetFilter]);
+
+  useEffect(() => { setPage(1); }, [search, actionFilter, actorFilter, targetFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pageRows = filtered.slice(pageStart, pageStart + PAGE_SIZE);
 
   return (
     <div>
