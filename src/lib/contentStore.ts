@@ -1,13 +1,18 @@
+import { useEffect, useState } from "react";
 import { mediaItems, type MediaItem } from "@/data/media";
+import { projects as defaultProjects, type Project } from "@/data/projects";
+import { supabase } from "@/integrations/supabase/client";
 
 // ============================================
-// CONTENT STORE — localStorage-based CMS
+// CONTENT STORE — Supabase-backed CMS
 // ============================================
-// All site content can be edited via /admin
-// Changes persist in localStorage and override
-// the default static data from data files.
+// All site content is edited via /admin and persisted
+// to the `site_content` table in Lovable Cloud.
+// A localStorage mirror keeps `getContent()` synchronous
+// and provides an offline fallback until the DB hydrates.
 
 const STORAGE_KEY = "nosteq_admin_content";
+const EVENT_NAME = "nosteq:content-updated";
 
 export interface HeroContent {
   badge: string;
@@ -16,15 +21,8 @@ export interface HeroContent {
   stats: { value: string; label: string }[];
 }
 
-export interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-export interface FAQSection {
-  category: string;
-  questions: FAQItem[];
-}
+export interface FAQItem { question: string; answer: string }
+export interface FAQSection { category: string; questions: FAQItem[] }
 
 export interface PackageItem {
   name: string;
@@ -69,6 +67,41 @@ export interface ServiceEditItem {
   useCases: string[];
 }
 
+export interface ProjectEditItem {
+  id: string;
+  title: string;
+  client: string;
+  location: string;
+  category: string;
+  description: string;
+  image: string;
+  year: string;
+  status: "completed" | "live" | "ongoing";
+  stats: Record<string, string>;
+}
+
+export interface FooterLink { label: string; id: string }
+export interface FooterSocial { platform: string; href: string }
+export interface FooterContent {
+  brandName: string;
+  brandTagline: string;
+  description: string;
+  quickLinks: FooterLink[];
+  contactLines: string[];
+  supportNote: string;
+  copyright: string;
+  socials: FooterSocial[];
+}
+
+export interface NavLink { label: string; href: string }
+export interface NavbarContent {
+  brandName: string;
+  brandTagline: string;
+  links: NavLink[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
 export interface SiteContent {
   hero: HeroContent;
   services: ServiceEditItem[];
@@ -78,9 +111,12 @@ export interface SiteContent {
   about: AboutContent;
   contact: ContactInfo;
   media: MediaItem[];
+  projects: ProjectEditItem[];
+  footer: FooterContent;
+  navbar: NavbarContent;
 }
 
-// Default content extracted from components
+// Default content
 const defaultContent: SiteContent = {
   hero: {
     badge: "Fintech-grade Internet-as-a-Service · SLA-backed",
@@ -117,29 +153,20 @@ const defaultContent: SiteContent = {
     { name: "Premium", speed: "200 Mbps+", price: "25,000+", description: "Custom-built for organizations that need it all", features: ["Scalable on demand", "Multiple static IPs", "99.95% uptime guarantee", "On-site support team", "Custom SLA terms"], popular: false },
   ],
   faqs: [
-    {
-      category: "Getting Started",
-      questions: [
-        { question: "How quickly can you set up my fiber connection?", answer: "If fiber already reaches your building, we'll have you online in 2–4 hours. If we need to lay new fiber to your location, expect 5–7 business days." },
-        { question: "Will I need to pay for installation?", answer: "Nope — installation is completely free when you sign up for 6 months or longer." },
-        { question: "What equipment do I get?", answer: "Every package comes with a high-performance WiFi router, a fiber ONT device, and all the cabling needed." },
-        { question: "Are you available in my area?", answer: "We currently cover Nairobi, Kiambu, Thika, and surrounding areas — and we're expanding fast." },
-      ]
-    },
-    {
-      category: "Money Matters",
-      questions: [
-        { question: "Can I switch my plan anytime?", answer: "Absolutely. Upgrading takes effect immediately. Downgrading kicks in at your next billing cycle." },
-        { question: "How can I pay?", answer: "M-Pesa, bank transfer, card, or Airtel Money. Businesses can set up invoiced billing." },
-      ]
-    },
-    {
-      category: "Support & Reliability",
-      questions: [
-        { question: "What's your uptime guarantee?", answer: "99.9% across all packages — and we put our money where our mouth is." },
-        { question: "Something's wrong with my connection — who do I call?", answer: "Our 24/7 team at +254 743 101 738 — call or WhatsApp." },
-      ]
-    }
+    { category: "Getting Started", questions: [
+      { question: "How quickly can you set up my fiber connection?", answer: "If fiber already reaches your building, we'll have you online in 2–4 hours. If we need to lay new fiber to your location, expect 5–7 business days." },
+      { question: "Will I need to pay for installation?", answer: "Nope — installation is completely free when you sign up for 6 months or longer." },
+      { question: "What equipment do I get?", answer: "Every package comes with a high-performance WiFi router, a fiber ONT device, and all the cabling needed." },
+      { question: "Are you available in my area?", answer: "We currently cover Nairobi, Kiambu, Thika, and surrounding areas — and we're expanding fast." },
+    ]},
+    { category: "Money Matters", questions: [
+      { question: "Can I switch my plan anytime?", answer: "Absolutely. Upgrading takes effect immediately. Downgrading kicks in at your next billing cycle." },
+      { question: "How can I pay?", answer: "M-Pesa, bank transfer, card, or Airtel Money. Businesses can set up invoiced billing." },
+    ]},
+    { category: "Support & Reliability", questions: [
+      { question: "What's your uptime guarantee?", answer: "99.9% across all packages — and we put our money where our mouth is." },
+      { question: "Something's wrong with my connection — who do I call?", answer: "Our 24/7 team at +254 743 101 738 — call or WhatsApp." },
+    ]},
   ],
   about: {
     story: [
@@ -166,34 +193,133 @@ const defaultContent: SiteContent = {
     hours: ["Monday – Friday: 8:00 AM – 6:00 PM", "Saturday: 9:00 AM – 4:00 PM", "Sunday: Closed"],
   },
   media: mediaItems,
+  projects: defaultProjects.map((p: Project) => ({
+    id: p.id,
+    title: p.title,
+    client: p.client,
+    location: p.location,
+    category: p.category,
+    description: p.description,
+    image: p.image,
+    year: p.year,
+    status: p.status,
+    stats: p.stats,
+  })),
+  footer: {
+    brandName: "Nosteq Networks",
+    brandTagline: "Full IT Technology Solutions",
+    description: "International-grade IT infrastructure, fiber internet, CCTV security, and enterprise technology solutions. Certified and trusted by businesses and organizations across the region.",
+    quickLinks: [
+      { label: "Home", id: "hero" },
+      { label: "Services", id: "services" },
+      { label: "Packages", id: "packages" },
+      { label: "Portfolio", id: "portfolio" },
+      { label: "About", id: "about" },
+      { label: "Contact", id: "contact" },
+    ],
+    contactLines: ["+254 743 101 738", "info@nosteq.co.ke", "Banana Hill, Kiambu, Kenya"],
+    supportNote: "24/7 Support Available",
+    copyright: "© {year} Nosteq Networks Limited. All Rights Reserved.",
+    socials: [
+      { platform: "LinkedIn", href: "https://www.linkedin.com/company/nosteq-networks" },
+      { platform: "Facebook", href: "https://www.facebook.com/NosteqWIFI" },
+      { platform: "Instagram", href: "https://www.instagram.com/nosteqwifi" },
+      { platform: "Twitter", href: "https://twitter.com/nosteqkenya" },
+      { platform: "TikTok", href: "https://www.tiktok.com/@nosteq.network.li" },
+    ],
+  },
+  navbar: {
+    brandName: "Nosteq Networks",
+    brandTagline: "Get Connected",
+    links: [
+      { label: "Services", href: "/#services" },
+      { label: "Packages", href: "/#packages" },
+      { label: "Portfolio", href: "/#portfolio" },
+      { label: "About", href: "/#about" },
+      { label: "FAQ", href: "/#faq" },
+      { label: "Contact", href: "/#contact" },
+    ],
+    ctaLabel: "Get Quote",
+    ctaHref: "/#contact",
+  },
 };
 
-export function getContent(): SiteContent {
+// ---- In-memory cache + subscribers ----
+let cache: SiteContent = loadLocal();
+
+function loadLocal(): SiteContent {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      return { ...defaultContent, ...JSON.parse(stored) };
-    }
-  } catch (e) {
-    console.error("Failed to load admin content:", e);
-  }
+    const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+    if (stored) return mergeDefaults(JSON.parse(stored));
+  } catch (e) { console.error("localStorage load failed", e); }
   return defaultContent;
 }
 
-export function saveContent(content: Partial<SiteContent>) {
-  try {
-    const current = getContent();
-    const updated = { ...current, ...content };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    return updated;
-  } catch (e) {
-    console.error("Failed to save admin content:", e);
+function mergeDefaults(partial: Partial<SiteContent>): SiteContent {
+  return { ...defaultContent, ...partial } as SiteContent;
+}
+
+function broadcast() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(EVENT_NAME));
   }
 }
 
-export function resetContent() {
-  localStorage.removeItem(STORAGE_KEY);
-  return defaultContent;
+function persistLocal(c: SiteContent) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(c)); } catch {}
+}
+
+// ---- Public API ----
+export function getContent(): SiteContent { return cache; }
+
+export function saveContent(patch: Partial<SiteContent>): SiteContent {
+  cache = { ...cache, ...patch };
+  persistLocal(cache);
+  broadcast();
+  // Fire-and-forget upsert to Supabase
+  void (async () => {
+    try {
+      for (const [key, value] of Object.entries(patch)) {
+        await supabase.from("site_content").upsert(
+          { section_key: key, data: value as any, updated_at: new Date().toISOString() },
+          { onConflict: "section_key" }
+        );
+      }
+    } catch (e) { console.error("Supabase save failed", e); }
+  })();
+  return cache;
+}
+
+export function resetContent(): SiteContent {
+  cache = defaultContent;
+  persistLocal(cache);
+  broadcast();
+  return cache;
+}
+
+/** Load latest content from Supabase and update cache. */
+export async function hydrateFromDB(): Promise<void> {
+  try {
+    const { data, error } = await supabase.from("site_content").select("section_key, data");
+    if (error) throw error;
+    if (!data || data.length === 0) return;
+    const patch: any = {};
+    for (const row of data) patch[row.section_key] = row.data;
+    cache = mergeDefaults({ ...cache, ...patch });
+    persistLocal(cache);
+    broadcast();
+  } catch (e) { console.error("Hydrate from DB failed", e); }
+}
+
+/** React hook that returns the latest content and re-renders on updates. */
+export function useSiteContent(): SiteContent {
+  const [c, setC] = useState<SiteContent>(cache);
+  useEffect(() => {
+    const handler = () => setC({ ...cache });
+    window.addEventListener(EVENT_NAME, handler);
+    return () => window.removeEventListener(EVENT_NAME, handler);
+  }, []);
+  return c;
 }
 
 export { defaultContent };
