@@ -8,6 +8,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { navbar } = useSiteContent();
+  const navLinks = navbar.links;
 
   useEffect(() => {
     const handleScroll = () => {
