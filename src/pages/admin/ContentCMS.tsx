@@ -40,6 +40,8 @@ import {
   Lock,
   Cpu,
   Radio,
+  Menu,
+  Layout,
   type LucideIcon,
 } from "lucide-react";
 import {
@@ -123,14 +125,17 @@ const ContentCMS = () => {
 
       <div>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-4 md:grid-cols-7 w-full mb-8">
+          <TabsList className="grid grid-cols-5 md:grid-cols-10 w-full mb-8">
             <TabsTrigger value="hero" className="gap-1.5"><Home className="w-4 h-4" /><span className="hidden md:inline">Hero</span></TabsTrigger>
             <TabsTrigger value="services" className="gap-1.5"><Layers className="w-4 h-4" /><span className="hidden md:inline">Services</span></TabsTrigger>
             <TabsTrigger value="packages" className="gap-1.5"><Package className="w-4 h-4" /><span className="hidden md:inline">Plans</span></TabsTrigger>
+            <TabsTrigger value="projects" className="gap-1.5"><Layers className="w-4 h-4" /><span className="hidden md:inline">Projects</span></TabsTrigger>
             <TabsTrigger value="faq" className="gap-1.5"><HelpCircle className="w-4 h-4" /><span className="hidden md:inline">FAQ</span></TabsTrigger>
             <TabsTrigger value="about" className="gap-1.5"><Users className="w-4 h-4" /><span className="hidden md:inline">About</span></TabsTrigger>
             <TabsTrigger value="contact" className="gap-1.5"><Phone className="w-4 h-4" /><span className="hidden md:inline">Contact</span></TabsTrigger>
             <TabsTrigger value="media" className="gap-1.5"><Image className="w-4 h-4" /><span className="hidden md:inline">Media</span></TabsTrigger>
+            <TabsTrigger value="navbar" className="gap-1.5"><Menu className="w-4 h-4" /><span className="hidden md:inline">Navbar</span></TabsTrigger>
+            <TabsTrigger value="footer" className="gap-1.5"><Layout className="w-4 h-4" /><span className="hidden md:inline">Footer</span></TabsTrigger>
           </TabsList>
 
 
