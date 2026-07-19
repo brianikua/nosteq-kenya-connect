@@ -661,6 +661,201 @@ const ContentCMS = () => {
               </div>
             </div>
           </TabsContent>
+
+          {/* PROJECTS TAB */}
+          <TabsContent value="projects">
+            <div className="space-y-4 max-w-5xl">
+              <div className="flex justify-between items-center">
+                <h3 className="font-heading text-xl font-bold">Portfolio Projects</h3>
+                <Button variant="outline" size="sm" onClick={() => {
+                  updateContent("projects", [...content.projects, {
+                    id: `project-${Date.now()}`,
+                    title: "New Project",
+                    client: "",
+                    location: "",
+                    category: "Enterprise Network",
+                    description: "",
+                    image: "",
+                    year: String(new Date().getFullYear()),
+                    status: "completed",
+                    stats: {},
+                  }]);
+                }}>
+                  <Plus className="w-4 h-4 mr-1" /> Add Project
+                </Button>
+              </div>
+              <div className="grid gap-4">
+                {content.projects.map((p, i) => (
+                  <Card key={p.id}>
+                    <CardContent className="pt-6 space-y-3">
+                      <div className="flex gap-4">
+                        {p.image && (
+                          <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted shrink-0">
+                            <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-3">
+                          <div><Label>Title</Label><Input value={p.title} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], title: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                          <div><Label>Client</Label><Input value={p.client} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], client: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                          <div><Label>Location</Label><Input value={p.location} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], location: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                          <div><Label>Category</Label><Input value={p.category} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], category: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                          <div><Label>Year</Label><Input value={p.year} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], year: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                          <div>
+                            <Label>Status</Label>
+                            <Select value={p.status} onValueChange={(v) => { const arr = [...content.projects]; arr[i] = { ...arr[i], status: v as any }; updateContent("projects", arr); }}>
+                              <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="completed">Completed</SelectItem>
+                                <SelectItem value="live">Live</SelectItem>
+                                <SelectItem value="ongoing">Ongoing</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                        <Button variant="ghost" size="icon" className="text-destructive" onClick={() => updateContent("projects", content.projects.filter((_, idx) => idx !== i))}>
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <div><Label>Image URL</Label><Input value={p.image} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], image: e.target.value }; updateContent("projects", arr); }} className="mt-1" /></div>
+                      <div><Label>Description</Label><Textarea value={p.description} onChange={(e) => { const arr = [...content.projects]; arr[i] = { ...arr[i], description: e.target.value }; updateContent("projects", arr); }} className="mt-1" rows={2} /></div>
+                      <div>
+                        <Label>Stats (key = value, one per line)</Label>
+                        <Textarea
+                          value={Object.entries(p.stats).map(([k, v]) => `${k} = ${v}`).join("\n")}
+                          onChange={(e) => {
+                            const stats: Record<string, string> = {};
+                            e.target.value.split("\n").forEach((line) => {
+                              const [k, ...rest] = line.split("=");
+                              if (k && rest.length) stats[k.trim()] = rest.join("=").trim();
+                            });
+                            const arr = [...content.projects];
+                            arr[i] = { ...arr[i], stats };
+                            updateContent("projects", arr);
+                          }}
+                          className="mt-1 font-mono text-xs"
+                          rows={3}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* NAVBAR TAB */}
+          <TabsContent value="navbar">
+            <div className="grid gap-6 max-w-3xl">
+              <Card>
+                <CardHeader><CardTitle>Navbar Branding</CardTitle></CardHeader>
+                <CardContent className="space-y-4">
+                  <div><Label>Brand Name</Label><Input value={content.navbar.brandName} onChange={(e) => updateContent("navbar", { ...content.navbar, brandName: e.target.value })} className="mt-1" /></div>
+                  <div><Label>Brand Tagline</Label><Input value={content.navbar.brandTagline} onChange={(e) => updateContent("navbar", { ...content.navbar, brandTagline: e.target.value })} className="mt-1" /></div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div><Label>CTA Label</Label><Input value={content.navbar.ctaLabel} onChange={(e) => updateContent("navbar", { ...content.navbar, ctaLabel: e.target.value })} className="mt-1" /></div>
+                    <div><Label>CTA Link</Label><Input value={content.navbar.ctaHref} onChange={(e) => updateContent("navbar", { ...content.navbar, ctaHref: e.target.value })} className="mt-1" /></div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Menu Links</CardTitle>
+                    <Button variant="outline" size="sm" onClick={() => updateContent("navbar", { ...content.navbar, links: [...content.navbar.links, { label: "New", href: "/#new" }] })}>
+                      <Plus className="w-4 h-4 mr-1" /> Add
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {content.navbar.links.map((link, i) => (
+                    <div key={i} className="flex gap-2 items-end">
+                      <div className="flex-1"><Label>Label</Label><Input value={link.label} onChange={(e) => { const links = [...content.navbar.links]; links[i] = { ...links[i], label: e.target.value }; updateContent("navbar", { ...content.navbar, links }); }} className="mt-1" /></div>
+                      <div className="flex-1"><Label>Href</Label><Input value={link.href} onChange={(e) => { const links = [...content.navbar.links]; links[i] = { ...links[i], href: e.target.value }; updateContent("navbar", { ...content.navbar, links }); }} className="mt-1" /></div>
+                      <Button variant="ghost" size="icon" className="text-destructive" onClick={() => updateContent("navbar", { ...content.navbar, links: content.navbar.links.filter((_, idx) => idx !== i) })}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* FOOTER TAB */}
+          <TabsContent value="footer">
+            <div className="grid gap-6 max-w-3xl">
+              <Card>
+                <CardHeader><CardTitle>Footer Branding</CardTitle></CardHeader>
+                <CardContent className="space-y-4">
+                  <div><Label>Brand Name</Label><Input value={content.footer.brandName} onChange={(e) => updateContent("footer", { ...content.footer, brandName: e.target.value })} className="mt-1" /></div>
+                  <div><Label>Brand Tagline</Label><Input value={content.footer.brandTagline} onChange={(e) => updateContent("footer", { ...content.footer, brandTagline: e.target.value })} className="mt-1" /></div>
+                  <div><Label>Description</Label><Textarea value={content.footer.description} onChange={(e) => updateContent("footer", { ...content.footer, description: e.target.value })} className="mt-1" rows={3} /></div>
+                  <div><Label>Support Note</Label><Input value={content.footer.supportNote} onChange={(e) => updateContent("footer", { ...content.footer, supportNote: e.target.value })} className="mt-1" /></div>
+                  <div><Label>Copyright ({"{year}"} will be replaced)</Label><Input value={content.footer.copyright} onChange={(e) => updateContent("footer", { ...content.footer, copyright: e.target.value })} className="mt-1" /></div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Quick Links</CardTitle>
+                    <Button variant="outline" size="sm" onClick={() => updateContent("footer", { ...content.footer, quickLinks: [...content.footer.quickLinks, { label: "New", id: "new" }] })}>
+                      <Plus className="w-4 h-4 mr-1" /> Add
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {content.footer.quickLinks.map((link, i) => (
+                    <div key={i} className="flex gap-2 items-end">
+                      <div className="flex-1"><Label>Label</Label><Input value={link.label} onChange={(e) => { const arr = [...content.footer.quickLinks]; arr[i] = { ...arr[i], label: e.target.value }; updateContent("footer", { ...content.footer, quickLinks: arr }); }} className="mt-1" /></div>
+                      <div className="flex-1"><Label>Section ID</Label><Input value={link.id} onChange={(e) => { const arr = [...content.footer.quickLinks]; arr[i] = { ...arr[i], id: e.target.value }; updateContent("footer", { ...content.footer, quickLinks: arr }); }} className="mt-1" /></div>
+                      <Button variant="ghost" size="icon" className="text-destructive" onClick={() => updateContent("footer", { ...content.footer, quickLinks: content.footer.quickLinks.filter((_, idx) => idx !== i) })}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader><CardTitle>Contact Lines (one per line)</CardTitle></CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={content.footer.contactLines.join("\n")}
+                    onChange={(e) => updateContent("footer", { ...content.footer, contactLines: e.target.value.split("\n") })}
+                    rows={4}
+                  />
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Social Links</CardTitle>
+                    <Button variant="outline" size="sm" onClick={() => updateContent("footer", { ...content.footer, socials: [...content.footer.socials, { platform: "LinkedIn", href: "" }] })}>
+                      <Plus className="w-4 h-4 mr-1" /> Add
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {content.footer.socials.map((s, i) => (
+                    <div key={i} className="flex gap-2 items-end">
+                      <div className="flex-1">
+                        <Label>Platform</Label>
+                        <Select value={s.platform} onValueChange={(v) => { const arr = [...content.footer.socials]; arr[i] = { ...arr[i], platform: v }; updateContent("footer", { ...content.footer, socials: arr }); }}>
+                          <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            {["LinkedIn", "Facebook", "Instagram", "Twitter", "YouTube", "GitHub", "TikTok"].map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="flex-1"><Label>URL</Label><Input value={s.href} onChange={(e) => { const arr = [...content.footer.socials]; arr[i] = { ...arr[i], href: e.target.value }; updateContent("footer", { ...content.footer, socials: arr }); }} className="mt-1" /></div>
+                      <Button variant="ghost" size="icon" className="text-destructive" onClick={() => updateContent("footer", { ...content.footer, socials: content.footer.socials.filter((_, idx) => idx !== i) })}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
