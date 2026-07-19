@@ -1,88 +1,91 @@
 
-## Vision
+## Goal
 
-Reposition Nosteq Networks as **"Internet-as-a-Service, engineered like fintech"** — connectivity delivered with the reliability, transparency, and account-management polish of a modern financial platform. The public site sells IaaS plans; the admin dashboard becomes the operator control plane running the business.
+Everything visible on the public site becomes fully manageable (create, edit, delete) from `/admin`, backed by Lovable Cloud so changes sync across every visitor and device instantly.
 
-Since no new company name was provided, we keep **Nosteq Networks** and layer a new tagline: *"Internet-as-a-Service. Fintech-grade reliability."* (Easy to rename later.)
+## Sections brought under admin control
 
----
+- Hero (badge, headings, subheading, stats)
+- Services (list — add/edit/delete each card, icon, tagline, description, features, benefits, technologies, use cases, gallery images)
+- Home Packages & Business Packages (list — add/edit/delete, mark popular)
+- FAQ categories and questions (list — add/edit/delete)
+- About (story paragraphs, stats, testimonials — add/edit/delete)
+- Contact (phone, email, address, hours)
+- Media gallery (add/edit/delete image or video items with category)
+- Portfolio / Projects (add/edit/delete case studies)
+- Footer (tagline, columns, links, socials, copyright)
+- Navbar links
 
-## Part 1 — Public site reframe
+## How it works
 
-Rewrite copy, hero, services and packages to speak the IaaS + fintech language, without deleting existing infrastructure services (they become the "how we deliver" story underneath the IaaS product).
+- One `site_content` table with `(section_key TEXT PRIMARY KEY, data JSONB, updated_at, updated_by)`.
+- Public site reads with the anon key — everyone sees the same content, no login needed.
+- Writes restricted to `admin`/`superadmin` via RLS using existing `is_admin_or_superadmin()` function.
+- Every write is written to `admin_audit_logs` (section, actor, before/after summary).
+- Frontend content loader (`src/lib/contentStore.ts`) rewritten to fetch from the DB with a React Query cache; falls back to hardcoded defaults on first load so the site never renders empty.
+- One-time seeder pushes the current default content into the DB on first admin visit.
 
-- **Hero**: "Internet-as-a-Service for banks, fintechs & modern businesses" + trust stats (uptime %, SLA credit %, MRR-style badges).
-- **Product tiers (replaces current Packages)**: Starter IaaS / Growth IaaS / Enterprise IaaS / Custom — each with bandwidth, SLA %, support tier, monthly price, and a "Subscribe" CTA that opens the onboarding/KYC flow.
-- **Services section** stays but reframed as *"Infrastructure powering our IaaS"* (Fiber, CCTV, Data Center, ServerRoomMasters, etc. — unchanged data, new heading + intro).
-- **New sections**: "Uptime you can bank on" (live-feel SLA numbers), "Transparent billing" (fintech-style invoice mockup), "KYC & onboarding in 24 hrs".
-- **Navbar**: add *Pricing*, *Uptime*, *Login* (routes to `/admin/login` for now → customer portal later).
-- Fonts / colors stay on the current Plus Jakarta + DM Sans + blue/maroon system (already fintech-appropriate).
+## Admin UI
 
-## Part 2 — Admin as fintech IaaS control plane
+Under `/admin/content` (existing route), replace the current single editor with a tabbed layout:
 
-Restructure `/admin` into a sidebar-driven operator dashboard with these modules:
-
-```text
-┌────────────────────────────────────────────────────────┐
-│ Sidebar         │  Overview                            │
-│  • Overview     │  ┌─────────┬─────────┬─────────┐    │
-│  • Customers    │  │  MRR    │ Active  │ Uptime  │    │
-│  • Subscriptions│  │ KES 1.2M│  Subs   │ 99.94%  │    │
-│  • Billing      │  └─────────┴─────────┴─────────┘    │
-│  • Usage        │  Recent signups · SLA incidents      │
-│  • Uptime / SLA │  Revenue trend · Churn               │
-│  • KYC Queue    │                                      │
-│  • Content CMS  │  (existing site-content editor       │
-│  • Web Users    │   moved under "Content CMS")         │
-│  • Settings     │                                      │
-└────────────────────────────────────────────────────────┘
+```
+Content
+├── Hero
+├── Services         [+ Add service]  list with edit/delete row actions
+├── Packages         Home / Business tabs, each with add/edit/delete
+├── FAQs             categories + questions, add/edit/delete
+├── About            story paragraphs, stats, testimonials
+├── Contact          simple form
+├── Media            grid with add/edit/delete, image upload
+├── Portfolio        add/edit/delete case studies with images
+├── Footer           columns + links editor
+└── Navbar           link editor
 ```
 
-Module scope for this build:
+Every list has inline "Add", "Edit" (dialog), "Delete" (confirm) actions. Save writes to the DB and invalidates the cache so the public site updates on next paint.
 
-1. **Overview** — KPI cards (MRR, active subs, avg uptime, KYC pending), recent activity feed.
-2. **Customers** — table of end-customers (business name, contact, KYC status, plan, MRR, status). Create/edit/suspend.
-3. **Subscriptions** — assign a plan to a customer, set billing cycle, activation date, status (trial/active/past-due/cancelled).
-4. **Billing** — invoices per customer (number, period, amount, status paid/unpaid/overdue), mark-as-paid action, download stub. This is an operator ledger — no real payment processor yet (that's a follow-up decision).
-5. **Usage metering** — per-subscription bandwidth used (GB), peak Mbps, data-cap %, manual entry + CSV import stub; chart per customer.
-6. **Uptime & SLA** — per-customer uptime %, incident log (start, end, duration, impact), auto-computed SLA credit owed.
-7. **KYC queue** — pending applications with business docs checklist (ID, cert of incorporation, KRA PIN, proof of address); approve / reject with reason.
-8. **Content CMS** — existing site content editor, unchanged, just relocated in the sidebar.
-9. **Web Users** — existing superadmin-only editor management, unchanged.
+## Technical details
 
-Superadmin sees everything. Admin sees everything except Web Users. Editor sees only Content CMS.
+**Database**
+- New table `public.site_content` with GRANT SELECT to anon, full CRUD to authenticated, admin-only via RLS policies calling `is_admin_or_superadmin(auth.uid())`.
+- New storage bucket `site-media` (public read) for uploaded images used across Hero/Media/Portfolio/Services galleries.
 
-## Part 3 — Data model (new tables, all with RLS + GRANTs)
-
+**Data shape** — one JSONB row per section, e.g.
 ```text
-customers          → business_name, contact_name, email, phone, kyc_status, status
-subscriptions      → customer_id, plan_tier, bandwidth_mbps, monthly_price_kes,
-                     billing_cycle, status, activated_at, next_billing_at
-invoices           → subscription_id, invoice_number, period_start, period_end,
-                     amount_kes, status, issued_at, paid_at
-usage_records      → subscription_id, period_start, period_end,
-                     gb_used, peak_mbps, cap_percent
-sla_incidents      → subscription_id, started_at, ended_at, duration_minutes,
-                     impact, credit_kes
-kyc_applications   → customer_id, id_doc_url, cert_url, kra_pin_url, address_url,
-                     status, reviewer_id, review_notes, reviewed_at
+site_content
+  hero          -> { badge, heading[], subheading, stats[] }
+  services      -> [ { slug, iconName, title, badge, tagline, description, features[], benefits[], technologies[], useCases[], gallery[] } ]
+  packages_home -> [ { name, speed, price, description, features[], popular } ]
+  packages_biz  -> [ ... ]
+  faqs          -> [ { category, questions:[{question, answer}] } ]
+  about         -> { story[], stats[], testimonials[] }
+  contact       -> { phone, email, address, hours[] }
+  media         -> [ { id, type, src, thumbnail?, title, description, category, date } ]
+  projects      -> [ { id, title, client, summary, images[], ... } ]
+  footer        -> { tagline, columns[], socials[], copyright }
+  navbar        -> { links:[{label, href}] }
 ```
 
-RLS: only `authenticated` users with role `admin` or `superadmin` can read/write; `editor` has no access. `service_role` full access for edge functions. Every table gets standard `id`, `created_at`, `updated_at` + update-trigger.
+**Frontend**
+- `src/lib/contentStore.ts`: replace localStorage getters with a `useSiteContent(section)` React Query hook and a `saveSection(section, data)` mutation.
+- Components (`Hero`, `Services`, `Packages`, `FAQ`, `About`, `Contact`, `MediaGallery`, `Portfolio`, `Footer`, `Navbar`) switch from static/local to the hook. Loading states use existing skeletons.
+- Admin content page becomes `src/pages/admin/content/*` — one small editor file per section, sharing a common `ListEditor` component for repeating items.
+- Image uploads go through the new `site-media` bucket; returned public URL is stored in the JSONB.
 
-## Part 4 — Not in this build (call out and defer)
+**Audit**
+- Every save from the admin editors calls a small shared helper that writes an entry to `admin_audit_logs` with `action = 'content.update'`, `target_table = 'site_content'`, `record_id = section_key`, and diff-style metadata.
 
-- Real payment processor (Stripe/Paddle/M-Pesa) integration — needs a separate decision.
-- Automated uptime probes — SLA numbers are operator-entered for now.
-- End-customer self-service portal — admin-only management first; portal is phase 2.
-- Automated invoice PDF generation & email delivery — deferred.
+## Delivery order (single build)
 
-## Technical notes
+1. Migration: `site_content` table + policies + grants + storage bucket + seed defaults.
+2. `contentStore` rewrite + `useSiteContent` hook + upload helper.
+3. Rewire public components to consume the hook.
+4. New admin content editors (Hero, Services, Packages, FAQs, About, Contact, Media, Portfolio, Footer, Navbar).
+5. Audit logging on all saves.
+6. Verify with Playwright: log in, edit each section, confirm the public route reflects the change.
 
-- Frontend: new sidebar shell `AdminLayout.tsx`, module pages under `src/pages/admin/`, shared `AdminSidebar.tsx`, KPI/table primitives reused from shadcn.
-- Reuse existing `useAdminAuth` for gating; extend it to expose role for module-level visibility.
-- Migration adds the 6 tables above with RLS + GRANTs in one call; no changes to existing `profiles` / `user_roles`.
-- Public-site copy changes are localized to `Hero.tsx`, `Packages.tsx`, `Services.tsx` (heading + intro), `About.tsx` (positioning line), plus a new `UptimePromise.tsx` section on the home page.
-- No brand assets regenerated (keeps credit cost low). We can swap imagery later.
+## Out of scope
 
-Delivery order once approved: (1) DB migration, (2) admin shell + Overview + Customers, (3) Subscriptions + Billing, (4) Usage + SLA + KYC modules, (5) public site copy reframe.
+- Multi-language content, draft/publish workflow, and per-user content revisions (can be added later).
+- Redesigning any section — visuals stay the same, only the data source changes.
