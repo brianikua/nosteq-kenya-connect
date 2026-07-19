@@ -2,20 +2,14 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Network } from "lucide-react";
-
-const navLinks = [
-  { label: "Services", href: "/#services" },
-  { label: "Packages", href: "/#packages" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "About", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
-];
+import { useSiteContent } from "@/lib/contentStore";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { navbar } = useSiteContent();
+  const navLinks = navbar.links;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,10 +53,10 @@ const Navbar = () => {
             <Network className={`w-7 h-7 md:w-8 md:h-8 shrink-0 ${isScrolled || isMobileMenuOpen ? 'text-primary' : 'text-primary-foreground'}`} />
             <div className="min-w-0">
               <h1 className={`font-heading font-bold text-lg md:text-xl truncate ${isScrolled || isMobileMenuOpen ? 'text-foreground' : 'text-primary-foreground'}`}>
-                Nosteq Networks
+                {navbar.brandName}
               </h1>
               <p className={`text-[10px] md:text-xs ${isScrolled || isMobileMenuOpen ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>
-                Get Connected
+                {navbar.brandTagline}
               </p>
             </div>
           </a>
@@ -81,9 +75,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
+            <a href={navbar.ctaHref} onClick={(e) => handleNavClick(e, navbar.ctaHref)}>
               <Button variant="hero" size="sm">
-                Get Quote
+                {navbar.ctaLabel}
               </Button>
             </a>
           </div>
@@ -114,9 +108,9 @@ const Navbar = () => {
               </a>
             ))}
             <div className="pt-2 pb-1">
-              <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
+              <a href={navbar.ctaHref} onClick={(e) => handleNavClick(e, navbar.ctaHref)}>
                 <Button variant="hero" className="w-full" size="lg">
-                  Get Quote
+                  {navbar.ctaLabel}
                 </Button>
               </a>
             </div>
