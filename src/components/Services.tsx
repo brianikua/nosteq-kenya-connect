@@ -44,7 +44,7 @@ const Services = () => {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicesData.map((service, index) => (
+          {displayServices.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.06}>
               <Link to={`/services/${service.slug}`} className="block h-full">
                 <Card className="bg-card border-border hover:border-primary/30 transition-all duration-300 card-hover group h-full cursor-pointer">
