@@ -2,15 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Network } from "lucide-react";
-
-const navLinks = [
-  { label: "Services", href: "/#services" },
-  { label: "Packages", href: "/#packages" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "About", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
-];
+import { useSiteContent } from "@/lib/contentStore";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
