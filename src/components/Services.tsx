@@ -1,11 +1,30 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Gauge, Shield, Cable, Database, Code, Network, Lightbulb, Phone, Server, Wifi, Monitor, Cloud, Lock, Cpu, Radio, type LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { servicesData } from "@/data/services";
+import { useSiteContent } from "@/lib/contentStore";
 import ScrollReveal from "./ScrollReveal";
 
+const iconMap: Record<string, LucideIcon> = {
+  Gauge, Shield, Cable, Database, Code, Network, Lightbulb, Phone, Server, Wifi, Monitor, Cloud, Lock, Cpu, Radio,
+};
+
 const Services = () => {
+  const { services: cmsServices } = useSiteContent();
+  // Merge CMS overrides on top of static services; fall back to static-only when CMS is empty
+  const displayServices = cmsServices.length > 0
+    ? cmsServices.map((cms) => {
+        const staticService = servicesData.find((s) => s.slug === cms.slug);
+        return {
+          slug: cms.slug,
+          title: cms.title,
+          badge: cms.badge,
+          tagline: cms.tagline,
+          icon: iconMap[cms.iconName] || staticService?.icon || Network,
+        };
+      })
+    : servicesData.map((s) => ({ slug: s.slug, title: s.title, badge: s.badge, tagline: s.tagline, icon: s.icon }));
   return (
     <section id="services" className="py-24 relative">
       <div className="absolute inset-0 subtle-pattern" />

@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Building2, Calendar, ArrowRight, ExternalLink, CheckCircle2, Clock, Zap } from "lucide-react";
-import { projects, categories, statusConfig, type Project } from "@/data/projects";
+import { categories, statusConfig } from "@/data/projects";
+import { useSiteContent } from "@/lib/contentStore";
 import ScrollReveal from "./ScrollReveal";
 
 const statusIcons = { CheckCircle2, Zap, Clock };
@@ -12,7 +13,8 @@ const statusIcons = { CheckCircle2, Zap, Clock };
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const navigate = useNavigate();
-  const filteredProjects = activeCategory === "All" ? projects : projects.filter(p => p.category === activeCategory);
+  const { projects } = useSiteContent();
+  const filteredProjects = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
 
   return (
     <section id="portfolio" className="py-16 md:py-24 relative bg-accent/30">
