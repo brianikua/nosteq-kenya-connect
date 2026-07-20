@@ -13,6 +13,7 @@ import {
   FileText,
   Shield,
   ScrollText,
+  Images,
   ArrowLeft,
   LogOut,
 } from "lucide-react";
