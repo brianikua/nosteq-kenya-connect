@@ -19,6 +19,7 @@ import Admin, {
   AdminSLA,
   AdminKYC,
   AdminContent,
+  AdminMediaLibrary,
   AdminUsersPage,
   AdminAuditLogs,
 } from "./pages/Admin";
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="sla" element={<AdminSLA />} />
             <Route path="kyc" element={<AdminKYC />} />
             <Route path="content" element={<AdminContent />} />
+            <Route path="media" element={<AdminMediaLibrary />} />
             <Route path="users" element={<AdminUsersPage />} />
             <Route path="audit-logs" element={<AdminAuditLogs />} />
           </Route>

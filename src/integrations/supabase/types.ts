@@ -189,6 +189,48 @@ export type Database = {
           },
         ]
       }
+      media_assets: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          height: number | null
+          id: string
+          mime_type: string | null
+          name: string
+          path: string
+          size_bytes: number | null
+          updated_at: string
+          url: string
+          width: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          name: string
+          path: string
+          size_bytes?: number | null
+          updated_at?: string
+          url: string
+          width?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          name?: string
+          path?: string
+          size_bytes?: number | null
+          updated_at?: string
+          url?: string
+          width?: number | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
