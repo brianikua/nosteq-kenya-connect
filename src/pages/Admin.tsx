@@ -61,7 +61,7 @@ const Admin = () => {
     if (item.superadminOnly && !isSuperadmin) return false;
     if (item.adminAndUp && !(role === "admin" || role === "superadmin")) return false;
     // editors: only Content CMS
-    if (role === "editor" && item.to !== "/admin/content") return false;
+    if (role === "editor" && item.to !== "/admin/content" && item.to !== "/admin/media") return false;
     return true;
   });
 
