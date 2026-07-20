@@ -19,6 +19,7 @@ import Admin, {
   AdminSLA,
   AdminKYC,
   AdminContent,
+  AdminMediaLibrary,
   AdminUsersPage,
   AdminAuditLogs,
 } from "./pages/Admin";
