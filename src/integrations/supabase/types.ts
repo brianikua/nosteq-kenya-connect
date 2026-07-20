@@ -199,6 +199,8 @@ export type Database = {
           name: string
           path: string
           size_bytes: number | null
+          thumb_path: string | null
+          thumb_url: string | null
           updated_at: string
           url: string
           width: number | null
@@ -212,6 +214,8 @@ export type Database = {
           name: string
           path: string
           size_bytes?: number | null
+          thumb_path?: string | null
+          thumb_url?: string | null
           updated_at?: string
           url: string
           width?: number | null
@@ -225,6 +229,8 @@ export type Database = {
           name?: string
           path?: string
           size_bytes?: number | null
+          thumb_path?: string | null
+          thumb_url?: string | null
           updated_at?: string
           url?: string
           width?: number | null
