@@ -147,6 +147,7 @@ export const AdminUsage = lazy(() => import("./admin/Usage"));
 export const AdminSLA = lazy(() => import("./admin/SLA"));
 export const AdminKYC = lazy(() => import("./admin/KYC"));
 export const AdminContent = lazy(() => import("./admin/ContentCMS"));
+export const AdminMediaLibrary = lazy(() => import("./admin/MediaLibrary"));
 export const AdminUsersPage = lazy(() => import("./admin/UsersPage"));
 export const AdminAuditLogs = lazy(() => import("./admin/AuditLogs"));
 
