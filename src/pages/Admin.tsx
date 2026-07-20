@@ -36,6 +36,7 @@ const navItems: NavItem[] = [
   { to: "/admin/sla", label: "Uptime / SLA", icon: ShieldCheck },
   { to: "/admin/kyc", label: "KYC Queue", icon: FileCheck2 },
   { to: "/admin/content", label: "Content CMS", icon: FileText },
+  { to: "/admin/media", label: "Media Library", icon: Images },
   { to: "/admin/users", label: "Web Users", icon: Shield, superadminOnly: true },
   { to: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText, adminAndUp: true },
 ];
