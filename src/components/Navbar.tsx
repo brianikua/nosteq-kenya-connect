@@ -42,20 +42,20 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? "bg-card/95 backdrop-blur-lg shadow-md border-b border-border"
-          : "bg-transparent"
+          ? "bg-card/95 backdrop-blur-lg shadow-sm border-b border-border"
+          : "bg-background/70 backdrop-blur-md border-b border-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="/#hero" onClick={(e) => handleNavClick(e, "/#hero")} className="flex items-center gap-2 sm:gap-3 cursor-pointer min-w-0">
-            <Network className={`w-7 h-7 md:w-8 md:h-8 shrink-0 ${isScrolled || isMobileMenuOpen ? 'text-primary' : 'text-primary-foreground'}`} />
+            <Network className="w-7 h-7 md:w-8 md:h-8 shrink-0 text-primary" />
             <div className="min-w-0">
-              <h1 className={`font-heading font-bold text-lg md:text-xl truncate ${isScrolled || isMobileMenuOpen ? 'text-foreground' : 'text-primary-foreground'}`}>
+              <h1 className="font-heading font-bold text-lg md:text-xl truncate text-foreground">
                 {navbar.brandName}
               </h1>
-              <p className={`text-[10px] md:text-xs ${isScrolled || isMobileMenuOpen ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>
+              <p className="text-[10px] md:text-xs text-muted-foreground">
                 {navbar.brandTagline}
               </p>
             </div>
@@ -68,9 +68,7 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                  isScrolled ? "text-foreground hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
-                }`}
+                className="text-sm font-medium transition-colors whitespace-nowrap text-foreground/80 hover:text-primary"
               >
                 {link.label}
               </a>
@@ -84,7 +82,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 -mr-2 ${isScrolled || isMobileMenuOpen ? 'text-foreground' : 'text-primary-foreground'}`}
+            className="lg:hidden p-2 -mr-2 text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
