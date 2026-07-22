@@ -1,8 +1,6 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import heroTechnicians from "@/assets/hero-technicians.jpg";
-import heroBg from "@/assets/hero-bg.jpg";
 import fiberImg from "@/assets/services/fiber-internet.jpg";
 import cctvImg from "@/assets/services/cctv-security.jpg";
 import serverImg from "@/assets/server-room.jpg";
@@ -11,248 +9,140 @@ import cablingImg from "@/assets/services/structured-cabling.jpg";
 import smartBuildingImg from "@/assets/services/smart-building.jpg";
 import voipImg from "@/assets/services/voip-communications.jpg";
 import ScrollReveal from "./ScrollReveal";
-import { getContent } from "@/lib/contentStore";
+import { useSiteContent } from "@/lib/contentStore";
 
 interface HeroProps {
   onQuoteClick: () => void;
 }
 
-const PARTICLE_COUNT = 40;
-
-// Brand colors: Blue (215, 90%, 52%) & Maroon (345, 65%, 35%)
-const BRAND_BLUE = { r: 26, g: 115, b: 232 };
-const BRAND_MAROON = { r: 147, g: 31, b: 63 };
-
-function createParticles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  const particles = Array.from({ length: PARTICLE_COUNT }, () => {
-    const isBlue = Math.random() > 0.4; // 60% blue, 40% maroon
-    const color = isBlue ? BRAND_BLUE : BRAND_MAROON;
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 2.5 + 1,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4,
-      opacity: Math.random() * 0.6 + 0.2,
-      color,
-    };
-  });
-
-  let animId: number;
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw connections with gradient-like colors
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const alpha = 0.12 * (1 - dist / 150);
-          // Blend the two particle colors for the line
-          const c1 = particles[i].color;
-          const c2 = particles[j].color;
-          const avgR = Math.round((c1.r + c2.r) / 2);
-          const avgG = Math.round((c1.g + c2.g) / 2);
-          const avgB = Math.round((c1.b + c2.b) / 2);
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(${avgR}, ${avgG}, ${avgB}, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw dots
-    for (const p of particles) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity})`;
-      ctx.fill();
-
-      p.x += p.dx;
-      p.y += p.dy;
-
-      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-    }
-
-    animId = requestAnimationFrame(draw);
-  }
-
-  draw();
-  return () => cancelAnimationFrame(animId);
-}
-
 const Hero = ({ onQuoteClick }: HeroProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const content = getContent();
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const cleanup = createParticles(canvas, ctx);
-    return () => {
-      cleanup();
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
+  const content = useSiteContent();
 
   const scrollToPackages = () => {
-    const element = document.getElementById("packages");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("packages")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
+    <section id="hero" className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
+      {/* Soft editorial backdrop */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-24 right-[-10%] w-[520px] h-[520px] rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-0 left-[-10%] w-[420px] h-[420px] rounded-full bg-secondary/5 blur-3xl" />
+        <div className="absolute inset-0 subtle-pattern opacity-60" />
       </div>
 
-      {/* Particle canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-[1] pointer-events-none"
-      />
+      <div className="container mx-auto px-4">
+        {/* Editorial masthead: eyebrow + big serif headline */}
+        <ScrollReveal>
+          <div className="max-w-5xl">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="eyebrow">{content.hero.badge}</span>
+              <span className="h-px flex-1 max-w-[120px] bg-border" />
+            </div>
 
-      <div className="container mx-auto px-4 py-32 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <ScrollReveal direction="left">
-            <div className="text-center md:text-left space-y-8">
-              <div className="inline-block">
-                <span className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary-foreground backdrop-blur-sm">
-                  <Zap className="inline w-4 h-4 mr-2" />
-                  {content.hero.badge}
-                </span>
-              </div>
-              
-              <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-primary-foreground">
-                {content.hero.heading[0]}
-                <br />
-                <span className="gradient-text">{content.hero.heading[1]}</span>
-                <br />
-                {content.hero.heading[2]}
-              </h1>
-              
-              <p className="text-lg md:text-xl text-primary-foreground/70 max-w-xl leading-relaxed">
+            <h1 className="font-heading text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] text-foreground">
+              {content.hero.heading[0]}
+              <br />
+              <span className="italic text-primary">{content.hero.heading[1]}</span>
+              <br />
+              {content.hero.heading[2]}
+            </h1>
+          </div>
+        </ScrollReveal>
+
+        {/* Two-column: lede + visual */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 mt-12 lg:mt-16 items-start">
+          <ScrollReveal direction="left" delay={0.05}>
+            <div className="lg:col-span-5 space-y-8">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg">
                 {content.hero.subheading}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="hero" size="lg" onClick={scrollToPackages}>
-                  See What We Offer
+                  See what we offer
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-                <Button variant="cta" size="lg" onClick={onQuoteClick}>
-                  Talk to Our Team — Free
+                <Button variant="outline" size="lg" onClick={onQuoteClick}>
+                  Talk to our team
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-8 justify-center md:justify-start pt-6">
-                {content.hero.stats.map((stat, i) => (
-                  <div key={i} className="text-center">
-                    <div className="font-heading text-3xl font-bold text-primary-foreground">{stat.value}</div>
-                    <div className="text-sm text-primary-foreground/50">{stat.label}</div>
-                  </div>
-                ))}
+              {/* Live NOC badge */}
+              <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full border border-border bg-card shadow-sm">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+                <span className="text-xs font-medium text-foreground">Live NOC · 99.99% uptime this month</span>
               </div>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="right" delay={0.15}>
-            <div className="relative">
-              {/* Collage grid */}
-              <div className="grid grid-cols-6 grid-rows-6 gap-3 h-[520px] md:h-[560px]">
-                <div className="col-span-4 row-span-4 relative rounded-2xl overflow-hidden shadow-2xl group">
-                  <img
-                    src={heroTechnicians}
-                    alt="Nosteq engineering team deploying enterprise infrastructure"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-                  <div className="absolute bottom-3 left-3 text-xs font-medium text-primary-foreground/90 backdrop-blur-sm bg-background/30 px-2 py-1 rounded">
-                    Field engineering
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-6 grid-rows-6 gap-3 h-[440px] md:h-[520px]">
+                <div className="col-span-4 row-span-6 relative rounded-2xl overflow-hidden shadow-[var(--shadow-elevated)] group">
+                  <img src={heroTechnicians} alt="Nosteq engineering team deploying enterprise infrastructure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                    <div className="backdrop-blur-md bg-white/85 px-3 py-2 rounded-lg">
+                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Field engineering</div>
+                      <div className="text-sm font-semibold text-foreground">Deployments · Nairobi</div>
+                    </div>
                   </div>
                 </div>
-                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group animate-float-slow">
-                  <img src={fiberImg} alt="Fiber internet backbone" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-70" />
-                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Fiber</div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-md group">
+                  <img src={fiberImg} alt="Fiber backbone" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold uppercase tracking-widest text-white">Fiber</div>
                 </div>
-                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
-                  <img src={serverImg} alt="Server room infrastructure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-accent/60 to-transparent opacity-70" />
-                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Data halls</div>
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-md group">
+                  <img src={serverImg} alt="Data halls" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/20 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold uppercase tracking-widest text-white">Data halls</div>
                 </div>
-                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
-                  <img src={cctvImg} alt="CCTV security systems" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Security</div>
-                </div>
-                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
-                  <img src={smartBuildingImg} alt="Smart building automation" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-70" />
-                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">Smart building</div>
-                </div>
-                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-xl group">
-                  <img src={voipImg} alt="VoIP communications" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-accent/50 to-transparent opacity-70" />
-                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold text-primary-foreground">VoIP</div>
-                </div>
-              </div>
-
-              {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 bg-background/80 backdrop-blur-md border border-primary/20 rounded-xl px-3 py-2 shadow-xl hidden md:block">
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Live NOC</div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-primary-foreground">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> 99.99% uptime
+                <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-md group">
+                  <img src={cctvImg} alt="Security" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-[10px] font-semibold uppercase tracking-widest text-white">Security</div>
                 </div>
               </div>
             </div>
           </ScrollReveal>
         </div>
 
-        {/* Scrolling marquee strip - teases more visual content below */}
-        <div className="mt-16 relative overflow-hidden rounded-xl border border-primary/10 bg-background/20 backdrop-blur-sm">
-          <div className="flex gap-4 py-3 animate-marquee whitespace-nowrap">
-            {[fiberImg, cctvImg, serverImg, dataCenterImg, cablingImg, smartBuildingImg, voipImg, heroTechnicians, fiberImg, cctvImg, serverImg, dataCenterImg].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt=""
-                className="h-16 w-28 object-cover rounded-lg flex-shrink-0 opacity-80 hover:opacity-100 transition-opacity"
-              />
+        {/* Hero stats — editorial rule */}
+        <div className="mt-16 md:mt-20 border-t border-border pt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {content.hero.stats.map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                <div className="font-heading text-3xl md:text-4xl font-bold text-primary">{stat.value}</div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground mt-2">{stat.label}</div>
+              </div>
             ))}
           </div>
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
         </div>
-      </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2" />
+        {/* Compliance strip */}
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-widest text-muted-foreground">
+          <span className="inline-flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5" /> CA-licensed ISP</span>
+          <span>·</span>
+          <span>ISO-aligned processes</span>
+          <span>·</span>
+          <span>KYC-first onboarding</span>
+          <span>·</span>
+          <span>24/7 NOC</span>
+        </div>
+
+        {/* Marquee — teaser strip */}
+        <div className="mt-12 relative overflow-hidden rounded-xl border border-border bg-muted/50">
+          <div className="flex gap-3 py-3 animate-marquee whitespace-nowrap">
+            {[fiberImg, cctvImg, serverImg, dataCenterImg, cablingImg, smartBuildingImg, voipImg, heroTechnicians, fiberImg, cctvImg, serverImg, dataCenterImg].map((src, i) => (
+              <img key={i} src={src} alt="" className="h-14 w-24 object-cover rounded-md flex-shrink-0 opacity-90" />
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-muted to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-muted to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
